@@ -67,3 +67,8 @@ CREATE TABLE skills (
 
 -- INSERT INTO skills (user_id, skill_name, skill_level) 
 -- VALUES (1, 'Python', 'advanced');
+
+
+
+
+ALTER TABLE courses ADD COLUMN course_provider VARCHAR(255) NOT NULL;

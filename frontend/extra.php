@@ -97,17 +97,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Animation for modal (CSS Keyframes)
         const style = document.createElement('style');
         style.innerHTML = `
-                                            @keyframes slideIn {
-                                                from {
-                                                    transform: translateY(-50px);
-                                                    opacity: 0;
+                                                @keyframes slideIn {
+                                                    from {
+                                                        transform: translateY(-50px);
+                                                        opacity: 0;
+                                                    }
+                                                    to {
+                                                        transform: translateY(0);
+                                                        opacity: 1;
+                                                    }
                                                 }
-                                                to {
-                                                    transform: translateY(0);
-                                                    opacity: 1;
-                                                }
-                                            }
-                                        `;
+                                            `;
         document.head.appendChild(style);
     </script>
 <?php endif; ?>

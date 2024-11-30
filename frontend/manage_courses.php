@@ -17,10 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $course_link = trim($_POST['course_link']);
         $is_premium = isset($_POST['is_premium']) ? 1 : 0;
         $course_image = trim($_POST['course_image']);
+        $course_provider = trim($_POST['course_provider']); // New field
 
-        $sql = "INSERT INTO courses (title, category, course_link, is_premium, course_image) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO courses (title, category, course_link, is_premium, course_image, course_provider) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssds", $title, $category, $course_link, $is_premium, $course_image);
+        $stmt->bind_param("sssdss", $title, $category, $course_link, $is_premium, $course_image, $course_provider);
         $stmt->execute();
         $message = "Course added successfully!";
     } elseif (isset($_POST['update_course'])) {
@@ -31,10 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $course_link = trim($_POST['course_link']);
         $is_premium = isset($_POST['is_premium']) ? 1 : 0;
         $course_image = trim($_POST['course_image']);
+        $course_provider = trim($_POST['course_provider']); // New field
 
-        $sql = "UPDATE courses SET title = ?, category = ?, course_link = ?, is_premium = ?, course_image = ? WHERE id = ?";
+        $sql = "UPDATE courses SET title = ?, category = ?, course_link = ?, is_premium = ?, course_image = ?, course_provider = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssisi", $title, $category, $course_link, $is_premium, $course_image, $id);
+        $stmt->bind_param("sssdssi", $title, $category, $course_link, $is_premium, $course_image, $course_provider, $id);
         $stmt->execute();
         $message = "Course updated successfully!";
     } elseif (isset($_POST['delete_course'])) {
@@ -88,6 +90,17 @@ $result = $conn->query($sql);
                 <span class="input-group-text bg-light"><i class="fas fa-layer-group text-muted"></i></span>
                 <input type="text" name="category" id="category" class="form-control"
                     placeholder="Enter course category" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="course_provider" class="form-label">
+                <i class="fas fa-university text-primary me-2"></i>Course Provider
+            </label>
+            <div class="input-group">
+                <span class="input-group-text bg-light"><i class="fas fa-building text-muted"></i></span>
+                <input type="text" name="course_provider" id="course_provider" class="form-control"
+                    placeholder="Enter course provider (e.g., Coursera, Udemy)" required>
             </div>
         </div>
 
@@ -156,6 +169,7 @@ $result = $conn->query($sql);
                 <th>#</th>
                 <th>Title</th>
                 <th>Category</th>
+                <th>Provider</th>
                 <th>Course Link</th>
                 <th>Premium</th>
                 <th>Image</th>
@@ -168,6 +182,7 @@ $result = $conn->query($sql);
                     <td><?php echo $course['id']; ?></td>
                     <td><?php echo htmlspecialchars($course['title']); ?></td>
                     <td><?php echo htmlspecialchars($course['category']); ?></td>
+                    <td><?php echo htmlspecialchars($course['course_provider']); ?></td>
                     <td><a href="<?php echo htmlspecialchars($course['course_link']); ?>" target="_blank">View Course</a>
                     </td>
                     <td><?php echo $course['is_premium'] ? 'Yes' : 'No'; ?></td>
@@ -208,6 +223,11 @@ $result = $conn->query($sql);
                                         <label for="category" class="form-label">Category</label>
                                         <input type="text" name="category" id="category" class="form-control"
                                             value="<?php echo htmlspecialchars($course['category']); ?>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="course_provider" class="form-label">Course Provider</label>
+                                        <input type="text" name="course_provider" id="course_provider" class="form-control"
+                                            value="<?php echo htmlspecialchars($course['course_provider']); ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="course_link" class="form-label">Course Link</label>

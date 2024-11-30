@@ -48,12 +48,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="index.php" class="nav-item nav-link active">Home</a>
+            <a href="index.php" class="nav-item nav-link">Home</a>
             <a href="about.php" class="nav-item nav-link">About</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
+                    <?php
+                    // Check if the user is logged in, if not then redirect them to the login page
+                    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true):
+                        ?>
+                        <a href="login.php" class="dropdown-item">Career Prediction</a>
+                    <?php else: ?>
+                        <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
+                    <?php endif; ?>
                     <a href="blog.php" class="dropdown-item">Knowledge Network</a>
                     <a href="courses.php" class="dropdown-item">Courses</a>
                 </div>
