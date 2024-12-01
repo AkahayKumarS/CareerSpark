@@ -21,6 +21,11 @@ include 'includes/admin_navbar.php';
             <a href="manage_courses.php">Go to Courses</a>
         </div>
         <div class="dashboard-card">
+            <i class="fa fa-brain"></i>
+            <h5>Manage knowledgeNetwork</h5>
+            <a href="manage_knowledgeNetwork.php">Go to knowledgeNetwork</a>
+        </div>
+        <div class="dashboard-card">
             <i class="fa fa-industry"></i>
             <h5>Manage Industry Information</h5>
             <a href="manage_industry.php">Go to Industry</a>
