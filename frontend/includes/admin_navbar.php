@@ -117,6 +117,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
                 <a href="manage_courses.php" class="nav-item nav-link">Courses</a>
+                <a href="manage_knowledgeNetwork.php" class="nav-item nav-link">knowledgeNetwork</a>
                 <a href="manage_industry.php" class="nav-item nav-link">Industry</a>
                 <a href="manage_users.php" class="nav-item nav-link">Users</a>
                 <a href="feedback.php" class="nav-item nav-link">Feedback</a>

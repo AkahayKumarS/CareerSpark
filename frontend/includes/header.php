@@ -61,7 +61,7 @@
                     <?php else: ?>
                         <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
                     <?php endif; ?>
-                    <a href="blog.php" class="dropdown-item">Knowledge Network</a>
+                    <a href="knowledgeNetwork.php" class="dropdown-item">Knowledge Network</a>
                     <a href="courses.php" class="dropdown-item">Courses</a>
                 </div>
             </div>
