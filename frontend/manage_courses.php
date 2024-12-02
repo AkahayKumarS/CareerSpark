@@ -57,11 +57,12 @@ $result = $conn->query($sql);
 
 <?php include 'includes/admin_navbar.php'; ?>
 
-<div class="container py-5">
 
-    <?php if (isset($message)): ?>
-        <div class="alert alert-success text-center" id="alert-message"><?php echo $message; ?></div>
-    <?php endif; ?>
+<?php if (isset($message)): ?>
+    <div class="alert alert-success text-center" id="alert-message"><?php echo $message; ?></div>
+<?php endif; ?>
+
+<div class="container py-5">
 
     <!-- Add Course Form -->
     <form action="manage_courses.php" method="POST" class="bg-light p-4 rounded shadow mb-5 course-add-form">
@@ -145,7 +146,7 @@ $result = $conn->query($sql);
 
     <style>
         .course-add-form {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
             border: 1px solid #e0e0e0;
         }
@@ -166,7 +167,7 @@ $result = $conn->query($sql);
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Provider</th>
@@ -266,7 +267,7 @@ $result = $conn->query($sql);
         if (alertMessage) {
             alertMessage.style.display = 'none';
         }
-    }, 3000);
+    }, 2000);
 
     function confirmDelete() {
         return confirm('Are you sure you want to delete this course?');

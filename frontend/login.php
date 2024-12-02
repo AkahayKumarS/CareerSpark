@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!-- Login Form -->
+
 <div class="container-xxl py-5 login-page">
     <div class="container">
         <!-- Error Message Container -->
@@ -120,6 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </div>
+
 
 <!-- Existing Modal from Original Code Remains Unchanged -->
 <?php if ($modalDisplay): ?>
@@ -190,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php if (!empty($redirectUrl)): ?>
                     window.location.href = '<?php echo $redirectUrl; ?>';
                 <?php endif; ?>
-            }, 3000);
+            }, 1000);
         });
     </script>
 <?php endif; ?>
@@ -198,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <style>
     /* Custom Login Page Styles */
     .login-page {
-        background: linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%);
+        /* background: linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%); */
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -207,9 +209,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     .login-card {
+        margin-left: 25px;
         background: white;
         /* border-radius: 15px; */
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.19);
         padding: 40px;
         max-width: 500px;
         width: 100%;
@@ -217,7 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     .login-card:hover {
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
         transform: translateY(-10px);
     }
 
@@ -343,14 +346,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Auto-dismiss error messages after 3 seconds
+    // Auto-dismiss error messages after 2 seconds
     document.addEventListener('DOMContentLoaded', function () {
         const errorAlerts = document.querySelectorAll('.alert-danger');
         errorAlerts.forEach(alert => {
             setTimeout(() => {
                 const bsAlert = new bootstrap.Alert(alert);
                 bsAlert.close();
-            }, 3000);
+            }, 2000);
         });
     });
 </script>

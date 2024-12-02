@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <style>
     /* Custom Registration Page Styles */
     .register-page {
-        background: linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%);
+        /* background: linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%); */
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -241,7 +241,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .register-card {
         background: white;
         /* border-radius: 15px; */
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        margin-left: 25px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.19);
         padding: 40px;
         max-width: 500px;
         width: 100%;
@@ -249,7 +250,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     .register-card:hover {
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
         transform: translateY(-10px);
     }
 

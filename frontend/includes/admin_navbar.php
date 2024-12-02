@@ -117,10 +117,8 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="admin_dashboard.php" class="nav-item nav-link">Dashboard</a>
                 <a href="manage_courses.php" class="nav-item nav-link">Courses</a>
-                <a href="manage_knowledgeNetwork.php" class="nav-item nav-link">knowledgeNetwork</a>
-                <a href="manage_industry.php" class="nav-item nav-link">Industry</a>
+                <a href="manage_knowledgeNetwork.php" class="nav-item nav-link">Knowledge Network</a>
                 <a href="manage_users.php" class="nav-item nav-link">Users</a>
-                <a href="feedback.php" class="nav-item nav-link">Feedback</a>
                 <a href="../backend/logout.php"
                     class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase">Log out
                     <i class="fa fa-sign-out-alt ms-1"></i></a>

@@ -22,7 +22,7 @@ include 'includes/admin_navbar.php';
         </div>
         <div class="dashboard-card">
             <i class="fa fa-brain"></i>
-            <h5>Manage knowledgeNetwork</h5>
+            <h5>Manage Knowledge Network</h5>
             <a href="manage_knowledgeNetwork.php">Go to knowledgeNetwork</a>
         </div>
         <div class="dashboard-card">
