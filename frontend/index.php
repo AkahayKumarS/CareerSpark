@@ -49,7 +49,7 @@ include '../backend/config.php';
                             <h1 class="display-3 text-white animated slideInDown">Explore Your Future</h1>
                             <p class="fs-5 text-white mb-4 pb-2">Get tailored career suggestions and resources designed
                                 just for you. CareerSpark guides you every step of the way.</p>
-                            <a href="courses.php"
+                            <a href="knowledgeNetwork.php"
                                 class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Explore Careers</a>
                             <a href="register.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join
                                 Now</a>

@@ -128,9 +128,12 @@
         href="http://127.0.0.1/CareerSpark/frontend/index.php"
         class="navbar-brand d-flex align-items-center px-4 px-lg-5"
       >
-        <h2 class="m-0 text-primary">
-          <i class="fa fa-book me-3"></i>CareerSpark
-        </h2>
+        <!-- Replace book icon with CareerSpark logo -->
+        <img
+          src="http://127.0.0.1/CareerSpark/frontend/img/careerSparkLogo.png"
+          alt="CareerSpark Logo"
+          style="height: 310px; width: 350px; margin-right: 10px"
+        />
       </a>
       <button
         type="button"
@@ -205,7 +208,7 @@
         "
       ></div>
       <div class="bg-overlay"></div>
-      <!-- Dark overlay --> 
+      <!-- Dark overlay -->
 
       <div class="container">
         <div class="row">
@@ -239,21 +242,53 @@
           </div>
         </div>
 
-        <!-- Additional Roles -->
-        {% for key, value in final_res.items(): %} {%if job0!=job_dict[value]%}
+        <!-- Matched Skills -->
         <div class="col-lg-4">
           <div class="card">
-            <div class="card-body text-center">
-              <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
-              <h5 class="card-title">Alternative Career Path</h5>
-              <p class="card-text">{{ job_dict[value] }}</p>
-              <div class="mt-3">
-                <span class="badge bg-success">Strong Match</span>
-              </div>
+            <div class="card-body">
+              <h5 class="card-title text-success">Matched Skills</h5>
+              <ul class="list-group">
+                {% for skill in matched_skills %}
+                <li class="list-group-item">
+                  <i class="fas fa-check-circle text-success me-2"></i>{{ skill
+                  }}
+                </li>
+                {% endfor %}
+              </ul>
             </div>
           </div>
         </div>
-        {%endif%} {%endfor%}
+
+        <!-- Missing Skills and Courses -->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-danger">Missing Skills</h5>
+              <ul class="list-group">
+                {% for skill, courses in courses.items() %}
+                <li class="list-group-item">
+                  <i class="fas fa-exclamation-circle text-danger me-2"></i>{{
+                  skill }}
+                  <ul class="mt-2">
+                    {% for course in courses %}
+                    <li>
+                      <a
+                        href="{{ course['course_link'] }}"
+                        target="_blank"
+                        class="text-primary"
+                      >
+                        <i class="fas fa-book-open me-2"></i>{{ course['title']
+                        }}
+                      </a>
+                      {% endfor %}
+                    </li>
+                  </ul>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

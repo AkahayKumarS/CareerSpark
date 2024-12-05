@@ -26,11 +26,6 @@ include 'includes/admin_navbar.php';
             <a href="manage_knowledgeNetwork.php">Go to knowledgeNetwork</a>
         </div>
         <div class="dashboard-card">
-            <i class="fa fa-industry"></i>
-            <h5>Manage Industry Information</h5>
-            <a href="manage_industry.php">Go to Industry</a>
-        </div>
-        <div class="dashboard-card">
             <i class="fa fa-users"></i>
             <h5>Manage Users</h5>
             <a href="manage_users.php">Go to Users</a>

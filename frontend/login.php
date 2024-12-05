@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_name'] = $user['name'];
                     $_SESSION['user_type'] = $user['user_type'];
+                    setcookie("user_id", $_SESSION['user_id'], time() + 3600, "/", "", false, true); // Secure, HttpOnly cookie
 
                     $modalDisplay = true;
 
@@ -171,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 padding: 15px; 
                 border-radius: 10px;
                 border: 1px solid #b8e4ff;">
-                <small style="color: #06BBCC;">Redirecting in 3 seconds...</small>
+                <small style="color: #06BBCC;">Redirecting in 1 second...</small>
             </div>
         </div>
     </div>
@@ -187,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             modal.style.opacity = '1';
             modal.querySelector('div').style.transform = 'scale(1)';
 
-            // Redirect after 3 seconds
+            // Redirect after 1 second
             setTimeout(() => {
                 <?php if (!empty($redirectUrl)): ?>
                     window.location.href = '<?php echo $redirectUrl; ?>';

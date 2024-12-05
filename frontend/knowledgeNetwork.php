@@ -204,7 +204,7 @@ $result = $stmt->get_result();
 
                         // "Read More" button with link to job details page
                         echo '<a href="jobDetails.php?id=' . htmlspecialchars($job['id'], ENT_QUOTES, 'UTF-8') . '" class="btn btn-primary">';
-                        echo '<i class="fas fa-book-open mr-2"></i>Read More</a>';
+                        echo '<i class="fas fa-book-open mr-2"></i> Read More</a>';
                         echo '</div>';
                     }
                 } else {

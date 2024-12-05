@@ -14,7 +14,7 @@ session_start();
             <a href="contact.php" class="btn btn-outline-primary py-3 px-5 ms-2">Contact Again</a>
         </div>
         <div class="mt-5">
-            <img class="img-fluid" src="img/thank_you.svg" alt="Thank You" style="max-width: 50%;">
+            <img class="img-fluid" src="img/thank_you.jpg" alt="Thank You" style="max-width: 30%;">
         </div>
     </div>
 </div>
