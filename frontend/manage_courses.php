@@ -18,10 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $is_premium = isset($_POST['is_premium']) ? 1 : 0;
         $course_image = trim($_POST['course_image']);
         $course_provider = trim($_POST['course_provider']); // New field
+        $duration = trim($_POST['duration']);
 
-        $sql = "INSERT INTO courses (title, category, course_link, is_premium, course_image, course_provider) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO courses (title, category, course_link, is_premium, course_image, course_provider, duration) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssdss", $title, $category, $course_link, $is_premium, $course_image, $course_provider);
+        $stmt->bind_param("sssdssi", $title, $category, $course_link, $is_premium, $course_image, $course_provider, $duration);
         $stmt->execute();
         $message = "Course added successfully!";
     } elseif (isset($_POST['update_course'])) {
@@ -33,10 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $is_premium = isset($_POST['is_premium']) ? 1 : 0;
         $course_image = trim($_POST['course_image']);
         $course_provider = trim($_POST['course_provider']); // New field
+        $duration = trim($_POST['duration']);
 
-        $sql = "UPDATE courses SET title = ?, category = ?, course_link = ?, is_premium = ?, course_image = ?, course_provider = ? WHERE id = ?";
+        $sql = "UPDATE courses SET title = ?, category = ?, course_link = ?, is_premium = ?, course_image = ?, course_provider = ?, duration = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssdssi", $title, $category, $course_link, $is_premium, $course_image, $course_provider, $id);
+        $stmt->bind_param("sssdssii", $title, $category, $course_link, $is_premium, $course_image, $course_provider, $duration, $id);
         $stmt->execute();
         $message = "Course updated successfully!";
     } elseif (isset($_POST['delete_course'])) {
@@ -106,6 +108,18 @@ $result = $conn->query($sql);
         </div>
 
         <div class="mb-3">
+            <label for="duration" class="form-label">
+                <i class="fas fa-clock text-primary me-2"></i>Course Duration (in weeks)
+            </label>
+            <div class="input-group">
+                <span class="input-group-text bg-light"><i class="fas fa-hourglass-half text-muted"></i></span>
+                <input type="number" name="duration" id="duration" class="form-control"
+                    placeholder="Enter course duration" required>
+            </div>
+        </div>
+
+
+        <div class="mb-3">
             <label for="course_link" class="form-label">
                 <i class="fas fa-link text-primary me-2"></i>Course Link
             </label>
@@ -171,6 +185,7 @@ $result = $conn->query($sql);
                 <th>Title</th>
                 <th>Category</th>
                 <th>Provider</th>
+                <th>Duration (Weeks)</th>
                 <th>Course Link</th>
                 <th>Premium</th>
                 <th>Image</th>
@@ -184,6 +199,7 @@ $result = $conn->query($sql);
                     <td><?php echo htmlspecialchars($course['title']); ?></td>
                     <td><?php echo htmlspecialchars($course['category']); ?></td>
                     <td><?php echo htmlspecialchars($course['course_provider']); ?></td>
+                    <td><?php echo htmlspecialchars($course['duration']); ?></td>
                     <td><a href="<?php echo htmlspecialchars($course['course_link']); ?>" target="_blank">View Course</a>
                     </td>
                     <td><?php echo $course['is_premium'] ? 'Yes' : 'No'; ?></td>
@@ -229,6 +245,11 @@ $result = $conn->query($sql);
                                         <label for="course_provider" class="form-label">Course Provider</label>
                                         <input type="text" name="course_provider" id="course_provider" class="form-control"
                                             value="<?php echo htmlspecialchars($course['course_provider']); ?>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="duration" class="form-label">Course Duration (in weeks)</label>
+                                        <input type="number" name="duration" id="duration" class="form-control"
+                                            value="<?php echo htmlspecialchars($course['duration']); ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="course_link" class="form-label">Course Link</label>

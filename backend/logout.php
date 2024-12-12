@@ -2,6 +2,7 @@
 session_start();  // Start the session
 session_unset();  // Unset all session variables
 session_destroy();  // Destroy the session
+setcookie("user_id", "", time() - 3600, "/");
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +12,9 @@ session_destroy();  // Destroy the session
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logout</title>
+
+    <!-- Favicon -->
+    <link href="../frontend/img/CareerSparkFavicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">

@@ -47,7 +47,7 @@ $jobDetails = $result->fetch_assoc();
     }
 
     .job-details-container h3 {
-        color: #06BBCC;
+        color: #06bbcc;
         margin-top: 30px;
         margin-bottom: 20px;
         position: relative;
@@ -60,7 +60,7 @@ $jobDetails = $result->fetch_assoc();
         position: absolute;
         left: 0;
         top: 0;
-        color: #06BBCC;
+        color: #06bbcc;
         font-size: 30px;
         font-weight: 900;
     }
@@ -92,7 +92,7 @@ $jobDetails = $result->fetch_assoc();
     .back-btn {
         margin-top: 20px;
         display: inline-block;
-        background-color: #06BBCC;
+        background-color: #06bbcc;
         color: white;
         padding: 10px 20px;
         border-radius: 5px;

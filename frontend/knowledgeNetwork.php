@@ -83,7 +83,7 @@ $result = $stmt->get_result();
     .search-container .btn {
         padding: 15px 25px;
         border-radius: 0 5px 5px 0;
-        background-color: #06BBCC;
+        background-color: #06bbcc;
         border: none;
         transition: all 0.3s ease;
     }
@@ -108,7 +108,7 @@ $result = $stmt->get_result();
     }
 
     .blog-post h2 {
-        color: #06BBCC;
+        color: #06bbcc;
         margin-bottom: 15px;
         position: relative;
         padding-left: 40px;
@@ -121,13 +121,13 @@ $result = $stmt->get_result();
         position: absolute;
         left: 0;
         top: 0;
-        color: #06BBCC;
+        color: #06bbcc;
         font-size: 30px;
         font-weight: 900;
     }
 
     .blog-post .btn {
-        background-color: #06BBCC;
+        background-color: #06bbcc;
         border: none;
         transition: all 0.3s ease;
     }
@@ -151,7 +151,7 @@ $result = $stmt->get_result();
     }
 
     .no-results i {
-        color: #06BBCC;
+        color: #06bbcc;
         margin-bottom: 20px;
     }
 </style>

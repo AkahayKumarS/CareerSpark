@@ -103,6 +103,39 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       }
     </style>
+    <style>
+      .timeline {
+        border-left: 4px solid #06bbcc;
+        padding: 10px 0;
+        margin-top: 20px;
+        position: relative;
+      }
+
+      .timeline-item {
+        margin-left: 30px;
+        padding: 10px;
+        position: relative;
+        background: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .timeline-item:before {
+        content: "";
+        position: absolute;
+        left: -14px;
+        top: 10px;
+        width: 8px;
+        height: 8px;
+        background: #06bbcc;
+        border-radius: 50%;
+      }
+
+      .timeline-item h5 {
+        margin: 0;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <!-- Spinner Start -->
@@ -228,49 +261,85 @@
     <!-- Career List -->
     <div class="container career-list py-5">
       <div class="row g-4">
-        <!-- Predicted Career Role -->
-        <div class="col-lg-4">
-          <div class="card">
+        <!-- Best Matched Career -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0">
             <div class="card-body text-center">
-              <i class="fas fa-bullseye fa-3x text-primary mb-3"></i>
-              <h5 class="card-title">Best Matched Career</h5>
-              <p class="card-text">{{ job0 }}</p>
+              <i class="fas fa-bullseye fa-4x text-primary mb-3"></i>
+              <h4 class="card-title fw-bold">Best Matched Career</h4>
+              <p class="card-text fs-5 text-muted">{{ job0 }}</p>
               <div class="mt-3">
-                <span class="badge bg-primary">Top Recommendation</span>
+                <span class="badge bg-primary px-3 py-2"
+                  >Top Recommendation</span
+                >
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Matched Skills -->
-        <div class="col-lg-4">
-          <div class="card">
+        <!-- Alternative Career Paths -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0">
             <div class="card-body">
-              <h5 class="card-title text-success">Matched Skills</h5>
+              <h4 class="card-title text-warning fw-bold">
+                Alternative Career Paths
+              </h4>
               <ul class="list-group">
-                {% for skill in matched_skills %}
-                <li class="list-group-item">
-                  <i class="fas fa-check-circle text-success me-2"></i>{{ skill
+                {% if alternative_careers %} {% for career in
+                alternative_careers %}
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="fas fa-lightbulb text-warning me-3"></i>{{ career }}
+                </li>
+                {% endfor %} {% else %}
+                <li class="list-group-item text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No alternative careers
+                  found.
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-4">
+        <!-- Matched Skills -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h4 class="card-title text-success fw-bold">Matched Skills</h4>
+              <ul class="list-group">
+                {% if matched_skills %} {% for skill in matched_skills %}
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="fas fa-check-circle text-success me-3"></i>{{ skill
                   }}
                 </li>
-                {% endfor %}
+                {% endfor %} {% else %}
+                <li class="list-group-item text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No matched skills
+                  found.
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
         </div>
 
         <!-- Missing Skills and Courses -->
-        <div class="col-lg-4">
-          <div class="card">
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0">
             <div class="card-body">
-              <h5 class="card-title text-danger">Missing Skills</h5>
+              <h4 class="card-title text-danger fw-bold">Missing Skills</h4>
               <ul class="list-group">
-                {% for skill, courses in courses.items() %}
+                {% if missing_skills %} {% for skill in missing_skills %}
                 <li class="list-group-item">
-                  <i class="fas fa-exclamation-circle text-danger me-2"></i>{{
-                  skill }}
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-exclamation-circle text-danger me-3"></i>{{
+                    skill }}
+                  </div>
+                  {% if courses[skill] %}
                   <ul class="mt-2">
-                    {% for course in courses %}
+                    {% for course in courses[skill] %}
                     <li>
                       <a
                         href="{{ course['course_link'] }}"
@@ -280,14 +349,69 @@
                         <i class="fas fa-book-open me-2"></i>{{ course['title']
                         }}
                       </a>
-                      {% endfor %}
                     </li>
+                    {% endfor %}
                   </ul>
+                  {% else %}
+                  <!-- <span class="text-muted d-block mt-2">
+                    <i class="fas fa-info-circle me-2"></i>No courses available
+                    for this skill.
+                  </span> -->
+                  {% endif %}
                 </li>
-                {% endfor %}
+                {% endfor %} {% else %}
+                <li class="list-group-item text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No missing skills
+                  found.
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
+        </div>
+
+        <!-- Career Roadmap -->
+        <div class="container mt-5">
+          <h3 class="text-center text-primary">
+            Your Personalized Career Roadmap
+          </h3>
+          <div class="timeline">
+            {% for phase in roadmap %}
+            <div class="timeline-item">
+              <h5 class="text-secondary">{{ phase.skill }}</h5>
+              <p>
+                <strong>Start Date:</strong> {{ phase.start_date }} <br />
+                <strong>End Date:</strong> {{ phase.end_date }}
+              </p>
+              {% if phase.courses %}
+              <ul>
+                {% for course in phase.courses %}
+                <li>
+                  <a
+                    href="{{ course.course_link }}"
+                    target="_blank"
+                    class="text-primary"
+                  >
+                    <i class="fas fa-book"></i> {{ course.title }}
+                  </a>
+                  ({{ course.duration }} weeks)
+                </li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <p class="text-muted">
+                <i>No courses available for this skill</i>
+              </p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="container text-center mt-5">
+          <a href="/download-roadmap" class="btn btn-primary btn-lg shadow-sm">
+            <i class="fas fa-download me-2"></i>Download Career Roadmap
+          </a>
         </div>
       </div>
     </div>

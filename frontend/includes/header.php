@@ -6,7 +6,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/" rel="icon">
+    <link href="img/CareerSparkFavicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,16 +56,34 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                 <div class="dropdown-menu fade-down m-0">
                     <?php
-                    // Check if the user is logged in, if not then redirect them to the login page
+                    // Check if the user is logged in
                     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true):
                         ?>
                         <a href="login.php" class="dropdown-item">Career Prediction</a>
-                    <?php else: ?>
-                        <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
+                    <?php else:
+                        // URL of the Flask server
+                        $flask_server_url = 'http://127.0.0.1:5000';
+
+                        // Use cURL to check if the Flask server is running
+                        $ch = curl_init($flask_server_url);
+                        curl_setopt($ch, CURLOPT_NOBODY, true);
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_exec($ch);
+                        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                        curl_close($ch);
+
+                        // Check if the Flask server is running
+                        if ($http_status == 200): ?>
+                            <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
+                        <?php else: ?>
+                            <a href="404.php" class="dropdown-item">Career Prediction</a>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <a href="knowledgeNetwork.php" class="dropdown-item">Knowledge Network</a>
                     <a href="courses.php" class="dropdown-item">Courses</a>
                 </div>
+
             </div>
             <a href="contact.php" class="nav-item nav-link">Contact</a>
 

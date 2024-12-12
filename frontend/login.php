@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div style="
                 width: 120px; 
                 height: 120px; 
-                background: linear-gradient(135deg, #06BBCC 0%, #0ac2d4 100%); 
+                background: linear-gradient(135deg, #06bbcc 0%, #0ac2d4 100%); 
                 border-radius: 50%; 
                 margin: 0 auto 25px;
                 display: flex;
@@ -165,14 +165,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </div>
-            <h2 style="color: #06BBCC; margin-bottom: 15px; font-size: 1.8rem;">Login Successful</h2>
+            <h2 style="color: #06bbcc; margin-bottom: 15px; font-size: 1.8rem;">Login Successful</h2>
             <p style="color: #6c757d; margin-bottom: 25px;">Welcome back! You will be redirected to your dashboard.</p>
             <div style="
                 background: #f0f9ff; 
                 padding: 15px; 
                 border-radius: 10px;
                 border: 1px solid #b8e4ff;">
-                <small style="color: #06BBCC;">Redirecting in 1 second...</small>
+                <small style="color: #06bbcc;">Redirecting in 1 second...</small>
             </div>
         </div>
     </div>
