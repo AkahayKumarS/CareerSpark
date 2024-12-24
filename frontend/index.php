@@ -14,7 +14,7 @@ include '../backend/config.php';
     <div class="owl-carousel header-carousel position-relative">
         <!-- Slide 1 -->
         <div class="owl-carousel-item position-relative">
-            <img class="img-fluid" src="img/carousel-1.jpg" alt="Empowering Career Choices">
+            <img class="img-fluid" src="img/slider-1.jpg" alt="Empowering Career Choices">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                 style="background: rgba(24, 29, 56, .7);">
                 <div class="container">
@@ -38,7 +38,7 @@ include '../backend/config.php';
 
         <!-- Slide 2 -->
         <div class="owl-carousel-item position-relative">
-            <img class="img-fluid" src="img/carousel-2.jpg" alt="Personalized Recommendations">
+            <img class="img-fluid" src="img/slider-2.jpg" alt="Personalized Recommendations">
             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                 style="background: rgba(24, 29, 56, .7);">
                 <div class="container">
@@ -72,7 +72,7 @@ include '../backend/config.php';
             <!-- Image Section -->
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                 <div class="position-relative h-100">
-                    <img class="img-fluid position-absolute w-100 h-100" src="img/about.jpg" alt="Career Guidance"
+                    <img class="img-fluid position-absolute w-100 h-100" src="img/about.png" alt="Career Guidance"
                         style="object-fit: cover;">
                 </div>
             </div>

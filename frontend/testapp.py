@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import pickle
 import numpy as np
 import mysql.connector
 from datetime import timedelta, date
+import os
 
 app = Flask(__name__)
+
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'fallback-secret-key')
 
 # Database connection function
 def get_db_connection():
@@ -166,6 +169,9 @@ def result():
         # Generate the roadmap
         roadmap = generate_roadmap(missing_skills, courses_for_missing_skills)
 
+        session['best_career'] = best_matched_job_role
+        session['roadmap'] = roadmap
+
         # Render the testafter.html page with the results
         return render_template(
             "testafter.html",
@@ -176,6 +182,19 @@ def result():
             courses=courses_for_missing_skills,
             roadmap=roadmap
         )
+
+@app.route('/career_roadmap')
+def career_roadmap():
+    # Retrieve the roadmap details sent as query parameters
+    job_role = session.get('best_career')
+    roadmap = session.get('roadmap', [])
+
+    # Render the career roadmap page with the details
+    return render_template(
+        'career_roadmap.html',  # Your HTML page name
+        roadmap=roadmap,
+        job_role=job_role
+    )
 
 
 if __name__ == '__main__':

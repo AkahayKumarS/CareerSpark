@@ -139,15 +139,16 @@ if ($result) {
             <label for="skills" class="form-label">
                 <i class="fas fa-tools text-primary me-2"></i>Skills
             </label>
-            <input type="text" name="skills" id="skills" class="form-control" placeholder="Required skills" required>
+            <textarea type="text" name="skills" id="skills" class="form-control" placeholder="Required skills"
+                required></textarea>
         </div>
 
         <div class="mb-3">
             <label for="educational_requirements" class="form-label">
                 <i class="fas fa-graduation-cap text-primary me-2"></i>Educational Requirements
             </label>
-            <input type="text" name="educational_requirements" id="educational_requirements" class="form-control"
-                placeholder="Enter educational requirements" required>
+            <textarea type="text" name="educational_requirements" id="educational_requirements" class="form-control"
+                placeholder="Enter educational requirements" required></textarea>
         </div>
 
         <div class="mb-3">
@@ -170,8 +171,8 @@ if ($result) {
             <label for="companies" class="form-label">
                 <i class="fas fa-building text-primary me-2"></i>Companies
             </label>
-            <input type="text" name="companies" id="companies" class="form-control"
-                placeholder="Enter associated companies" required>
+            <textarea type="text" name="companies" id="companies" class="form-control"
+                placeholder="Enter associated companies" required></textarea>
         </div>
 
         <div class="d-grid">
