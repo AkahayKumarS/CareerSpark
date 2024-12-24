@@ -252,8 +252,29 @@ $profile = $stmt_fetch->get_result()->fetch_assoc();
                             <i class="bi bi-pencil me-2"></i>Edit Profile
                         </a>
                     <?php endif; ?>
+                     <!-- Resume Generation Button -->
+                     <button type="button" id="generate-resume" class="btn btn-success btn-lg ms-3 px-5 py-2">
+    <i class="bi bi-file-earmark-pdf me-2"></i> Generate Resume
+</button>
+
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<!-- Resume Preview Modal -->
+<div class="modal fade" id="resumePreviewModal" tabindex="-1" aria-labelledby="resumePreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resumePreviewModalLabel">Resume Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="resume-preview"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="download-resume">Download Resume</button>
+            </div>
         </div>
     </div>
 </div>
@@ -283,6 +304,8 @@ $profile = $stmt_fetch->get_result()->fetch_assoc();
 }
 </style>
 
+// <!-- Include jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
     // Handle profile picture preview
     document.querySelector('input[name="profile_picture"]')?.addEventListener('change', function(event) {
@@ -300,7 +323,50 @@ $profile = $stmt_fetch->get_result()->fetch_assoc();
     setTimeout(() => {
         const alerts = document.querySelectorAll('.alert');
         alerts.forEach(alert => alert.remove());
-    }, 3000);
-</script>
+    }, 2000);
 
+    // Add event listener for the "Generate Resume" button click
+document.getElementById('generate-resume').addEventListener('click', function() {
+    // Navigate to the 'resume_builder' page
+    window.location.href = 'resume_builder.php';  // Replace with your desired path
+});
+
+
+    // Handle resume download
+    document.getElementById('download-resume').addEventListener('click', function() {
+        const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Collect profile data
+    const name = "<?php echo htmlspecialchars($profile['name'] ?? 'Student Name'); ?>";
+    const bio = "<?php echo htmlspecialchars($profile['bio'] ?? 'No bio available'); ?>";
+    const address = "<?php echo htmlspecialchars($profile['address'] ?? 'Not specified'); ?>";
+    const college = "<?php echo htmlspecialchars($profile['college'] ?? 'Not specified'); ?>";
+    const highestQualification = "<?php echo htmlspecialchars($profile['highest_qualification'] ?? 'Not specified'); ?>";
+    const technicalSkills = "<?php echo htmlspecialchars($profile['technical_skills'] ?? 'Not specified'); ?>";
+    const hobbies = "<?php echo htmlspecialchars($profile['hobbies'] ?? 'Not specified'); ?>";
+    const github = "<?php echo htmlspecialchars($profile['github_profile'] ?? 'Not specified'); ?>";
+    const linkedin = "<?php echo htmlspecialchars($profile['linkedin_profile'] ?? 'Not specified'); ?>";
+
+    // Create PDF content
+    doc.setFontSize(22);
+    doc.text(name, 20, 20);
+
+    doc.setFontSize(14);
+    doc.text("Bio: " + bio, 20, 40);
+    doc.text("Address: " + address, 20, 50);
+    doc.text("College: " + college, 20, 60);
+    doc.text("Highest Qualification: " + highestQualification, 20, 70);
+    doc.text("Technical Skills: " + technicalSkills, 20, 80);
+    doc.text("Hobbies: " + hobbies, 20, 90);
+
+    if (github) {
+        doc.text("GitHub: " + github, 20, 100);
+    }
+    if (linkedin) {
+        doc.text("LinkedIn: " + linkedin, 20, 110);
+    }
+        doc.save(`${name}_Resume.pdf`);
+    });
+</script>
 <?php include 'includes/footer.php'; ?>
