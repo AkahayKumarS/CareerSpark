@@ -172,10 +172,26 @@ def result():
         session['best_career'] = best_matched_job_role
         session['roadmap'] = roadmap
 
+        # Querying part of the result() function
+        conn = get_db_connection()  # Establish DB connection
+        cursor = conn.cursor()
+
+        # SQL query to fetch job ID for the best-matched career role (job0)
+        query = "SELECT id FROM knowledge_network WHERE title = %s"
+        cursor.execute(query, (best_matched_job_role,))  # Pass job0 as parameter
+
+        # Fetch the job ID
+        job_id = cursor.fetchone()[0]  # Assuming job_role is unique and only one ID is fetched
+
+        cursor.close()
+        conn.close()
+
+
         # Render the testafter.html page with the results
         return render_template(
             "testafter.html",
             job0=best_matched_job_role,
+            job_id=job_id,
             alternative_careers=alternative_career_roles,
             matched_skills=matched_skills,
             missing_skills=missing_skills,

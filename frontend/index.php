@@ -125,7 +125,7 @@ include '../backend/config.php';
                 // Display category title if selected
                 echo isset($_GET['category'])
                     ? htmlspecialchars($_GET['category']) . " Courses"
-                    : "Popular Courses";
+                    : "Latest Courses";
                 ?>
             </h1>
         </div>

@@ -14,6 +14,7 @@ $user_id = $_SESSION['user_id'];
 
 // Define the $isEditing variable based on URL query parameter
 $isEditing = isset($_GET['edit']) && $_GET['edit'] === 'true';
+$isProfileDataAvailable = false;
 
 // Handle Form Submission for Profile Update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -66,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 Profile updated successfully!
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
               </div>";
+        $isProfileDataAvailable = true;
     } else {
         echo "<div class='alert alert-danger text-center alert-dismissible fade show' id='error-message' role='alert'>
                 Error updating profile: " . $stmt->error . "
@@ -254,7 +256,7 @@ $profile = $stmt_fetch->get_result()->fetch_assoc();
                     <?php endif; ?>
                      <!-- Resume Generation Button -->
                      <button type="button" id="generate-resume" class="btn btn-success btn-lg ms-3 px-5 py-2">
-    <i class="bi bi-file-earmark-pdf me-2"></i> Generate Resume
+    <i class="bi bi-file-earmark-pdf me-2"></i> Create Resume
 </button>
 
                 </div>

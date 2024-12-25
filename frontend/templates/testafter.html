@@ -207,6 +207,17 @@
         margin-right: 10px;
         color: #3b82f6;
       }
+
+      .best-career-link {
+        color: #6c757d; /* Default text color (muted gray) */
+        text-decoration: none; /* Remove underline */
+        transition: color 0.3s ease; /* Smooth transition effect */
+      }
+
+      .best-career-link:hover {
+        color: #06bbcc; /* Highlight color on hover */
+        text-decoration: underline; /* Add underline effect on hover */
+      }
     </style>
   </head>
   <body>
@@ -339,7 +350,13 @@
             <div class="card-body text-center">
               <i class="fas fa-bullseye fa-4x text-primary mb-3"></i>
               <h4 class="card-title fw-bold">Best Matched Career</h4>
-              <p class="card-text fs-5 text-muted">{{ job0 }}</p>
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/jobDetails.php?id={{ job_id }}"
+                class="card-text fs-5 text-muted best-career-link"
+              >
+                {{ job0 }}
+              </a>
+
               <div class="mt-3">
                 <span class="badge bg-primary px-3 py-2"
                   >Top Recommendation</span
@@ -461,17 +478,21 @@
       </div>
     </div>
 
-    <!-- Rest of the HTML remains the same as the original document -->
     <!-- Footer Start -->
     <div
-      class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn"
+      class="my-footer container-fluid bg-dark text-light footer pt-5 mt-0 wow fadeIn"
       data-wow-delay="0.1s"
     >
-      <div class="container py-5">
+      <div class="container py-5 position-relative">
         <div class="row g-5">
           <!-- Quick Links -->
           <div class="col-lg-3 col-md-6">
             <h4 class="text-white mb-3">Quick Links</h4>
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/index.php"
+              >Home</a
+            >
             <a
               class="btn btn-link"
               href="http://127.0.0.1/CareerSpark/frontend/about.php"
@@ -484,18 +505,13 @@
             >
             <a
               class="btn btn-link"
-              href="http://127.0.0.1/CareerSpark/frontend/privacy.php"
-              >Privacy Policy</a
+              href="http://127.0.0.1/CareerSpark/frontend/courses.php"
+              >Courses</a
             >
             <a
               class="btn btn-link"
-              href="http://127.0.0.1/CareerSpark/frontend/terms.php"
-              >Terms & Conditions</a
-            >
-            <a
-              class="btn btn-link"
-              href="http://127.0.0.1/CareerSpark/frontend/faq.php"
-              >FAQs & Help</a
+              href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php"
+              >Knowledge Network</a
             >
           </div>
 
@@ -535,78 +551,27 @@
             </div>
           </div>
 
-          <!-- Gallery -->
+          <!-- Our Motto Section -->
           <div class="col-lg-3 col-md-6">
-            <h4 class="text-white mb-3">Gallery</h4>
-            <div class="row g-2 pt-2">
-              <div class="col-4">
-                <img
-                  class="img-fluid bg-light p-1"
-                  src="img/course-1.jpg"
-                  alt="Course 1"
-                />
-              </div>
-              <div class="col-4">
-                <img
-                  class="img-fluid bg-light p-1"
-                  src="img/course-2.jpg"
-                  alt="Course 2"
-                />
-              </div>
-              <div class="col-4">
-                <img
-                  class="img-fluid bg-light p-1"
-                  src="img/course-3.jpg"
-                  alt="Course 3"
-                />
-              </div>
-              <div class="col-4">
-                <img
-                  class="img-fluid bg-light p-1"
-                  src="img/course-2.jpg"
-                  alt="Course 4"
-                />
-              </div>
-              <div class="col-4">
-                <img
-                  class="img-fluid bg-light p-1"
-                  src="img/course-3.jpg"
-                  alt="Course 5"
-                />
-              </div>
-              <div class="col-4">
-                <img
-                  class="img-fluid bg-light p-1"
-                  src="img/course-1.jpg"
-                  alt="Course 6"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Newsletter -->
-          <div class="col-lg-3 col-md-6">
-            <h4 class="text-white mb-3">Newsletter</h4>
+            <h4 class="text-white mb-3">Our Motto</h4>
             <p>
-              Subscribe to stay updated on career tips, resources, and
-              opportunities.
+              At CareerSpark, we empower individuals with the tools and
+              opportunities to succeed in their careers, offering top resources
+              to guide job seekers toward their professional goals.
             </p>
-            <div class="position-relative mx-auto" style="max-width: 400px">
-              <input
-                class="form-control border-0 w-100 py-3 ps-4 pe-5"
-                type="email"
-                placeholder="Your Email"
-              />
-              <button
-                type="button"
-                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
-              >
-                Sign Up
-              </button>
-            </div>
           </div>
         </div>
+
+        <!-- CareerSpark Logo -->
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+          <img
+            src="http://127.0.0.1/CareerSpark/frontend/img/careerSpark_footer_logo.png"
+            alt="CareerSpark Logo"
+            style="height: 240px"
+          />
+        </div>
       </div>
+
       <div class="container">
         <div class="copyright">
           <div class="row">
@@ -634,6 +599,12 @@
       </div>
     </div>
     <!-- Footer End -->
+
+    <style>
+      .my-footer {
+        background: linear-gradient(90deg, rgb(22, 33, 50), rgb(46, 188, 201));
+      }
+    </style>
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"

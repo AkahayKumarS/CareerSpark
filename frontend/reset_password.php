@@ -8,11 +8,19 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
+    $newPassword = trim($_POST['new_password']);
+    $confirmPassword = trim($_POST['confirm_password']);
 
     // Validate email
     if (empty($email)) {
         $messageType = "danger";
         $message = "Please enter your email address.";
+    } elseif (empty($newPassword) || empty($confirmPassword)) {
+        $messageType = "danger";
+        $message = "Please enter and confirm your new password.";
+    } elseif ($newPassword !== $confirmPassword) {
+        $messageType = "danger";
+        $message = "Passwords do not match.";
     } else {
         // Email validation regex
         $emailRegex = '/^[^\s@]+@[^\s@]+\.[^\s@]+$/';
@@ -20,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $messageType = "danger";
             $message = "Please enter a valid email address.";
         } else {
-            // Check if email exists
+            // Check if email exists in the database
             $sql = "SELECT * FROM users WHERE email = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $email);
@@ -28,12 +36,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = $stmt->get_result();
 
             if ($result->num_rows === 1) {
-                // Assume a function sendResetLink() is defined to send a password reset link
-                $resetLink = "reset_link_example.com"; // Generate a real reset link
-                sendResetLink($email, $resetLink);
+                // User exists, update the password
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); // Hash the password
+                $updateSql = "UPDATE users SET password = ? WHERE email = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("ss", $hashedPassword, $email);
+                $updateStmt->execute();
 
-                $messageType = "success";
-                $message = "A password reset link has been sent to your email address.";
+                if ($updateStmt->affected_rows > 0) {
+                    $messageType = "success";
+                    $message = "Your password has been successfully reset.";
+                } else {
+                    $messageType = "danger";
+                    $message = "There was an error updating your password.";
+                }
+
+                $updateStmt->close();
             } else {
                 $messageType = "danger";
                 $message = "Email address not found.";
@@ -44,12 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
-}
-
-function sendResetLink($email, $resetLink)
-{
-    // Placeholder function for sending email
-    // Implement actual email sending logic here using mail() or a library like PHPMailer
 }
 ?>
 
@@ -74,7 +86,7 @@ function sendResetLink($email, $resetLink)
                 <div class="login-card">
                     <div class="login-header">
                         <h2 class="text-primary">Reset Password</h2>
-                        <p>Enter your email address to reset your password</p>
+                        <p>Enter your email address and new password to reset</p>
                     </div>
 
                     <form action="reset_password.php" method="POST" onsubmit="return validateResetForm()"
@@ -89,7 +101,25 @@ function sendResetLink($email, $resetLink)
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary login-btn">Send Reset Link</button>
+                        <div class="form-group">
+                            <label for="new_password" class="form-label">New Password</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" class="form-control" id="new_password" name="new_password"
+                                    placeholder="Enter new password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" class="form-control" id="confirm_password"
+                                    name="confirm_password" placeholder="Confirm new password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary login-btn">Reset Password</button>
 
                         <div class="signup-link">
                             <p>Remember your password? <a href="login.php" class="text-primary">Login</a></p>
@@ -104,15 +134,30 @@ function sendResetLink($email, $resetLink)
 <script>
     function validateResetForm() {
         const email = document.getElementById('email').value.trim();
+        const newPassword = document.getElementById('new_password').value.trim();
+        const confirmPassword = document.getElementById('confirm_password').value.trim();
+
         if (email === '') {
             alert('Please enter your email address.');
             return false;
         }
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert('Please enter a valid email address.');
             return false;
         }
+
+        if (newPassword === '' || confirmPassword === '') {
+            alert('Please enter and confirm your new password.');
+            return false;
+        }
+
+        if (newPassword !== confirmPassword) {
+            alert('Passwords do not match.');
+            return false;
+        }
+
         return true;
     }
 
@@ -140,6 +185,7 @@ function sendResetLink($email, $resetLink)
     }
 
     .login-card {
+        margin-left: 25px;
         background: white;
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         padding: 40px;
