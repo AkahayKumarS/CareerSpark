@@ -97,7 +97,7 @@ include '../backend/config.php';
                         <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Industry Insights</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Expert Career Guidance</p>
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Career Roadmap Generation</p>
                     </div>
                     <div class="col-sm-6">
                         <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Comprehensive Resources</p>

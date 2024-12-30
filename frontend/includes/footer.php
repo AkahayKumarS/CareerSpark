@@ -18,7 +18,7 @@
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>SJEC, Mangaluru</p>
                 <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9108083054</p>
                 <p class="mb-2"><i class="fa fa-envelope me-3"></i>support@careerspark.com</p>
-                <div class="d-flex pt-2">
+                <!-- <div class="d-flex pt-2">
                     <a class="btn btn-outline-light btn-social" href="https://twitter.com"><i
                             class="fab fa-twitter"></i></a>
                     <a class="btn btn-outline-light btn-social" href="https://facebook.com"><i
@@ -27,7 +27,7 @@
                             class="fab fa-youtube"></i></a>
                     <a class="btn btn-outline-light btn-social" href="https://linkedin.com"><i
                             class="fab fa-linkedin-in"></i></a>
-                </div>
+                </div> -->
             </div>
 
             <!-- Our Motto Section -->

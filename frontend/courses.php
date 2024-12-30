@@ -17,18 +17,25 @@ include '../backend/config.php'; // Database connection
             $categoryQuery = "SELECT DISTINCT category FROM courses";
             $categoryResult = $conn->query($categoryQuery);
 
-            while ($category = $categoryResult->fetch_assoc()): ?>
+            // Counter for row and column layout
+            $counter = 0;
+
+            while ($category = $categoryResult->fetch_assoc()):
+                // Check to start a new row every 4 categories
+                if ($counter % 4 == 0 && $counter > 0) {
+                    echo '</div><div class="row g-3">'; // Close and open a new row
+                }
+                ?>
                 <div class="col-lg-3 col-md-4 wow zoomIn" data-wow-delay="0.1s">
                     <a href="courses.php?category=<?php echo urlencode($category['category']); ?>"
-                        class="position-relative d-block overflow-hidden">
-                        <img class="img-fluid" src="img/<?php echo htmlspecialchars($category['category']); ?>.jpg"
-                            alt="<?php echo htmlspecialchars($category['category']); ?>">
-                        <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                            <h5 class="m-0"><?php echo htmlspecialchars($category['category']); ?></h5>
-                        </div>
+                        class="btn btn-outline-primary w-100 text-center p-3" style="border-radius: 10px;">
+                        <?php echo htmlspecialchars($category['category']); ?>
                     </a>
                 </div>
-            <?php endwhile; ?>
+                <?php
+                $counter++; // Increment counter
+            endwhile;
+            ?>
         </div>
     </div>
 </div>

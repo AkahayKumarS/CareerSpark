@@ -56,6 +56,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                 <div class="dropdown-menu fade-down m-0">
                     <?php
+
                     // Check if the user is logged in
                     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true):
                         ?>
@@ -74,17 +75,46 @@
                         curl_close($ch);
 
                         // Check if the Flask server is running
-                        if ($http_status == 200): ?>
-                            <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
-                        <?php else: ?>
-                            <a href="404.php" class="dropdown-item">Career Prediction</a>
-                        <?php endif; ?>
-                    <?php endif; ?>
+                        if ($http_status == 200) {
+                            // Establish database connection
+                            $conn = new mysqli("localhost", "root", "", "careerspark");
+
+                            // Check connection
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            // Fetch user ID from the cookie
+                            $user_id = $_COOKIE['user_id'] ?? null;
+
+                            // Check if the user has a student profile
+                            $sql = "SELECT profile_id FROM student_profiles WHERE user_id = ?";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param("i", $user_id);
+                            $stmt->execute();
+                            $stmt->store_result();
+
+                            if ($stmt->num_rows > 0) {
+                                // Student profile exists, allow access
+                                echo '<a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>';
+                            } else {
+                                // No student profile found, show alert
+                                echo '<a href="#" class="dropdown-item" onclick="alert(\'Complete your profile before taking career prediction.\');">Career Prediction</a>';
+                            }
+
+                            // Close statement
+                            $stmt->close();
+                        } else {
+                            // Flask server not running
+                            echo '<a href="404.php" class="dropdown-item">Career Prediction</a>';
+                        }
+                    endif;
+                    ?>
                     <a href="knowledgeNetwork.php" class="dropdown-item">Knowledge Network</a>
                     <a href="courses.php" class="dropdown-item">Courses</a>
                 </div>
-
             </div>
+
             <a href="contact.php" class="nav-item nav-link">Contact</a>
 
 

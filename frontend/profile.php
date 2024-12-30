@@ -255,9 +255,9 @@ $profile = $stmt_fetch->get_result()->fetch_assoc();
                         </a>
                     <?php endif; ?>
                      <!-- Resume Generation Button -->
-                     <button type="button" id="generate-resume" class="btn btn-success btn-lg ms-3 px-5 py-2">
+                     <!-- <button type="button" id="generate-resume" class="btn btn-success btn-lg ms-3 px-5 py-2">
     <i class="bi bi-file-earmark-pdf me-2"></i> Create Resume
-</button>
+</button> -->
 
                 </div>
             </form>
@@ -306,7 +306,7 @@ $profile = $stmt_fetch->get_result()->fetch_assoc();
 }
 </style>
 
-// <!-- Include jsPDF library -->
+<!-- Include jsPDF library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
     // Handle profile picture preview
