@@ -7,7 +7,6 @@ career = pd.read_csv('dataset9000.data', header = None)
 X = np.array(career.iloc[:, 0:17]) #X is skills
 print(X)
 y = np.array(career.iloc[:, 17]) #Y is Roles
-print("hi")
 print(y) 
 
 ##  attribute to return the column labels of the given Dataframe
