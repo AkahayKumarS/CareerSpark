@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>CareerSpark</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/img/CareerSparkFavicon.png" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/css/style.css" rel="stylesheet">
+</head>
+<!-- Spinner Start -->
+<div id="spinner"
+  class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="http://127.0.0.1/CareerSpark/frontend/index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <!-- Replace book icon with CareerSpark logo -->
+        <img src="http://127.0.0.1/CareerSpark/frontend/img/careerSparkLogo.png" alt="CareerSpark Logo"
+            style="height: 310px; width: 350px; margin-right: 10px;">
+    </a>
+  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+      <a href="http://127.0.0.1/CareerSpark/frontend/index.php" class="nav-item nav-link">Home</a>
+      <a href="http://127.0.0.1/CareerSpark/frontend/about.php" class="nav-item nav-link">About</a>
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
+        <div class="dropdown-menu fade-down m-0">
+          <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
+          <a href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php" class="dropdown-item">Knowledge Network</a>
+          <a href="http://127.0.0.1/CareerSpark/frontend/courses.php" class="dropdown-item">Courses</a>
+        </div>
+      </div>
+      <a href="http://127.0.0.1/CareerSpark/frontend/contact.php" class="nav-item nav-link">Contact</a>
+      <a href="http://127.0.0.1/CareerSpark/backend/logout.php" class="nav-item nav-link">Log out <i
+          class="fa fa-sign-out-alt ms-1"></i></a>
+      <a href="http://127.0.0.1/CareerSpark/frontend/profile.php"
+        class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase">Profile <i
+          class="bi bi-person-circle ms-2"></i>
+      </a>
+
+    </div>
+  </div>
+</nav>
+<!-- Navbar End -->
+
+<!-- Form Section -->
+<div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+      <div class="col-lg-8">
+          <div class="form-card shadow-lg rounded-3 p-5">
+              <h2 class="text-center mb-4">Rate Your Skills</h2>
+              <form method="POST" action="{{url_for('prediction')}}">
+                  <div class="row g-3">
+                      <!-- Database Fundamentals -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="database-fundamentals" class="form-label">
+                                  <i class="fas fa-database me-2 text-primary"></i>Database Fundamentals
+                              </label>
+                              <select class="form-select" id="database-fundamentals" name="database_fundamentals"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Computer Architecture -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="computer-architecture" class="form-label">
+                                  <i class="fas fa-laptop me-2 text-primary"></i>Computer Architecture
+                              </label>
+                              <select class="form-select" id="computer-architecture" name="computer_architecture"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Distributed Computing Systems -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="distributed-computing-systems" class="form-label">
+                                  <i class="fas fa-network-wired me-2 text-primary"></i>Distributed Computing Systems
+                              </label>
+                              <select class="form-select" id="distributed-computing-systems"
+                                  name="distributed_computing_systems_skills" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Cyber Security -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="cyber-security" class="form-label">
+                                  <i class="fas fa-shield-alt me-2 text-primary"></i>Cyber Security
+                              </label>
+                              <select class="form-select" id="cyber-security" name="cyber_security" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Computer Networking -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="computer-networking" class="form-label">
+                                  <i class="fas fa-globe me-2 text-primary"></i>Computer Networking
+                              </label>
+                              <select class="form-select" id="computer-networking" name="computer_networking"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Software Development -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="software-development" class="form-label">
+                                  <i class="fas fa-code me-2 text-primary"></i>Software Development
+                              </label>
+                              <select class="form-select" id="software-development" name="software_development_skills"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Programming Skills -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="programming-skills" class="form-label">
+                                  <i class="fas fa-terminal me-2 text-primary"></i>Programming Skills
+                              </label>
+                              <select class="form-select" id="programming-skills" name="programming_skills" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Project Management -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="project-management" class="form-label">
+                                  <i class="fas fa-project-diagram me-2 text-primary"></i>Project Management
+                              </label>
+                              <select class="form-select" id="project-management" name="project_management" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Computer Forensics Fundamentals -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="computer-forensics-fundamentals" class="form-label">
+                                  <i class="fas fa-search me-2 text-primary"></i>Computer Forensics Fundamentals
+                              </label>
+                              <select class="form-select" id="computer-forensics-fundamentals"
+                                  name="computer_forensics_fundamentals_skills" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Technical Communication Skills -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="technical-communication-skills" class="form-label">
+                                  <i class="fas fa-comment-dots me-2 text-primary"></i>Technical Communication Skills
+                              </label>
+                              <select class="form-select" id="technical-communication-skills"
+                                  name="technical_communication_skills" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- AI ML -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="AI-ML" class="form-label">
+                                  <i class="fas fa-robot me-2 text-primary"></i>AI ML
+                              </label>
+                              <select class="form-select" id="AI-ML" name="AI_ML" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Software Engineering -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="software-engineering" class="form-label">
+                                  <i class="fas fa-tools me-2 text-primary"></i>Software Engineering
+                              </label>
+                              <select class="form-select" id="software-engineering" name="software_engineering_skills"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Business Analysis -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="business-analysis" class="form-label">
+                                  <i class="fas fa-chart-line me-2 text-primary"></i>Business Analysis
+                              </label>
+                              <select class="form-select" id="business-analysis" name="business_analysis" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Communication Skills -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="communication-skills" class="form-label">
+                                  <i class="fas fa-comments me-2 text-primary"></i>Communication Skills
+                              </label>
+                              <select class="form-select" id="communication-skills" name="communication_skills"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Data Science -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="data-science" class="form-label">
+                                  <i class="fas fa-chart-pie me-2 text-primary"></i>Data Science
+                              </label>
+                              <select class="form-select" id="data-science" name="data_science_skills" required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Troubleshooting Skills -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="troubleshooting-skills" class="form-label">
+                                  <i class="fas fa-wrench me-2 text-primary"></i>Troubleshooting Skills
+                              </label>
+                              <select class="form-select" id="troubleshooting-skills" name="troubleshooting_skills"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Graphics Designing -->
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label for="graphics-designing" class="form-label">
+                                  <i class="fas fa-palette me-2 text-primary"></i>Graphics Designing
+                              </label>
+                              <select class="form-select" id="graphics-designing" name="graphics_designing_skills"
+                                  required>
+                                  <option value="">Choose your level</option>
+                                  <option value="1">Not Interested</option>
+                                  <option value="2">Poor</option>
+                                  <option value="3">Beginner</option>
+                                  <option value="5">Average</option>
+                                  <option value="6">Intermediate</option>
+                                  <option value="7">Excellent</option>
+                                  <option value="9">Professional</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Submit Button -->
+                      <div class="text-center mt-4">
+                          <button type="submit" class="btn btn-custom px-5 py-2"
+                              style="background-color: #00bcd4; color: white">
+                              Discover Yourself!
+                          </button>
+                      </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+<!-- Footer Start -->
+<div class="my-footer container-fluid bg-dark text-light footer pt-5 mt-0 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5 position-relative">
+        <div class="row g-5">
+            <!-- Quick Links -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-white mb-3">Quick Links</h4>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/index.php">Home</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/about.php">About Us</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/contact.php">Contact Us</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/courses.php">Courses</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php">Knowledge Network</a>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-white mb-3">Contact</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>SJEC, Mangaluru</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9108083054</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>support@careerspark.com</p>
+                <!-- <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href="https://twitter.com"><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://facebook.com"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://youtube.com"><i
+                            class="fab fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://linkedin.com"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div> -->
+            </div>
+
+            <!-- Our Motto Section -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-white mb-3">Our Motto</h4>
+                <p>At CareerSpark, we empower individuals with the tools and opportunities to succeed in their careers,
+                    offering top resources to guide job seekers toward their professional goals.</p>
+            </div>
+        </div>
+
+        <!-- CareerSpark Logo -->
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+            <img src="http://127.0.0.1/CareerSpark/frontend/img/careerSpark_footer_logo.png" alt="CareerSpark Logo" style="height: 240px;">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="http://127.0.0.1/CareerSpark/frontend/index.php">CareerSpark</a>, All Rights Reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="footer-menu">
+                        Designed By <a class="border-bottom" href="https://github.com/AkahayKumarS/CareerSpark"
+                            target="_blank">GA-17</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<style>
+    .my-footer {
+        background: linear-gradient(90deg, rgb(22, 33, 50), rgb(46, 188, 201));
+    }
+</style>
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/wow/wow.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/easing/easing.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/waypoints/waypoints.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="http://127.0.0.1/CareerSpark/frontend/js/main.js"></script>
+</body>
+
+</html>
