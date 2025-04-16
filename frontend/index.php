@@ -7,7 +7,7 @@ session_start();
 <?php
 include 'includes/header.php';
 include '../backend/config.php';
-include "./templates/chatbot.php";
+include "chatbot.php";
 ?>
 
 <!-- Carousel Start -->

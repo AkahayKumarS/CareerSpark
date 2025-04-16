@@ -2,7 +2,7 @@
 session_start();
 include 'includes/header.php';
 include '../backend/config.php'; // Database connection
-include "./templates/chatbot.php";
+include "chatbot.php";
 ?>
 
 <!-- Categories Start -->

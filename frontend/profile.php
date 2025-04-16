@@ -2,7 +2,7 @@
 session_start();
 include '../backend/config.php'; // Include database connection
 include 'includes/header.php';
-include "./templates/chatbot.php";
+include "chatbot.php";
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {

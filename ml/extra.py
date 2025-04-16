@@ -276,15 +276,33 @@ def chat():
     qualification = profile_info.get("highest_qualification", "Not Provided")
     hobbies = profile_info.get("hobbies", "Not Provided")
 
-    # Build a detailed prompt
-    prompt = f"""You are CareerBot, an intelligent career guidance assistant. Below is the profile of a student seeking career assistance:
-    Name: {name}
-    Bio: {bio}
-    College: {college}
-    Highest Qualification: {qualification}
-    Hobbies: {hobbies}
-    Technical Skills: {', '.join(student_skills)}
-    Now, based on the above profile and skills, answer the following question in a helpful, clear, and personalized way:{user_input}"""
+
+    # Keywords indicating profile-based or career-related queries
+    profile_keywords = ["name", "my profile", "bio", "who am i", "about me", "myself", "college", "qualification","hobbies"]
+
+    career_keywords = ["career", "job", "skills", "resume", "future", "goal", "path", "guidance", "work",
+                    "opportunity", "interview", "field", "domain", "profession", "recommend", "suggest"]
+
+    # Lowercase user input for comparison
+    user_input_lower = user_input.lower()
+
+    is_profile_query = any(keyword in user_input_lower for keyword in profile_keywords)
+    is_career_query = any(keyword in user_input_lower for keyword in career_keywords)
+
+    # Build prompt accordingly
+    if is_profile_query or is_career_query:
+        prompt = f"""You are CareerBot, an intelligent assistant for students. Below is the student's profile:
+
+        - Name: {name}
+        - Bio: {bio}
+        - College: {college}
+        - Qualification: {qualification}
+        - Hobbies: {hobbies}
+        - Technical Skills: {', '.join(student_skills)}
+
+        Now answer the question clearly and helpfully: "{user_input}" """
+    else:
+        prompt = f"""You are CareerBot, a helpful student chatbot. Answer this message in a friendly and concise way: "{user_input}" """
 
     try:
         model = genai.GenerativeModel(model_name="models/gemini-1.5-pro-latest")

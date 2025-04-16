@@ -106,9 +106,6 @@ if ($result) {
 <?php endif; ?>
 <!-- Manage Knowledge Network -->
 <div class="container py-5">
-
-
-
     <!-- Add New Job Form -->
     <form action="manage_knowledgeNetwork.php" method="POST" class="bg-light p-4 rounded shadow mb-5 job-add-form">
         <div class="text-center mb-4">

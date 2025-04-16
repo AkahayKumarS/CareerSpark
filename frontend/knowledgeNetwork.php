@@ -4,7 +4,8 @@ session_start();
 
 // Database connection
 include '../backend/config.php'; // Ensure this file exists and has correct DB credentials
-include "./templates/chatbot.php";
+include 'includes/header.php';
+include "chatbot.php";
 
 // Default search term
 $searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
@@ -27,8 +28,6 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'includes/header.php'; ?>
-
 <style>
     /* Enhanced Knowledge Network Styles */
     .hero-area {

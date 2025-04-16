@@ -136,10 +136,10 @@
                         class="fa fa-sign-out-alt ms-1"></i></a>
             <?php endif; ?>
             <!-- Login/Logout Button End -->
-            <a href="profile.php" class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase">Profile <i
-                    class="bi bi-person-circle ms-2"></i>
+            <a href="<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) ? 'profile.php' : 'login.php'; ?>"
+                class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase">
+                Profile <i class="bi bi-person-circle ms-2"></i>
             </a>
-
         </div>
     </div>
 </nav>

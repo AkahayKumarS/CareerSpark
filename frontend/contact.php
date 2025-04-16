@@ -3,7 +3,7 @@ session_start();
 ?>
 <?php
 include 'includes/header.php';
-include "./templates/chatbot.php";
+include "chatbot.php";
 ?>
 
 <?php
