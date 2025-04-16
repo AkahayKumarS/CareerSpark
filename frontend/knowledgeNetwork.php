@@ -4,6 +4,7 @@ session_start();
 
 // Database connection
 include '../backend/config.php'; // Ensure this file exists and has correct DB credentials
+include "./templates/chatbot.php";
 
 // Default search term
 $searchTerm = isset($_POST['search']) ? $_POST['search'] : '';

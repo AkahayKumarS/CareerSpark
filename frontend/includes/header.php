@@ -56,10 +56,8 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                 <div class="dropdown-menu fade-down m-0">
                     <?php
-
                     // Check if the user is logged in
-                    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true):
-                        ?>
+                    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true): ?>
                         <a href="login.php" class="dropdown-item">Career Prediction</a>
                     <?php else:
                         // URL of the Flask server
@@ -87,18 +85,26 @@
                             // Fetch user ID from the cookie
                             $user_id = $_COOKIE['user_id'] ?? null;
 
-                            // Check if the user has a student profile
-                            $sql = "SELECT profile_id FROM student_profiles WHERE user_id = ?";
+                            // Check if the user has a student profile and fetch technical skills
+                            $sql = "SELECT profile_id, technical_skills FROM student_profiles WHERE user_id = ?";
                             $stmt = $conn->prepare($sql);
                             $stmt->bind_param("i", $user_id);
                             $stmt->execute();
                             $stmt->store_result();
 
                             if ($stmt->num_rows > 0) {
-                                // Student profile exists, allow access
-                                echo '<a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>';
+                                $stmt->bind_result($profile_id, $technical_skills);
+                                $stmt->fetch();
+
+                                if (!empty(trim($technical_skills))) {
+                                    // Technical skills are filled, allow access
+                                    echo '<a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>';
+                                } else {
+                                    // Technical skills not filled
+                                    echo '<a href="#" class="dropdown-item" onclick="alert(\'Please fill in your technical skills in the profile section before taking career prediction.\');">Career Prediction</a>';
+                                }
                             } else {
-                                // No student profile found, show alert
+                                // No student profile found
                                 echo '<a href="#" class="dropdown-item" onclick="alert(\'Complete your profile before taking career prediction.\');">Career Prediction</a>';
                             }
 
@@ -114,6 +120,7 @@
                     <a href="courses.php" class="dropdown-item">Courses</a>
                 </div>
             </div>
+
 
             <a href="contact.php" class="nav-item nav-link">Contact</a>
 

@@ -6,10 +6,12 @@ from datetime import timedelta, date
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
+from flask_cors import CORS
 
-
+ 
 load_dotenv()  # Load environment variables from .env file
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'fallback-secret-key')
 
@@ -46,6 +48,26 @@ def fetch_student_skills(user_id):
     result = cursor.fetchone()
     connection.close()
     return result['technical_skills'].split(", ") if result and result['technical_skills'] else []
+
+
+def fetch_student_profile_info(user_id):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    try:
+        query = """
+                SELECT u.name, sp.bio, sp.college, sp.highest_qualification, sp.hobbies
+                FROM users u
+                JOIN student_profiles sp ON u.id = sp.user_id
+                WHERE sp.user_id = %s"""
+        
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+        return result if result else {}
+    finally:
+        cursor.close()
+        connection.close()
+
 
 # Fetch courses for a specific skill
 def fetch_course_for_skill(skill):
@@ -173,6 +195,21 @@ def prediction():
         # Fetch the job ID
         job_id = cursor.fetchone()[0]  # Assuming job_role is   unique and only one ID is fetched
 
+        # Check if user already has a record
+        cursor.execute("SELECT career_suggested FROM recommendations WHERE user_id = %s", (user_id,))
+        existing = cursor.fetchone()
+
+        if existing:
+            session['previous_career'] = existing[0]
+            cursor.execute(
+                "UPDATE recommendations SET career_suggested = %s, prediction_date = NOW() WHERE user_id = %s",
+                (best_matched_job_role, user_id))
+        else:
+            session['previous_career'] = None  # No previous suggestion
+            cursor.execute(
+                "INSERT INTO recommendations (user_id, career_suggested) VALUES (%s, %s)", (user_id, best_matched_job_role))
+        
+        conn.commit()
         cursor.close()
         conn.close()
         session['job_id'] = job_id
@@ -190,6 +227,7 @@ def result_page():
     missing_skills = session.get('missing_skills')
     courses = session.get('courses')
     roadmap = session.get('roadmap')
+    previous_career = session.get('previous_career')
 
     return render_template(
         "testafter.html",
@@ -199,7 +237,8 @@ def result_page():
         matched_skills=matched_skills,
         missing_skills=missing_skills,
         courses=courses,
-        roadmap=roadmap
+        roadmap=roadmap,
+        previous_career=previous_career
     )
 
 @app.route('/career_roadmap')
@@ -213,6 +252,7 @@ def career_roadmap():
         job_role=job_role
     )
 
+
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json()
@@ -221,9 +261,52 @@ def chat():
     if not user_input:
         return jsonify({"reply": "Please enter a valid question."})
 
+    user_id = request.cookies.get("user_id")
+    if not user_id:
+        return jsonify({"reply": "User not logged in."})
+
+    # Fetch student skills
+    student_skills = fetch_student_skills(user_id)
+
+    # Fetch additional profile info
+    profile_info = fetch_student_profile_info(user_id)
+    name = profile_info.get("name", "Not Provided")
+    bio = profile_info.get("bio", "Not Provided")
+    college = profile_info.get("college", "Not Provided")
+    qualification = profile_info.get("highest_qualification", "Not Provided")
+    hobbies = profile_info.get("hobbies", "Not Provided")
+
+
+    # Keywords indicating profile-based or career-related queries
+    profile_keywords = ["name", "my profile", "bio", "who am i", "about me", "myself", "college", "qualification","hobbies"]
+
+    career_keywords = ["career", "job", "skills", "resume", "future", "goal", "path", "guidance", "work",
+                    "opportunity", "interview", "field", "domain", "profession", "recommend", "suggest"]
+
+    # Lowercase user input for comparison
+    user_input_lower = user_input.lower()
+
+    is_profile_query = any(keyword in user_input_lower for keyword in profile_keywords)
+    is_career_query = any(keyword in user_input_lower for keyword in career_keywords)
+
+    # Build prompt accordingly
+    if is_profile_query or is_career_query:
+        prompt = f"""You are CareerBot, an intelligent assistant for students. Below is the student's profile:
+
+        - Name: {name}
+        - Bio: {bio}
+        - College: {college}
+        - Qualification: {qualification}
+        - Hobbies: {hobbies}
+        - Technical Skills: {', '.join(student_skills)}
+
+        Now answer the question clearly and helpfully: "{user_input}" """
+    else:
+        prompt = f"""You are CareerBot, a helpful student chatbot. Answer this message in a friendly and concise way: "{user_input}" """
+
     try:
         model = genai.GenerativeModel(model_name="models/gemini-1.5-pro-latest")
-        response = model.generate_content(user_input)
+        response = model.generate_content(prompt)
         return jsonify({"reply": response.text})
     except Exception as e:
         return jsonify({"reply": f"Error: {str(e)}"})

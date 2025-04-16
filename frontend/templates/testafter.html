@@ -213,10 +213,237 @@
         text-decoration: none; /* Remove underline */
         transition: color 0.3s ease; /* Smooth transition effect */
       }
+    </style>
+    <!-- Add CSS in head section or in a separate stylesheet -->
+    <style>
+      /* Card hover effects */
+      .career-card {
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .career-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+      }
+
+      /* Icon wrapper with animation */
+      .icon-wrapper {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: rgba(0, 123, 255, 0.1);
+        animation: pulse 2s infinite;
+        margin-bottom: 1rem;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(0, 123, 255, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        }
+      }
+
+      /* Badge pulse effect */
+      .badge-pulse {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        animation: badgePulse 1.5s infinite;
+      }
+
+      @keyframes badgePulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      /* List item hover effects */
+      .career-item,
+      .skill-item {
+        transition: all 0.2s ease;
+        border-left: 0 solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .career-item:hover,
+      .skill-item:hover {
+        border-left: 4px solid #ffc107;
+        background-color: rgba(255, 193, 7, 0.05);
+        padding-left: calc(1.25rem - 4px);
+      }
+
+      .matched-skills .skill-item:hover {
+        border-left-color: #28a745;
+        background-color: rgba(40, 167, 69, 0.05);
+      }
+
+      .missing-skills .skill-item:hover {
+        border-left-color: #dc3545;
+        background-color: rgba(220, 53, 69, 0.05);
+      }
+
+      /* Course link hover effect */
+      .course-link {
+        transition: all 0.2s ease;
+        display: inline-block;
+        position: relative;
+      }
+
+      .course-link:hover {
+        color: #0056b3 !important;
+        transform: translateX(5px);
+      }
+
+      .course-link:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0056b3;
+        transition: width 0.3s;
+      }
+
+      .course-link:hover:after {
+        width: 100%;
+      }
+
+      /* Roadmap button effects */
+      .roadmap-btn {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .roadmap-btn:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: all 0.6s;
+        z-index: -1;
+      }
+
+      .roadmap-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      }
+
+      .roadmap-btn:hover:before {
+        left: 100%;
+      }
+
+      /* Skill glow effect */
+      .skill-glow {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 5px;
+        background: linear-gradient(to right, transparent, #28a745);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .matched-skills .skill-item:hover .skill-glow {
+        opacity: 1;
+      }
+
+      /* Animation for best career link */
+      .best-career-link {
+        position: relative;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
 
       .best-career-link:hover {
-        color: #06bbcc; /* Highlight color on hover */
-        text-decoration: underline; /* Add underline effect on hover */
+        color: #007bff !important;
+        transform: scale(1.05);
+        text-decoration: underline;
+      }
+
+      /* Course list styling */
+      .course-list {
+        list-style: none;
+        padding-left: 2rem;
+      }
+
+      .course-item {
+        margin: 0.5rem 0;
+        position: relative;
+      }
+
+      .course-item:before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: #007bff;
+        transform: translateY(-50%);
+      }
+    </style>
+
+    <style>
+      /* Last Suggested Career styling */
+      .last-career-alert {
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background-color: rgba(13, 202, 240, 0.1);
+        border-left: 4px solid #0dcaf0;
+      }
+
+      .last-career-alert:hover {
+        background-color: rgba(13, 202, 240, 0.15);
+      }
+
+      .history-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(13, 202, 240, 0.2);
+        color: #0dcaf0;
+      }
+
+      .previous-career-text {
+        font-weight: 500;
       }
     </style>
   </head>
@@ -344,23 +571,46 @@
     <!-- Career List -->
     <div class="container career-list py-5">
       <div class="row g-4">
+        <!-- Last Suggested Career -->
+        {% if previous_career %}
+        <div class="col-12">
+          <div
+            class="alert alert-info d-flex align-items-center shadow-sm border-0 last-career-alert"
+            role="alert"
+          >
+            <div class="history-icon-container me-3">
+              <i class="fas fa-history fa-lg"></i>
+            </div>
+            <div>
+              <strong>Last Suggested Career:</strong>
+              <span class="ms-1 previous-career-text"
+                >{{ previous_career }}</span
+              >
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
         <!-- Best Matched Career -->
         <div class="col-lg-6">
-          <div class="card shadow-sm border-0">
-            <div class="card-body text-center">
-              <i class="fas fa-bullseye fa-4x text-primary mb-3"></i>
+          <div class="card shadow-sm border-0 h-100 career-card">
+            <div class="card-body text-center position-relative">
+              <div class="icon-wrapper mb-3">
+                <i class="fas fa-bullseye fa-4x text-primary"></i>
+              </div>
               <h4 class="card-title fw-bold">Best Matched Career</h4>
               <a
                 href="http://127.0.0.1/CareerSpark/frontend/jobDetails.php?id={{ job_id }}"
-                class="card-text fs-5 text-muted best-career-link"
+                class="card-text fs-5 text-muted best-career-link d-block mb-4"
               >
                 {{ job0 }}
               </a>
 
-              <div class="mt-3">
-                <span class="badge bg-primary px-3 py-2"
-                  >Top Recommendation</span
-                >
+              <div class="mt-4">
+                <span class="badge bg-primary px-3 py-2 position-relative">
+                  <i class="fas fa-star me-1"></i> Top Recommendation
+                  <span class="badge-pulse"></span>
+                </span>
               </div>
             </div>
           </div>
@@ -368,16 +618,22 @@
 
         <!-- Alternative Career Paths -->
         <div class="col-lg-6">
-          <div class="card shadow-sm border-0">
+          <div class="card shadow-sm border-0 h-100 career-card">
             <div class="card-body">
-              <h4 class="card-title text-warning fw-bold">
-                Alternative Career Paths
-              </h4>
-              <ul class="list-group">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-route text-warning me-3 fa-2x"></i>
+                <h4 class="card-title text-warning fw-bold mb-0">
+                  Alternative Career Paths
+                </h4>
+              </div>
+              <ul class="list-group mt-3 alternative-careers">
                 {% if alternative_careers %} {% for career in
                 alternative_careers %}
-                <li class="list-group-item d-flex align-items-center">
-                  <i class="fas fa-lightbulb text-warning me-3"></i>{{ career }}
+                <li
+                  class="list-group-item d-flex align-items-center career-item"
+                >
+                  <i class="fas fa-lightbulb text-warning me-3"></i>
+                  <span>{{ career }}</span>
                 </li>
                 {% endfor %} {% else %}
                 <li class="list-group-item text-muted">
@@ -394,14 +650,23 @@
       <div class="row g-4 mt-4">
         <!-- Matched Skills -->
         <div class="col-lg-6">
-          <div class="card shadow-sm border-0">
+          <div class="card shadow-sm border-0 career-card">
             <div class="card-body">
-              <h4 class="card-title text-success fw-bold">Matched Skills</h4>
-              <ul class="list-group">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-medal text-success me-3 fa-2x"></i>
+                <h4 class="card-title text-success fw-bold mb-0">
+                  Matched Skills
+                </h4>
+              </div>
+              <ul class="list-group matched-skills">
                 {% if matched_skills %} {% for skill in matched_skills %}
-                <li class="list-group-item d-flex align-items-center">
-                  <i class="fas fa-check-circle text-success me-3"></i>{{ skill
-                  }}
+                <li
+                  class="list-group-item d-flex align-items-center skill-item"
+                  data-skill="{{ skill }}"
+                >
+                  <i class="fas fa-check-circle text-success me-3"></i>
+                  <span>{{ skill }}</span>
+                  <span class="skill-glow"></span>
                 </li>
                 {% endfor %} {% else %}
                 <li class="list-group-item text-muted">
@@ -416,24 +681,29 @@
 
         <!-- Missing Skills and Courses -->
         <div class="col-lg-6">
-          <div class="card shadow-sm border-0">
+          <div class="card shadow-sm border-0 career-card">
             <div class="card-body">
-              <h4 class="card-title text-danger fw-bold">Missing Skills</h4>
-              <ul class="list-group">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-puzzle-piece text-danger me-3 fa-2x"></i>
+                <h4 class="card-title text-danger fw-bold mb-0">
+                  Missing Skills
+                </h4>
+              </div>
+              <ul class="list-group missing-skills">
                 {% if missing_skills %} {% for skill in missing_skills %}
-                <li class="list-group-item">
+                <li class="list-group-item skill-item">
                   <div class="d-flex align-items-center">
-                    <i class="fas fa-exclamation-circle text-danger me-3"></i>{{
-                    skill }}
+                    <i class="fas fa-exclamation-circle text-danger me-3"></i>
+                    <span>{{ skill }}</span>
                   </div>
                   {% if courses[skill] %}
-                  <ul class="mt-2">
+                  <ul class="mt-2 course-list">
                     {% for course in courses[skill] %}
-                    <li>
+                    <li class="course-item">
                       <a
                         href="{{ course['course_link'] }}"
                         target="_blank"
-                        class="text-primary"
+                        class="text-primary course-link"
                       >
                         <i class="fas fa-book-open me-2"></i>{{ course['title']
                         }}
@@ -441,11 +711,6 @@
                     </li>
                     {% endfor %}
                   </ul>
-                  {% else %}
-                  <!-- <span class="text-muted d-block mt-2">
-                    <i class="fas fa-info-circle me-2"></i>No courses available
-                    for this skill.
-                  </span> -->
                   {% endif %}
                 </li>
                 {% endfor %} {% else %}
@@ -469,88 +734,120 @@
           <div class="text-center mt-4">
             <a
               href="{{ url_for('career_roadmap') }}"
-              class="btn btn-primary px-5 py-2"
+              class="btn btn-primary px-5 py-3 roadmap-btn"
             >
-              <i class="fas fa-road"></i> View Career Roadmap
+              <i class="fas fa-road me-2"></i> View Career Roadmap
             </a>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Add JavaScript to the bottom of your page -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Animate skills one by one
+        const skills = document.querySelectorAll(".matched-skills .skill-item");
+        skills.forEach((skill, index) => {
+          setTimeout(() => {
+            skill.style.opacity = "0";
+            skill.style.transform = "translateX(-20px)";
+            setTimeout(() => {
+              skill.style.transition = "all 0.5s ease";
+              skill.style.opacity = "1";
+              skill.style.transform = "translateX(0)";
+            }, 50);
+          }, index * 200);
+        });
+
+        // Add subtle animation to career cards
+        const cards = document.querySelectorAll(".career-card");
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            setTimeout(() => {
+              card.style.transition = "all 0.5s ease";
+              card.style.opacity = "1";
+              card.style.transform = "translateY(0)";
+            }, 50);
+          }, index * 150);
+        });
+      });
+    </script>
+
     <!-- Floating Chat Icon Button -->
-    <div
-      id="chat-toggle"
-      style="
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        background-color: #3498db;
-        color: white;
-        border-radius: 50%;
-        width: 55px;
-        height: 55px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 999;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      "
-    >
-      💬
+    <div id="chat-toggle" class="chat-toggle-btn">
+      <div class="chat-icon-wrapper">
+        <i class="fas fa-comments"></i>
+      </div>
+      <span class="notification-badge">1</span>
     </div>
 
     <!-- Chat Window -->
-    <div
-      id="chat-window"
-      style="
-        position: fixed;
-        bottom: 90px;
-        left: 20px;
-        width: 350px;
-        max-height: 500px;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        display: none;
-        flex-direction: column;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        z-index: 999;
-        overflow: hidden;
-      "
-    >
-      <div
-        style="
-          background-color: #3498db;
-          color: white;
-          padding: 10px;
-          font-weight: bold;
-        "
-      >
-        CareerBot
+    <div id="chat-window" class="career-chat-window">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="chat-title">
+            <h3>CareerBot</h3>
+            <span class="status-indicator">Online</span>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="action-btn minimize-btn">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button class="action-btn close-btn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
-      <div
-        id="chat-box"
-        style="padding: 10px; height: 300px; overflow-y: auto; font-size: 14px"
-      ></div>
-      <div style="display: flex; border-top: 1px solid #ddd">
-        <input
-          type="text"
-          id="chat-input"
-          placeholder="Ask CareerBot..."
-          style="flex: 1; border: none; padding: 10px; font-size: 14px"
-        />
+
+      <div id="chat-box" class="chat-messages">
+        <div class="message bot-message welcome-message">
+          <div class="message-content">
+            <p>
+              👋 Hi there! I'm CareerBot, your personal career advisor. How can
+              I help you today?
+            </p>
+            <span class="message-time">Just now</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-replies">
         <button
-          onclick="sendMessage()"
-          style="
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            padding: 10px;
-          "
+          class="quick-reply-btn"
+          onclick="sendQuickReply('What careers match my skills?')"
         >
-          Send
+          <i class="fas fa-briefcase"></i> Career matches
+        </button>
+        <button
+          class="quick-reply-btn"
+          onclick="sendQuickReply('Help me with my resume')"
+        >
+          <i class="fas fa-file-alt"></i> Resume help
+        </button>
+        <button
+          class="quick-reply-btn"
+          onclick="sendQuickReply('Interview tips')"
+        >
+          <i class="fas fa-comment-dots"></i> Interview tips
+        </button>
+      </div>
+
+      <div class="chat-input-container">
+        <div class="input-wrapper">
+          <input type="text" id="chat-input" placeholder="Ask CareerBot..." />
+          <button class="emoji-btn">
+            <i class="far fa-smile"></i>
+          </button>
+        </div>
+        <button id="send-btn" onclick="sendMessage()" class="send-btn">
+          <i class="fas fa-paper-plane"></i>
         </button>
       </div>
     </div>
@@ -684,16 +981,465 @@
     </style>
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+    <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
       ><i class="bi bi-arrow-up"></i
-    ></a>
+    ></a> -->
 
+    <style>
+      /* Main Chat Elements */
+      .chat-toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3498db, #1a76c7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .chat-toggle-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(52, 152, 219, 0.5);
+      }
+
+      .chat-icon-wrapper {
+        font-size: 24px;
+        animation: pulse 2s infinite;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #e74c3c;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border: 2px solid white;
+      }
+
+      .career-chat-window {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 400px;
+        height: 500px;
+        background: white;
+        border-radius: 15px;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      /* Chat Header */
+      .chat-header {
+        background: linear-gradient(135deg, #3498db, #1a76c7);
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 15px 15px 0 0;
+      }
+
+      .chat-header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .chat-avatar {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 20px;
+      }
+
+      .chat-title {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-title h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .status-indicator {
+        font-size: 12px;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+      }
+
+      .status-indicator:before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: #2ecc71;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      .chat-header-actions {
+        display: flex;
+      }
+
+      .action-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 5px;
+        transition: background-color 0.2s;
+      }
+
+      .action-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Chat Messages */
+      .chat-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background-color: #f8fafc;
+        position: relative;
+      }
+
+      .message {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        max-width: 80%;
+      }
+
+      .bot-message {
+        align-self: flex-start;
+      }
+
+      .user-message {
+        align-self: flex-end;
+        margin-left: auto;
+      }
+
+      .message-content {
+        padding: 12px 16px;
+        border-radius: 18px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        position: relative;
+        word-break: break-word;
+      }
+
+      .bot-message .message-content {
+        background-color: white;
+        border-bottom-left-radius: 5px;
+      }
+
+      .user-message .message-content {
+        background-color: #3498db;
+        color: white;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message-time {
+        font-size: 10px;
+        opacity: 0.7;
+        margin-top: 5px;
+        align-self: flex-end;
+      }
+
+      .welcome-message .message-content {
+        background-color: rgba(52, 152, 219, 0.1);
+        border: 1px solid rgba(52, 152, 219, 0.2);
+      }
+
+      /* Typing indicator */
+      .typing-indicator {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: white;
+        border-radius: 18px;
+        width: fit-content;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .typing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #b0b0b0;
+        margin: 0 2px;
+        animation: typingBounce 1.4s infinite ease-in-out;
+      }
+
+      .typing-dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typingBounce {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+        }
+        30% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* Quick Replies */
+      .quick-replies {
+        padding: 10px 15px;
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        background-color: #f8fafc;
+        border-top: 1px solid #eaeaea;
+        scrollbar-width: none;
+      }
+
+      .quick-replies::-webkit-scrollbar {
+        display: none;
+      }
+
+      .quick-reply-btn {
+        white-space: nowrap;
+        padding: 8px 12px;
+        border-radius: 18px;
+        background-color: white;
+        border: 1px solid #e0e5eb;
+        color: #3498db;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+      }
+
+      .quick-reply-btn i {
+        margin-right: 5px;
+      }
+
+      .quick-reply-btn:hover {
+        background-color: #f0f7ff;
+        border-color: #3498db;
+        transform: translateY(-2px);
+      }
+
+      /* Input Area */
+      .chat-input-container {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-top: 1px solid #eaeaea;
+      }
+
+      .input-wrapper {
+        flex: 1;
+        background-color: #f0f2f5;
+        border-radius: 20px;
+        padding: 5px 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      #chat-input {
+        flex: 1;
+        border: none;
+        padding: 8px 0;
+        font-size: 14px;
+        background-color: transparent;
+        outline: none;
+      }
+
+      .emoji-btn {
+        background: none;
+        border: none;
+        color: #888;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 16px;
+        transition: color 0.2s;
+      }
+
+      .emoji-btn:hover {
+        color: #3498db;
+      }
+
+      .send-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+        transition: all 0.2s;
+      }
+
+      .send-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4);
+      }
+
+      /* Animations */
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
+        .career-chat-window {
+          width: calc(100% - 40px);
+          height: 70vh;
+          bottom: 80px;
+        }
+      }
+    </style>
     <script>
-      // Toggle chatbot visibility
-      document.getElementById("chat-toggle").addEventListener("click", () => {
+      document.addEventListener("DOMContentLoaded", function () {
+        // Elements
+        const chatToggle = document.getElementById("chat-toggle");
         const chatWindow = document.getElementById("chat-window");
-        chatWindow.style.display =
-          chatWindow.style.display === "flex" ? "none" : "flex";
+        const chatBox = document.getElementById("chat-box");
+        const chatInput = document.getElementById("chat-input");
+        const sendBtn = document.getElementById("send-btn");
+        const minimizeBtn = document.querySelector(".minimize-btn");
+        const closeBtn = document.querySelector(".close-btn");
+        const notificationBadge = document.querySelector(".notification-badge");
+
+        // Toggle chatbot visibility
+        chatToggle.addEventListener("click", () => {
+          if (chatWindow.style.display === "flex") {
+            chatWindow.style.opacity = "0";
+            setTimeout(() => {
+              chatWindow.style.display = "none";
+            }, 300);
+          } else {
+            chatWindow.style.display = "flex";
+            setTimeout(() => {
+              chatWindow.style.opacity = "1";
+              chatInput.focus();
+            }, 10);
+            notificationBadge.style.display = "none";
+          }
+        });
+
+        // Initialize
+        chatWindow.style.opacity = "0";
+        chatWindow.style.transform = "translateY(20px)";
+
+        // Add minimize functionality
+        minimizeBtn.addEventListener("click", () => {
+          chatWindow.style.opacity = "0";
+          chatWindow.style.transform = "translateY(20px)";
+          setTimeout(() => {
+            chatWindow.style.display = "none";
+            chatWindow.style.transform = "translateY(0)";
+          }, 300);
+        });
+
+        // Add close functionality
+        closeBtn.addEventListener("click", () => {
+          chatWindow.style.opacity = "0";
+          setTimeout(() => {
+            chatWindow.style.display = "none";
+          }, 300);
+        });
+
+        // Send message with Enter key
+        chatInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        });
+
+        // Format timestamp
+        function formatTime() {
+          const now = new Date();
+          let hours = now.getHours();
+          let minutes = now.getMinutes();
+          const ampm = hours >= 12 ? "PM" : "AM";
+
+          hours = hours % 12;
+          hours = hours ? hours : 12;
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+
+          return `${hours}:${minutes} ${ampm}`;
+        }
       });
 
       // Send message to backend
@@ -703,10 +1449,41 @@
         if (!message) return;
 
         const chatBox = document.getElementById("chat-box");
-        chatBox.innerHTML += `<p><strong>You:</strong> ${escapeHtml(
-          message
-        )}</p>`;
+        const timestamp = formatTime();
+
+        // Add user message with animation
+        const userMessageElement = document.createElement("div");
+        userMessageElement.className = "message user-message";
+        userMessageElement.style.opacity = "0";
+        userMessageElement.style.transform = "translateY(10px)";
+        userMessageElement.innerHTML = `
+          <div class="message-content">
+            <p>${escapeHtml(message)}</p>
+            <span class="message-time">${timestamp}</span>
+          </div>
+        `;
+        chatBox.appendChild(userMessageElement);
+
+        // Animate the message in
+        setTimeout(() => {
+          userMessageElement.style.transition = "all 0.3s ease";
+          userMessageElement.style.opacity = "1";
+          userMessageElement.style.transform = "translateY(0)";
+        }, 10);
+
         input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Show typing indicator
+        const typingIndicator = document.createElement("div");
+        typingIndicator.className = "typing-indicator";
+        typingIndicator.innerHTML = `
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        `;
+        chatBox.appendChild(typingIndicator);
+        chatBox.scrollTop = chatBox.scrollHeight;
 
         try {
           const res = await fetch("/chat", {
@@ -717,23 +1494,86 @@
 
           const data = await res.json();
 
-          // Format reply: support **bold**, *italic*, URLs, and newlines
-          let reply = escapeHtml(data.reply || "No response.");
+          // Remove typing indicator after a slight delay
+          setTimeout(() => {
+            if (typingIndicator.parentNode) {
+              typingIndicator.parentNode.removeChild(typingIndicator);
+            }
 
-          reply = reply
-            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // **bold**
-            .replace(/\*(.*?)\*/g, "<em>$1</em>") // *italic*
-            .replace(
-              /(https?:\/\/[^\s]+)/g,
-              '<a href="$1" target="_blank">$1</a>'
-            ) // links
-            .replace(/\n/g, "<br>"); // new lines
+            // Format reply: support **bold**, *italic*, URLs, and newlines
+            let reply = escapeHtml(
+              data.reply ||
+                "I didn't understand that. Could you please rephrase?"
+            );
 
-          chatBox.innerHTML += `<p><strong>CareerBot:</strong> ${reply}</p>`;
-          chatBox.scrollTop = chatBox.scrollHeight;
+            reply = reply
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // **bold**
+              .replace(/\*(.*?)\*/g, "<em>$1</em>") // *italic*
+              .replace(
+                /(https?:\/\/[^\s]+)/g,
+                '<a href="$1" target="_blank" class="chat-link">$1</a>'
+              ) // links
+              .replace(/\n/g, "<br>"); // new lines
+
+            // Add bot response with animation
+            const botMessageElement = document.createElement("div");
+            botMessageElement.className = "message bot-message";
+            botMessageElement.style.opacity = "0";
+            botMessageElement.style.transform = "translateY(10px)";
+            botMessageElement.innerHTML = `
+              <div class="message-content">
+                <p>${reply}</p>
+                <span class="message-time">${formatTime()}</span>
+              </div>
+            `;
+            chatBox.appendChild(botMessageElement);
+
+            // Animate the message in
+            setTimeout(() => {
+              botMessageElement.style.transition = "all 0.3s ease";
+              botMessageElement.style.opacity = "1";
+              botMessageElement.style.transform = "translateY(0)";
+              chatBox.scrollTop = chatBox.scrollHeight;
+            }, 10);
+          }, 1500); // Simulate thinking time
         } catch (error) {
-          chatBox.innerHTML += `<p><strong>CareerBot:</strong> An error occurred.</p>`;
+          // Remove typing indicator if there's an error
+          if (typingIndicator.parentNode) {
+            typingIndicator.parentNode.removeChild(typingIndicator);
+          }
+
+          // Add error message
+          const errorMessage = document.createElement("div");
+          errorMessage.className = "message bot-message";
+          errorMessage.innerHTML = `
+            <div class="message-content" style="background-color: #fff1f0; color: #e74c3c;">
+              <p><i class="fas fa-exclamation-circle me-2"></i>Sorry, I'm having trouble right now. Please try again.</p>
+              <span class="message-time">${formatTime()}</span>
+            </div>
+          `;
+          chatBox.appendChild(errorMessage);
+          chatBox.scrollTop = chatBox.scrollHeight;
         }
+      }
+
+      // Send a quick reply message
+      function sendQuickReply(message) {
+        document.getElementById("chat-input").value = message;
+        sendMessage();
+      }
+
+      // Format time helper function
+      function formatTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? "PM" : "AM";
+
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+
+        return `${hours}:${minutes} ${ampm}`;
       }
 
       // Basic HTML escape function to avoid issues

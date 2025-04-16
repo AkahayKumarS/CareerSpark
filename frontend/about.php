@@ -1,7 +1,10 @@
 <?php
 session_start();
 ?>
-<?php include 'includes/header.php'; ?>
+<?php
+include 'includes/header.php';
+include "./templates/chatbot.php";
+?>
 
 <!-- About Start -->
 <div class="container-xxl py-5">

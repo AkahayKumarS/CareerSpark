@@ -1,13 +1,26 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 import pickle
 import numpy as np
 import mysql.connector
 from datetime import timedelta, date
 import os
+from dotenv import load_dotenv
+import google.generativeai as genai
+from flask_cors import CORS
 
+ 
+load_dotenv()  # Load environment variables from .env file
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'fallback-secret-key')
+
+# Load the Gemini API key from .env file
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+# models = genai.list_models()
+# for model in models:
+#     print(model.name)
 
 # Database connection function
 def get_db_connection():
@@ -33,18 +46,35 @@ def fetch_student_skills(user_id):
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT technical_skills FROM student_profiles WHERE user_id = %s", (user_id,))
     result = cursor.fetchone()
-    print("student technical skills: ",result)
     connection.close()
     return result['technical_skills'].split(", ") if result and result['technical_skills'] else []
+
+
+def fetch_student_profile_info(user_id):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    try:
+        query = """
+                SELECT u.name, sp.bio, sp.college, sp.highest_qualification, sp.hobbies
+                FROM users u
+                JOIN student_profiles sp ON u.id = sp.user_id
+                WHERE sp.user_id = %s"""
+        
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+        return result if result else {}
+    finally:
+        cursor.close()
+        connection.close()
+
 
 # Fetch courses for a specific skill
 def fetch_course_for_skill(skill):
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True) 
-    # Use LIKE for partial matching within the course title
     cursor.execute("SELECT title, course_link, duration FROM courses WHERE title LIKE %s", (f"%{skill}%",))
     courses = cursor.fetchall()
-    print("Courses: ", courses)
     connection.close()
     return courses
 
@@ -55,7 +85,7 @@ def generate_roadmap(missing_skills, courses):
 
     for skill in missing_skills:
         skill_courses = courses.get(skill, [])
-        total_duration = sum(course.get('duration', 0) for course in skill_courses)  # Ensure duration is fetched correctly
+        total_duration = sum(course.get('duration', 0) for course in skill_courses)
         if skill_courses and total_duration > 0:
             end_date = start_date + timedelta(weeks=total_duration)
             roadmap.append({
@@ -64,7 +94,7 @@ def generate_roadmap(missing_skills, courses):
                 "start_date": start_date.strftime('%Y-%m-%d'),
                 "end_date": end_date.strftime('%Y-%m-%d'),
             })
-            start_date = end_date  # Update start date for the next phase
+            start_date = end_date
         else:
             roadmap.append({
                 "skill": skill,
@@ -75,142 +105,193 @@ def generate_roadmap(missing_skills, courses):
 
     return roadmap
 
-
 @app.route('/')
 def career():
     return render_template("hometest.html")
 
-@app.route('/predict', methods=['POST', 'GET'])
-def result():
+@app.route('/predict', methods=['POST','GET'])
+def prediction():
     user_id = request.cookies.get('user_id')
 
     if not user_id:
-        # Handle the case where the user is not logged in
         return "User not logged in. Please log in to access this feature.", 401
     
     if request.method == 'POST':
+        # Process form data
         result = request.form
-        #print("User Input:", result)
+        user_ratings = np.array([float(value) for value in  result.values()]).reshape(1, -1)
 
-        # Convert user input into a NumPy array
-        user_ratings = np.array([float(value) for value in result.values()]).reshape(1, -1)
-
-        # Load the ML model and make predictions
         loaded_model = pickle.load(open("careerlast.pkl", 'rb'))
         predictions = loaded_model.predict(user_ratings)
 
-        print("Predictions:", predictions)
-
-        # Extract the best-matched career role (string)
         best_matched_job_role = predictions[0]
-        print(f"Best Matched Career: {best_matched_job_role}")
 
-        # Predict probabilities for all careers
         pred_proba = loaded_model.predict_proba(user_ratings)
-        print("Prediction Probabilities:", pred_proba)
 
         jobs_dict = {0:'AI ML Specialist',
-                   1:'API Integration Specialist',
-                   2:'Application Support Engineer',
-                   3:'Business Analyst',
-                   4:'Customer Service Executive',
-                   5:'Cyber Security Specialist',
-                   6:'Data Scientist',
-                   7:'Database Administrator',
-                   8:'Graphics Designer',
-                   9:'Hardware Engineer',
-                   10:'Helpdesk Engineer',
-                   11:'Information Security Specialist',
-                   12:'Networking Engineer',
-                   13:'Project Manager',
-                   14:'Software Developer',
-                   15:'Software Tester',
-                   16:'Technical Writer'}
-                
-
-        # Calculate alternative career paths
-        threshold = 0.05  # Set a threshold for alternative career paths
+                1:'API Integration Specialist',
+                2:'Application Support Engineer',
+                3:'Business Analyst',
+                4:'Customer Service Executive',
+                5:'Cyber Security Specialist',
+                6:'Data Scientist',
+                7:'Database Administrator',
+                8:'Graphics Designer',
+                9:'Hardware Engineer',
+                10:'Helpdesk Engineer',
+                11:'Information Security Specialist',
+                12:'Networking Engineer',
+                13:'Project Manager',
+                14:'Software Developer',
+                15:'Software Tester',
+                16:'Technical Writer'}
+    
+        threshold = 0.05
         alternative_careers = [
-            (index, prob)
-            for index, prob in enumerate(pred_proba[0])
-            if prob > threshold and index != np.argmax(pred_proba[0])
+        (index, prob)
+        for index, prob in enumerate(pred_proba[0])
+        if prob > threshold and index != np.argmax(pred_proba[0])
         ]
-        alternative_careers = sorted(alternative_careers, key=lambda x: -x[1])  # Sort by probability
+        alternative_careers = sorted(alternative_careers,   key=lambda x: -x[1])
         alternative_career_roles = [
-            jobs_dict[career[0]] for career in alternative_careers
+        jobs_dict[career[0]] for career in alternative_careers
         ]
 
-        print("Alternative Career Paths:", alternative_career_roles)
-
-        # Fetch job roles and required skills from the database
-        job_roles = fetch_job_roles()  # Returns a list of dictionaries with job role info
-        best_matched_job = next((job for job in job_roles if job['job_role'] == best_matched_job_role), None)
+        job_roles = fetch_job_roles()
+        best_matched_job = next((job for job in job_roles if    job['job_role'] == best_matched_job_role), None)
 
         if not best_matched_job:
-            return f"Job role '{best_matched_job_role}' not found in the database.", 500
+            return f"Job role '{best_matched_job_role}' not     found in the database.", 500
 
-        required_skills = best_matched_job['required_skills'].split(", ")
-
+        required_skills = best_matched_job['required_skills'].  split(", ")
         user_skills = fetch_student_skills(user_id)
 
-        # Identify matched and missing skills
-        matched_skills = [skill for skill in required_skills if skill in user_skills]
-        missing_skills = [skill for skill in required_skills if skill not in matched_skills]
-        print(f"Matched skills: {matched_skills}")
-        print(f"Missing skills: {missing_skills}")
+        matched_skills = [skill for skill in required_skills    if skill in user_skills]
+        missing_skills = [skill for skill in required_skills    if skill not in matched_skills]
 
-        # Fetch courses for missing skills
         courses_for_missing_skills = {}
         for skill in missing_skills:
             courses = fetch_course_for_skill(skill)
             if courses:
                 courses_for_missing_skills[skill] = courses
 
-        # Generate the roadmap
-        roadmap = generate_roadmap(missing_skills, courses_for_missing_skills)
+        roadmap = generate_roadmap(missing_skills,  courses_for_missing_skills)
 
+        # Store results in session
         session['best_career'] = best_matched_job_role
+        session['alternative_careers'] =    alternative_career_roles
+        session['matched_skills'] = matched_skills
+        session['missing_skills'] = missing_skills
+        session['courses'] = courses_for_missing_skills
         session['roadmap'] = roadmap
 
-        #Querying part of the result() function
         conn = get_db_connection()  # Establish DB connection
         cursor = conn.cursor()
 
         # SQL query to fetch job ID for the best-matched career role (job0)
-        query = "SELECT id FROM knowledge_network WHERE title = %s"
+        query = "SELECT id FROM job_roles WHERE job_role = %s"
         cursor.execute(query, (best_matched_job_role,))  # Pass job0 as parameter
 
         # Fetch the job ID
-        job_id = cursor.fetchone()[0]  # Assuming job_role is unique and only one ID is fetched
+        job_id = cursor.fetchone()[0]  # Assuming job_role is   unique and only one ID is fetched
 
+        # Check if user already has a record
+        cursor.execute("SELECT career_suggested FROM recommendations WHERE user_id = %s", (user_id,))
+        existing = cursor.fetchone()
+
+        if existing:
+            session['previous_career'] = existing[0]
+            cursor.execute(
+                "UPDATE recommendations SET career_suggested = %s, prediction_date = NOW() WHERE user_id = %s",
+                (best_matched_job_role, user_id))
+        else:
+            session['previous_career'] = None  # No previous suggestion
+            cursor.execute(
+                "INSERT INTO recommendations (user_id, career_suggested) VALUES (%s, %s)", (user_id, best_matched_job_role))
+        
+        conn.commit()
         cursor.close()
         conn.close()
+        session['job_id'] = job_id
 
+        # Redirect to GET route
+        return redirect(url_for('result_page'))
 
-        # Render the testafter.html page with the results
-        return render_template(
-            "testafter.html",
-            job0=best_matched_job_role,
-            job_id=job_id,
-            alternative_careers=alternative_career_roles,
-            matched_skills=matched_skills,
-            missing_skills=missing_skills,
-            courses=courses_for_missing_skills,
-            roadmap=roadmap
-        )
+@app.route('/result', methods=['GET'])
+def result_page():
+    # Retrieve data from session
+    job0 = session.get('best_career')
+    job_id = session.get('job_id')
+    alternative_careers = session.get('alternative_careers')
+    matched_skills = session.get('matched_skills')
+    missing_skills = session.get('missing_skills')
+    courses = session.get('courses')
+    roadmap = session.get('roadmap')
+    previous_career = session.get('previous_career')
+
+    return render_template(
+        "testafter.html",
+        job0=job0,
+        job_id=job_id,
+        alternative_careers=alternative_careers,
+        matched_skills=matched_skills,
+        missing_skills=missing_skills,
+        courses=courses,
+        roadmap=roadmap,
+        previous_career=previous_career
+    )
 
 @app.route('/career_roadmap')
 def career_roadmap():
-    # Retrieve the roadmap details sent as query parameters
     job_role = session.get('best_career')
     roadmap = session.get('roadmap', [])
 
-    # Render the career roadmap page with the details
     return render_template(
-        'career_roadmap.html',  # Your HTML page name
+        'career_roadmap.html',
         roadmap=roadmap,
         job_role=job_role
     )
+
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.get_json()
+    user_input = data.get("message", "").strip()
+
+    if not user_input:
+        return jsonify({"reply": "Please enter a valid question."})
+
+    user_id = request.cookies.get("user_id")
+    if not user_id:
+        return jsonify({"reply": "User not logged in."})
+
+    # Fetch student skills
+    student_skills = fetch_student_skills(user_id)
+
+    # Fetch additional profile info
+    profile_info = fetch_student_profile_info(user_id)
+    name = profile_info.get("name", "Not Provided")
+    bio = profile_info.get("bio", "Not Provided")
+    college = profile_info.get("college", "Not Provided")
+    qualification = profile_info.get("highest_qualification", "Not Provided")
+    hobbies = profile_info.get("hobbies", "Not Provided")
+
+    # Build a detailed prompt
+    prompt = f"""You are CareerBot, an intelligent career guidance assistant. Below is the profile of a student seeking career assistance:
+    Name: {name}
+    Bio: {bio}
+    College: {college}
+    Highest Qualification: {qualification}
+    Hobbies: {hobbies}
+    Technical Skills: {', '.join(student_skills)}
+    Now, based on the above profile and skills, answer the following question in a helpful, clear, and personalized way:{user_input}"""
+
+    try:
+        model = genai.GenerativeModel(model_name="models/gemini-1.5-pro-latest")
+        response = model.generate_content(prompt)
+        return jsonify({"reply": response.text})
+    except Exception as e:
+        return jsonify({"reply": f"Error: {str(e)}"})
 
 
 if __name__ == '__main__':

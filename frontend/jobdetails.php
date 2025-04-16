@@ -4,6 +4,7 @@ session_start();
 
 // Database connection
 include '../backend/config.php'; // Ensure this file exists and has correct DB credentials
+include "./templates/chatbot.php";
 
 // Get the job ID from the URL
 $jobId = isset($_GET['id']) ? intval($_GET['id']) : 0;
