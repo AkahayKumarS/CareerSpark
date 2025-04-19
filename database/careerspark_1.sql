@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2025 at 09:04 AM
+-- Generation Time: Apr 12, 2025 at 10:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -188,27 +188,6 @@ INSERT INTO `knowledge_network` (`id`, `title`, `description`, `skills`, `educat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recommendations`
---
-
-CREATE TABLE `recommendations` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `career_suggested` varchar(100) NOT NULL,
-  `prediction_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `recommendations`
---
-
-INSERT INTO `recommendations` (`id`, `user_id`, `career_suggested`, `prediction_date`) VALUES
-(1, 16, 'API Integration Specialist', '2025-04-16 05:48:52'),
-(2, 25, 'Graphics Designer', '2025-04-14 12:29:07');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `student_profiles`
 --
 
@@ -232,8 +211,7 @@ CREATE TABLE `student_profiles` (
 --
 
 INSERT INTO `student_profiles` (`profile_id`, `user_id`, `bio`, `profile_picture`, `address`, `college`, `highest_qualification`, `github_profile`, `linkedin_profile`, `technical_skills`, `hobbies`, `updated_at`) VALUES
-(5, 16, 'A motivated engineering student passionate about technology and innovation and a passionate artist.', '../uploads/profile_pictures/defaultpfp.jpeg', 'Kundapura Taluk, Udupi Distraict, Karnataka', 'St. Joseph Engineering College, Mangaluru', 'Bachelor of Engineering in Computer Science', 'https://github.com/AkahayKumarS', 'https://www.linkedin.com/in/akshaya-kumar-s/', 'C, Java, Python, PHP, SQL, Graphic Design, Photoshop, 3D Modeling', 'Drawing, Painting and Clay Modeling', '2025-04-14 07:51:53'),
-(8, 25, 'I am a nursing student passionate about Art and Dance.', NULL, 'Kundapura Taluk, Udupi Distraict, Karnataka', 'Nursing college, Udupi', 'GNM Nursing', '', '', 'Graphic Design, Photoshop, 3D Modeling', 'Drawing and Painting', '2025-04-14 07:47:36');
+(5, 16, 'A motivated engineering student passionate about technology and innovation and a passionate artist.', '../uploads/profile_pictures/defaultpfp.jpeg', 'Kundapura Taluk, Udupi Distraict, Karnataka', 'St. Joseph Engineering College, Mangaluru', 'Bachelor of Engineering in Computer Science', 'https://github.com/AkahayKumarS', 'https://www.linkedin.com/in/akshaya-kumar-s/', '', 'Drawing, Painting and Clay Modeling', '2025-04-12 08:45:52');
 
 -- --------------------------------------------------------
 
@@ -262,84 +240,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `user_type
 (20, 'Amma', 'amma@gmail.com', '$2y$10$hl.HuFm0auXWST.2aRxa8ezxw4q733nyqet3L0GxYPMVHTwYQaDce', '2024-11-27 12:52:37', 'student'),
 (21, 'Ajith Kumar', 'ajithkumar@gmail.com', '$2y$10$zFT/7i2NSc/iHasN2m7yPuQubjKO8tUMlwTlIKyDvEnmy3..QoGBe', '2024-11-27 12:59:12', 'student'),
 (22, 'Ajith Kumar', 'akshaykumars@gmail.com', '$2y$10$pozGZ9183HeaKORkAKemSusbZ5Qcs11qvx93k8ND1W59FjZGMuJ76', '2024-11-27 13:34:42', 'student'),
-(24, 'Rohith', 'rohith@gmail.com', '$2y$10$glH7c3WPn73de0Wk2O2WDuW78aJPu.30WQIhx9lJgqrW6mW9WZ6dm', '2024-12-25 06:36:32', 'student'),
-(25, 'Aishwarya', 'aishu@gmail.com', '$2y$10$I8qrzg3SKvUA7kdUoviT3eHMFnUVKtTZ6mTQLFOCxrgD8Tg9grM.e', '2025-04-14 07:44:46', 'student');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resume_templates`
---
-
-CREATE TABLE `resume_templates` (
-  `template_id` int(11) NOT NULL AUTO_INCREMENT,
-  `template_name` varchar(100) NOT NULL,
-  `template_description` text,
-  `template_thumbnail` varchar(255),
-  `is_active` boolean DEFAULT true,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`template_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resumes`
---
-
-CREATE TABLE `resumes` (
-  `resume_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `template_id` int(11) NOT NULL,
-  `resume_name` varchar(255) NOT NULL,
-  `personal_info` JSON,
-  `education` JSON,
-  `experience` JSON,
-  `skills` JSON,
-  `projects` JSON,
-  `certifications` JSON,
-  `languages` JSON,
-  `interests` JSON,
-  `color_scheme` varchar(50) DEFAULT '#2bc5d4',
-  `font_family` varchar(50) DEFAULT 'Roboto',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`resume_id`),
-  KEY `user_id` (`user_id`),
-  KEY `template_id` (`template_id`),
-  CONSTRAINT `fk_resume_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_resume_template` FOREIGN KEY (`template_id`) REFERENCES `resume_templates` (`template_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resume_sections`
---
-
-CREATE TABLE `resume_sections` (
-  `section_id` int(11) NOT NULL AUTO_INCREMENT,
-  `resume_id` int(11) NOT NULL,
-  `section_name` varchar(100) NOT NULL,
-  `section_order` int(11) NOT NULL DEFAULT 0,
-  `is_visible` boolean DEFAULT true,
-  PRIMARY KEY (`section_id`),
-  KEY `resume_id` (`resume_id`),
-  CONSTRAINT `fk_section_resume` FOREIGN KEY (`resume_id`) REFERENCES `resumes` (`resume_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `resume_templates`
---
-
-INSERT INTO `resume_templates` (`template_name`, `template_description`, `template_thumbnail`) VALUES
-('Modern', 'Clean and professional design with a modern touch', 'assets/img/templates/modern.png'),
-('Classic', 'Traditional resume layout perfect for all industries', 'assets/img/templates/classic.png'),
-('Creative', 'Unique design for creative professionals', 'assets/img/templates/creative.png'),
-('Minimal', 'Simple and elegant design focusing on content', 'assets/img/templates/minimal.png'),
-('Professional', 'Corporate style perfect for business professionals', 'assets/img/templates/professional.png');
-
--- --------------------------------------------------------
+(24, 'Rohith', 'rohith@gmail.com', '$2y$10$glH7c3WPn73de0Wk2O2WDuW78aJPu.30WQIhx9lJgqrW6mW9WZ6dm', '2024-12-25 06:36:32', 'student');
 
 --
 -- Indexes for dumped tables
@@ -364,13 +265,6 @@ ALTER TABLE `knowledge_network`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `recommendations`
---
-ALTER TABLE `recommendations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `student_profiles`
 --
 ALTER TABLE `student_profiles`
@@ -383,27 +277,6 @@ ALTER TABLE `student_profiles`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `resume_templates`
---
-ALTER TABLE `resume_templates`
-  ADD PRIMARY KEY (`template_id`);
-
---
--- Indexes for table `resumes`
---
-ALTER TABLE `resumes`
-  ADD PRIMARY KEY (`resume_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `template_id` (`template_id`);
-
---
--- Indexes for table `resume_sections`
---
-ALTER TABLE `resume_sections`
-  ADD PRIMARY KEY (`section_id`),
-  ADD KEY `resume_id` (`resume_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -425,72 +298,29 @@ ALTER TABLE `job_roles`
 -- AUTO_INCREMENT for table `knowledge_network`
 --
 ALTER TABLE `knowledge_network`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1213;
-
---
--- AUTO_INCREMENT for table `recommendations`
---
-ALTER TABLE `recommendations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1212;
 
 --
 -- AUTO_INCREMENT for table `student_profiles`
 --
 ALTER TABLE `student_profiles`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `resume_templates`
---
-ALTER TABLE `resume_templates`
-  MODIFY `template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `resumes`
---
-ALTER TABLE `resumes`
-  MODIFY `resume_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `resume_sections`
---
-ALTER TABLE `resume_sections`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `recommendations`
---
-ALTER TABLE `recommendations`
-  ADD CONSTRAINT `recommendations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
 -- Constraints for table `student_profiles`
 --
 ALTER TABLE `student_profiles`
   ADD CONSTRAINT `fk_user_profile` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `resumes`
---
-ALTER TABLE `resumes`
-  ADD CONSTRAINT `fk_resume_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_resume_template` FOREIGN KEY (`template_id`) REFERENCES `resume_templates` (`template_id`);
-
---
--- Constraints for table `resume_sections`
---
-ALTER TABLE `resume_sections`
-  ADD CONSTRAINT `fk_section_resume` FOREIGN KEY (`resume_id`) REFERENCES `resumes` (`resume_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -118,6 +118,7 @@
                     ?>
                     <a href="knowledgeNetwork.php" class="dropdown-item">Knowledge Network</a>
                     <a href="courses.php" class="dropdown-item">Courses</a>
+                    <a href="resume_builder.php" class="dropdown-item">Resume Builder</a>
                 </div>
             </div>
 
