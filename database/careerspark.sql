@@ -1,0 +1,498 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 18, 2025 at 09:04 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `careerspark`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `course_link` varchar(255) NOT NULL,
+  `is_premium` tinyint(1) NOT NULL DEFAULT 0,
+  `course_image` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `course_provider` varchar(255) NOT NULL,
+  `duration` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `title`, `category`, `course_link`, `is_premium`, `course_image`, `created_at`, `updated_at`, `course_provider`, `duration`) VALUES
+(11, 'Python Programming', 'Programming', 'https://www.coursera.org/specializations/python-3-programming', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYbsJFulTRg3kb36fs2oHH0rDX5C0uJ6HBDQ&s', '2024-11-27 07:55:26', '2024-12-25 08:57:31', 'Coursera', 5),
+(12, 'Full Stack web development', 'Web development', 'https://www.coursera.org/professional-certificates/ibm-full-stack-cloud-developer', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiEjBilP-PBEbL7NAsVh5jU2PEYPgaGhh8-g&s', '2024-11-27 08:57:18', '2024-12-25 08:58:20', 'Coursera', 12),
+(13, 'Java Full Stack', 'Web development', 'https://www.udemy.com/course/full-stack-java-developer-java/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=DSA&topic=&priority', 0, 'https://www.achieversit.com/management/uploads/course_image/Java-Full-Stack_(1).png', '2024-11-27 09:02:29', '2024-12-25 08:58:41', 'Udemy', 12),
+(14, 'Coding for Everyone: C and C++', 'Programming', 'https://www.coursera.org/specializations/coding-for-everyone', 1, 'https://media.geeksforgeeks.org/wp-content/uploads/20230629144356/Best-CPP-Courses-with-Certificates.png', '2024-11-28 18:36:53', '2024-12-25 08:58:58', 'Coursera', 6),
+(15, 'React - The Complete Guide 2024', 'Web Development', 'https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=BFCPSALE24', 1, 'https://courses.tutorialswebsite.com/assets/front/img/category/reactjs-banner.jpeg', '2024-11-28 19:45:17', '2024-12-12 06:23:54', 'Udemy', 4),
+(16, 'Cloud Computing on AWS for Beginners', 'Cloud Computing', 'https://www.udemy.com/course/introduction-to-cloud-computing-on-amazon-aws-for-beginners/?couponCode=BFCPSALE24', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfX2uP2oWlJn9ePl4Gyoy47pkn3Kn-3YYw4A&s', '2024-11-28 20:14:15', '2024-12-12 06:24:04', 'Udemy', 5),
+(17, 'Complete C# Course – Beginner to Expert', 'Programming', 'https://www.udemy.com/course/complete-c-sharp-programming-course-beginner-to-expert/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=DSA&', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD8Dan4uLIUP-r30a5F3MceIF8rI3-NxofsQ&s', '2024-12-02 10:09:12', '2024-12-12 06:24:15', 'Udemy', 4),
+(18, 'Problem Solving', 'Problem-Solving', 'https://www.coursera.org/learn/problemsolving', 0, 'https://pico-consulting.com/wp-content/uploads/2017/05/shutterstock_425335618-Problem-Solving-banner.png', '2024-12-05 12:28:27', '2024-12-12 06:24:36', 'Coursera', 2),
+(19, 'Software Design and Architecture', 'Software Development', 'https://www.coursera.org/specializations/software-design-architecture', 0, 'https://cdn.educba.com/academy/wp-content/uploads/2020/03/Software-Design.jpg', '2024-12-05 12:40:35', '2024-12-28 06:57:12', 'Coursera', 3),
+(21, 'SQL Tutorial', 'Web development', 'https://www.w3schools.com/sql/', 0, 'https://www.vagdevitechnologies.com/wp-content/uploads/2022/11/Learn-SQL-Online-Courses.png', '2024-12-08 12:49:17', '2024-12-08 12:53:00', 'W3 Schools', 4),
+(22, 'API Development', 'Web Development', 'https://www.coursera.org/learn/codio-api-development', 0, 'https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera-course-photos/dd/a9057ecc6e4f09a4a5d8d2ed8fd927/iconapi.png?auto=format%2Ccompress%2C%20enhance&dpr=2&w=265&h=216&q=50&fit=crop', '2024-12-10 16:26:21', '2024-12-10 16:26:21', 'Coursera', 3),
+(23, 'JSON - Introduction', 'Web Development', 'https://www.w3schools.com/js/js_json_intro.asp', 0, 'https://i.ytimg.com/vi/6I3qMe-jXDs/hqdefault.jpg', '2024-12-10 16:28:55', '2024-12-10 16:45:33', 'W3 Schools', 2),
+(24, 'Integration Developer Certification', 'Software Development', 'https://academy.workato.com/integration-developer-certification', 1, 'https://cc.sj-cdn.net/instructor/9vaaj1fob32o-workato-training-certification/courses/1ns1yedn6gv6p/promo-image.1689106210.png', '2024-12-10 16:32:53', '2024-12-10 16:32:53', 'Workato', 3),
+(25, 'Databases and SQL for Data Science with Python', 'Database Management', 'https://www.coursera.org/learn/sql-data-science', 0, 'https://www.europe.study/images/subjects/python/sql-data-science-with-python.jpg', '2024-12-24 17:29:55', '2024-12-30 13:20:48', 'Coursera', 1),
+(26, 'FPGA Embedded Design', 'Hardware Engineering', 'https://www.udemy.com/course/fpga-embedded-design-verilog/?couponCode=IND21PM', 1, 'https://image.slidesharecdn.com/course-180606133831/85/Short-course-on-FPGA-programming-1-320.jpg', '2024-12-24 17:43:19', '2024-12-25 14:32:13', 'Udemy', 5),
+(27, 'Networking Protocols (CCENT/CCNA and CompTIA Network+ prep)', 'Cyber Security', 'https://www.udemy.com/course/networking-protocols-ccent-ccna-comptianetworkplus-prepcourse/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&tes', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNa93zaCE_T8LCU3G9frARd3uDt3lsBlRTiw&s', '2024-12-24 17:49:09', '2024-12-25 14:32:31', 'Udemy', 3),
+(28, 'Cisco CCNA 200-301: The Complete Guide to Getting Certified', 'Cyber Security', 'https://www.coursera.org/specializations/packt-cisco-ccna-200-301-the-complete-guide-to-getting-certified', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVVXGCkqphLbk7MAUthw5OD9tyz1Jd_5R1GOs-2os&s=0', '2024-12-24 17:53:35', '2024-12-25 14:32:46', 'Coursera', 6),
+(29, 'Ethical Hacking', 'Cyber Security', 'https://onlinecourses.nptel.ac.in/noc22_cs13/preview', 0, 'https://vinsys.com/static/media/uploads/2022/02/Best-Ethical-Hacking-Certification-Courses-in-2022.jpg', '2024-12-24 17:57:12', '2024-12-25 14:32:58', 'NPTEL', 12),
+(30, 'Java', 'Software Development', 'https://www.coursera.org/learn/java-introduction', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdCl4zZrcB7kwwZWw7pPXlT2QoFj43IzPcXA&s', '2024-12-24 18:34:13', '2024-12-25 14:33:26', 'Coursera', 2),
+(31, 'Docker for Beginners', 'Software Development', 'https://www.coursera.org/learn/docker-for-the-absolute-beginner', 0, 'https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera-course-photos/be/f2467688764f5b9482f701b5608eb5/Docker-Training-Course-For-Absolute-Beginners.png?auto=format%2Ccompress%2C%20enhance&dpr=1&w=265&h=216&fit', '2024-12-24 18:37:09', '2024-12-25 14:34:00', 'Coursera', 3),
+(32, 'Hardware Design Course', 'Hardware Designing', 'https://www.udemy.com/course/mixed_signal_course_esteempcb/?srsltid=AfmBOopEnivaCeL3HT-HG67_a5raCJs-9fyrUpHTEEttFO5QKnx7M42a&couponCode=IND21PM', 1, 'https://cdn.mindmajix.com/courses/hardware-design-and-development-training.png', '2024-12-24 18:41:38', '2024-12-25 14:35:31', 'Udemy', 2),
+(33, 'Circuits and PCB Design', 'Hardware Designing', 'https://onlinecourses.nptel.ac.in/noc24_ee127/preview', 0, 'https://5.imimg.com/data5/SELLER/Default/2022/7/QG/MK/AI/8956518/pcb-circuit-design-course.jpg', '2024-12-24 18:45:51', '2024-12-25 14:35:48', 'NPTEL', 12),
+(34, 'Python', 'Software Development', 'https://www.coursera.org/specializations/python?utm_medium=sem&utm_source=gg&utm_campaign=b2c_india_python_umich_ftcof_specializations_cx_dr_bau_gg_sem_hyb_in_all_m_hyb_24-04_x&campaignid=21151281836&adgroupid=164206015567&device=c&keyword=python%20course', 1, 'https://www.etudemy.com/wp-content/uploads/2022/01/Computer-Courses-in-Perinthalmanna-python-Copy.jpg', '2024-12-24 18:51:38', '2024-12-25 14:36:11', 'Coursera', 8),
+(35, 'Software Manual Testing', 'Software Testing', 'https://www.udemy.com/course/software-manual-testing-course/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=DSA&topic=&priority', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQH_oe0q4Nkl1qnArtKrcS0DEa1Svwnl46Rw&s', '2024-12-24 19:58:47', '2024-12-25 14:34:36', 'Udemy', 2),
+(36, 'Selenium', 'Software Testing', 'https://www.udemy.com/course/learn-selenium-automation-in-easy-python-language/?couponCode=IND21PM', 1, 'https://www.slaconsultantsindia.com/wp_files/wp-content/uploads/2018/05/Join-a-Respectable-Selenium-Training-Institute-to-Become-a-Professional-Software-Tester-880x618.jpg', '2024-12-24 20:02:29', '2024-12-25 14:36:31', 'Udemy', 1),
+(37, 'Learn Jira with real-world examples', 'Software Testing', 'https://www.udemy.com/course/the-complete-guide-to-jira-with-real-world-examples/?couponCode=IND21PM', 1, 'https://www.sipexe.com/assets/courses/Jira_testing.jpg', '2024-12-24 20:04:39', '2024-12-25 14:36:48', 'Udemy', 1),
+(38, 'Cypress', 'Software Testing', 'https://www.udemy.com/course/cypress-tutorial/?couponCode=IND21PM', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThBp_W0D6XLRZwO-R9jkf_MtOkM9H7hlT2UQ&s', '2024-12-24 20:06:32', '2024-12-25 14:37:04', 'Udemy', 2),
+(39, 'Adobe Photoshop', 'Graphics Designing', 'https://www.udemy.com/course/adobe-photoshop-course/?couponCode=IND21PM', 1, 'https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg', '2024-12-24 20:10:20', '2024-12-25 14:37:23', 'Udemy', 4),
+(40, 'Illustrator MasterClass', 'Graphics Designing', 'https://www.udemy.com/course/illustrator-cc-masterclass/?couponCode=IND21PM', 1, 'https://img-c.udemycdn.com/course/750x422/5182936_0106_2.jpg', '2024-12-24 20:12:16', '2024-12-25 14:37:36', 'Udemy', 3),
+(41, 'Learn 3D Modelling', 'Graphics Designing', 'https://www.udemy.com/course/blendertutorial/?couponCode=IND21PM', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOl-hgXTXFFNko-qu0sPR7VP0Wge-hQJqhWg&s', '2024-12-24 20:16:22', '2024-12-25 14:37:55', 'Udemy', 4),
+(42, 'Troubleshooting and Debugging Techniques', 'Helpdesk Engineering', 'https://www.coursera.org/learn/troubleshooting-debugging-techniques', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz7KDigiY-v3MmA6T6gbr-dK8ZfyEmauZmgg&s', '2024-12-24 20:19:51', '2024-12-25 14:38:21', 'Coursera', 1),
+(43, 'Introduction to Customer Service', 'Helpdesk Engineering', 'https://www.coursera.org/learn/introduction-to-customer-service', 0, 'https://www.hubspot.com/hs-fs/hubfs/CS%20Training.jpg?width=595&height=400&name=CS%20Training.jpg', '2024-12-24 20:22:27', '2024-12-25 14:38:34', 'Coursera', 2),
+(44, 'Introduction to MongoDB', 'Database Management', 'https://www.coursera.org/learn/introduction-to-mongodb', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOgUAeSr_szHDWRt-wFPuyB34pbxzJcon3Pg&s', '2024-12-25 06:49:11', '2024-12-25 14:38:50', 'Coursera', 3),
+(45, 'Introduction to Git and GitHub', 'Software Development', 'https://www.coursera.org/learn/introduction-git-github', 0, 'https://www.filepicker.io/api/file/tsmP4fdkSmKaiez6t2jl', '2024-12-25 06:52:48', '2024-12-25 14:39:21', 'Coursera', 3),
+(46, 'APIs', 'API Integration', 'https://www.coursera.org/learn/apis', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE9Qm8SFaazzUISjUjgHT_cYVcD0YCDAgFGA&s', '2024-12-25 06:55:17', '2024-12-25 14:39:36', 'Coursera', 3),
+(47, 'Developing APIs with Google Cloud\'s Apigee API Platform Specialization', 'API Integration', 'https://www.coursera.org/specializations/apigee-api-gcp', 0, 'https://www.xenonstack.com/hubfs/xenonstack-api-development-best-practices.png', '2024-12-25 06:57:23', '2024-12-25 14:39:53', 'Coursera', 4),
+(48, 'RESTful APIs Using Node.js and MongoDB', 'API Integration', 'https://www.coursera.org/learn/building-restful-apis-using-nodejs-and-express', 0, 'https://courses.tutorialswebsite.com/assets/front/img/category/nodejs-rest-api-courses11.jpeg', '2024-12-25 07:00:03', '2024-12-25 14:40:02', 'Coursera', 3),
+(49, 'OAuth 2.0 in Spring Boot Applications', 'API Integration', 'https://www.udemy.com/course/oauth2-in-spring-boot-applications/?couponCode=LEARNNOWPLANS', 1, 'https://img-c.udemycdn.com/course/750x422/3219295_581d_3.jpg', '2024-12-25 07:30:00', '2024-12-25 14:40:15', 'Udemy', 2),
+(50, 'Network Security', 'Cyber Security', 'https://www.coursera.org/learn/network-security', 0, 'https://d3f1iyfxxz8i1e.cloudfront.net/courses/course_image/73e7b3f18ea9.jpeg', '2024-12-25 07:32:48', '2024-12-25 14:40:29', 'Coursera', 3),
+(51, 'Penetration Testing, Threat Hunting, and Cryptography', 'Cyber Security', 'https://www.coursera.org/learn/ibm-penetration-testing-threat-hunting-cryptography', 0, 'https://images.www.talentlms.com/library/wp-content/uploads/penetration-testing-online-training-course-thumb.jpg', '2024-12-25 07:35:47', '2024-12-25 14:40:39', 'Coursera', 2),
+(52, 'Introduction to CRM with HubSpot', 'Helpdesk Engineering', 'https://www.coursera.org/projects/introduction-to-crm-with-hubspot', 0, 'https://dtmvamahs40ux.cloudfront.net/gl-academy/course/course-1032-CRM.jpg', '2024-12-25 07:38:14', '2024-12-25 14:40:50', 'Coursera', 1),
+(53, 'Supervised Machine Learning: Regression and Classification', 'Software Development', 'https://www.coursera.org/learn/machine-learning', 0, 'https://www.fsm.ac.in/blog/wp-content/uploads/2022/08/ml-e1610553826718.jpg', '2024-12-25 08:51:53', '2024-12-25 14:41:09', 'Coursera', 6),
+(54, 'After Effects CC Masters: VFX, Motion Graphics, Animation+', 'Graphics Designing', 'https://www.udemy.com/course/after-effects-cc/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=Keyword&topic=Digital_Compositing&prio', 0, 'https://www.classcentral.com/report/wp-content/uploads/2022/10/Adobe-After-Effects-BCG-Banner.png', '2024-12-25 08:54:23', '2024-12-25 14:41:34', 'Udemy', 5),
+(55, 'Leadership Skills', 'Project Management', 'https://www.coursera.org/learn/leadershipskills?utm_medium=sem&utm_source=gg&utm_campaign=b2c_india_leadershipskills_iima_ftcof_learn_arte_may-23_dr_sem_rsa_gads_lg-all&campaignid=20041645334&adgroupid=168762168624&device=c&keyword=leadership%20qualities%', 0, 'https://www.efrontlearning.com/blog/wp-content/uploads/2021/01/eFront_20210125_1200x628.png', '2024-12-25 09:01:59', '2024-12-25 14:41:54', 'Coursera', 6),
+(57, 'Agile Project Management: Agile, Scrum, Kanban & XP', 'Project Management', 'https://www.udemy.com/course/agile-project-management-genman/?couponCode=IND21PM', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTARGWOay_5yJK2PiuVR9_ZeScV2UDlWfyI2w&s', '2024-12-25 09:04:50', '2024-12-25 14:42:04', 'Udemy', 3),
+(58, 'The Ultimate Project Management PMP Prep Course', 'Project Management', 'https://www.udemy.com/course/ultimate-project-management-pmp-35-pdus/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=Keyword&topic=P', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyZsId2GmxxPbReit-OJqIJsITbzxHL3xUCA&s', '2024-12-25 09:07:01', '2024-12-25 14:42:14', 'Udemy', 3),
+(59, 'PL/SQL Bootcamp', 'Database Management', 'https://www.udemy.com/course/plsql-beginner-to-advanced-become-a-perfect-plsql-developer/?couponCode=LEARNNOWPLANS', 1, 'https://img-c.udemycdn.com/course/480x270/1312466_8faf_11.jpg', '2024-12-25 16:38:35', '2024-12-25 16:38:35', 'Udemy', 5),
+(60, 'TensorFlow for Deep Learning with Python', 'AIML', 'https://www.udemy.com/course/complete-guide-to-tensorflow-for-deep-learning-with-python/?couponCode=LEARNNOWPLANS', 1, 'https://img-c.udemycdn.com/course/480x270/1326292_4dcf.jpg', '2024-12-25 16:42:22', '2024-12-25 16:42:22', 'Udemy', 3),
+(61, 'Certified NLP Practitioner', 'AIML', 'https://www.udemy.com/course/nlp-practitioner-neuro-linguistic-programming-certification-abnlp/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGP8_boeFtawcTfJE4T1uZ_GVL3M2c8EGpMg&s', '2024-12-25 16:43:55', '2024-12-25 16:43:55', 'Udemy', 3),
+(62, 'Business Analysis: Developing Requirements', 'Business Analytics', 'https://www.udemy.com/course/developing-requirements/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=DSA&topic=&priority=Beta&utm_conten', 1, 'https://cdn.mindmajix.com/courses/business-analyst-training.png', '2024-12-25 16:46:12', '2024-12-30 13:16:40', 'Udemy', 1),
+(63, 'Communication Skills', 'Business Analytics', 'https://www.udemy.com/course/the-complete-communication-skills-master-class-for-life/?couponCode=IND21PM', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJHWlOJWHAD_ch9g4jsXJCc8MKJK3preAzGg&s', '2024-12-25 16:48:11', '2024-12-25 16:48:11', 'Udemy', 4),
+(64, 'Tableau Business Intelligence Analyst Professional Certificate', 'Business Analytics', 'https://www.coursera.org/professional-certificates/tableau-business-intelligence-analyst', 0, 'https://aictech.co.in/assets/front/img/courses/647f1ec7aed9e.png', '2024-12-25 16:50:12', '2024-12-25 16:50:12', 'Coursera', 8),
+(65, 'Cryptography I', 'Cyber Security', 'https://www.coursera.org/courses?query=cryptography', 0, 'https://img-c.udemycdn.com/course/480x270/6206543_704f.jpg', '2024-12-25 16:54:29', '2024-12-25 16:54:29', 'Coursera', 3),
+(66, 'Cyber Incident Response Specialization', 'Cyber Security', 'https://www.coursera.org/specializations/cyber-incident-response', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg-LDLLI2uwJmFsgZN9K_cKnemHZn9lbsMzQ&s', '2024-12-25 16:55:53', '2024-12-25 16:55:53', 'Coursera', 1),
+(67, 'Introduction to Technical Writing', 'Technical Writing', 'https://www.coursera.org/learn/technical-writing-introduction', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7JeFbOBy9dq638jitbFyJ0DNFAxlI0nkj9g&s', '2024-12-25 16:59:16', '2024-12-25 16:59:16', 'Coursera', 3),
+(68, 'Learn Markdown', 'Technical Writing', 'https://www.coursera.org/learn/learn-markdown', 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYOjJDSbefZWthZUwPRRY-UfxDF7R1kN9gAQ&s', '2024-12-25 17:03:47', '2024-12-25 17:03:47', 'Coursera', 1),
+(69, 'API Documentation', 'Technical Writing', 'https://www.udemy.com/course/the-art-of-api-documentation/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=DSA&topic=&priority=Beta&utm_c', 1, 'https://images.shiksha.com/mediadata/images/articles/1712649223phpqvuW40.jpeg', '2024-12-25 17:06:50', '2024-12-25 17:06:50', 'Udemy', 1),
+(70, 'Active Directory & Group Policy Lab', 'Helpdesk Engineering', 'https://www.udemy.com/course/active-directory-group-policy-2012/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=Keyword&topic=Active', 1, 'https://academy.hackthebox.com/storage/modules/74/logo.png', '2024-12-25 17:08:29', '2024-12-25 17:08:29', 'Udemy', 3),
+(71, 'Google BigQuery & PostgreSQL', 'Data Analysis', 'https://www.udemy.com/course/google-bigquery-and-postgresql-sql-for-data-analysis/?couponCode=IND21PM', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGgRn3Es_9EokT2lGs9dyyqBQltgzH5I991w&s', '2024-12-25 17:10:59', '2024-12-30 13:19:30', 'Udemy', 4),
+(72, 'The Data Analyst Course', 'Data Analysis', 'https://www.udemy.com/course/the-data-analyst-course-complete-data-analyst-bootcamp/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Beta_Prof_la.EN_cc.India&campaigntype=Search&portfolio=India&language=EN&product=Course&test=&audience=', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLRsxOsuM0gRtl4jFeKfo3VSozT1X3dt4POg&s', '2024-12-25 17:13:19', '2024-12-25 17:13:19', 'Udemy', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_roles`
+--
+
+CREATE TABLE `job_roles` (
+  `id` int(11) NOT NULL,
+  `job_role` varchar(255) NOT NULL,
+  `required_skills` text NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `job_roles`
+--
+
+INSERT INTO `job_roles` (`id`, `job_role`, `required_skills`, `description`, `created_at`) VALUES
+(1, 'Database Administrator', 'SQL, Database Management, PL/SQL, MongoDB', 'Responsible for managing, securing, and ensuring the performance of databases.', '2024-12-04 11:10:55'),
+(2, 'Hardware Engineer', 'Hardware Design, Circuit Design, FPGA Programming, VHDL', 'Designs and tests hardware components like processors and memory.', '2024-12-04 11:10:55'),
+(3, 'Application Support Engineer', 'SQL, Problem Solving, ITIL, Cloud Computing', 'Provides technical support for applications and resolves user issues.', '2024-12-04 11:10:55'),
+(4, 'Cyber Security Specialist', 'Ethical Hacking, Network Security, Penetration Testing, SIEM', 'Protects networks and systems from cyber threats and unauthorized access.', '2024-12-04 11:10:55'),
+(5, 'Networking Engineer', 'Networking Protocols, Cisco Technologies, SDN, Cloud Networking', 'Designs and maintains network infrastructure and ensures connectivity.', '2024-12-04 11:10:55'),
+(6, 'Software Developer', 'Java, Python, Git, Docker', 'Develops, tests, and maintains software applications.', '2024-12-04 11:10:55'),
+(7, 'API Integration Specialist', 'API Development, REST, GraphQL, OAuth2', 'Develops and integrates APIs for seamless communication between applications.', '2024-12-04 11:10:55'),
+(8, 'Project Manager', 'Leadership, Agile Methodologies, PMP Certification, MS Project', 'Oversees project execution, manages teams, and ensures project success.', '2024-12-04 11:10:55'),
+(9, 'Information Security Specialist', 'Network Security, Encryption, Incident Response, SOC Management', 'Ensures data integrity and security within an organization.', '2024-12-04 11:10:55'),
+(10, 'Technical Writer', 'Technical Writing, Research, Markdown, API Documentation', 'Creates user manuals, documentation, and guides for software and hardware.', '2024-12-04 11:10:55'),
+(11, 'AI ML Specialist', 'Machine Learning, Python, TensorFlow, NLP, Computer Vision', 'Builds and optimizes machine learning models and AI solutions.', '2024-12-04 11:10:55'),
+(12, 'Software Tester', 'Manual Testing, Selenium, JIRA, Cypress', 'Tests software to identify bugs and ensure quality assurance.', '2024-12-04 11:10:55'),
+(13, 'Business Analyst', 'Requirement Analysis, Communication, Tableau, SQL for Analysis', 'Analyzes business needs and bridges gaps between stakeholders and technical teams.', '2024-12-04 11:10:55'),
+(14, 'Customer Service Executive', 'Customer Support, CRM Tools, Multichannel Communication', 'Handles customer inquiries and ensures customer satisfaction.', '2024-12-04 11:10:55'),
+(15, 'Data Scientist', 'Data Analysis, Python, Machine Learning, BigQuery, Data Visualization', 'Analyzes large data sets to extract insights and make data-driven decisions.', '2024-12-04 11:10:55'),
+(16, 'Helpdesk Engineer', 'Troubleshooting, Customer Support, Active Directory, Ticketing Tools', 'Provides IT support and resolves technical issues for end-users.', '2024-12-04 11:10:55'),
+(17, 'Graphics Designer', 'Photoshop, Illustrator, After Effects, 3D Modeling', 'Designs visual content for print and digital media.', '2024-12-04 11:10:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `knowledge_network`
+--
+
+CREATE TABLE `knowledge_network` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `skills` text NOT NULL,
+  `educational_requirements` text NOT NULL,
+  `duties` text NOT NULL,
+  `salary` varchar(255) NOT NULL,
+  `companies` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `knowledge_network`
+--
+
+INSERT INTO `knowledge_network` (`id`, `title`, `description`, `skills`, `educational_requirements`, `duties`, `salary`, `companies`) VALUES
+(1, 'Database Administrator', 'Database administrators (DBAs) design, write and take care of computer database systems so that the right person can get the information they need at the right time.\r\n\r\nDatabase administrators or managers create and maintain databases compatible with their companies’ needs. These information technology (IT) professionals oversee database updates, storage, security, and troubleshooting.\r\n\r\nDatabase administrators also back up, restore, and troubleshoot database sets and system access, updating and integrating old programs to implement the latest technology.Database administrators need at least a bachelor’s degree in information science or computer science for most entry-level positions. Depending on the size and complexity of their company or governing body, these professionals may need a master’s degree in database administration or information technology. All database administrators need fundamental knowledge of structured query language (SQL) and software vendor certifications.', '1. Good communication, teamwork and negotiation skills\r\n2. Familiarity with the main data manipulation languages and the principles of database design\r\n3. The ability to work to tight deadlines under pressure\r\n4. Basic understanding of disaster recovery and database backup procedures\r\n5. A willingness to keep up to date with developments in new technology\r\n6. An understanding of information legislation, such as the Data Protection Act.', '1. Bachelor’s Degree in Computer Science or Computer Engineering\r\n2. Advanced knowledge of database structure and theory\r\n3. Experience with MySQL and MSSQL\r\n4. All database administrators need fundamental knowledge of structured query language (SQL) and software vendor certifications.\r\n', '1. Establish the needs of users and monitor user access and security\r\n2. Monitor performance and manage parameters in order to provide fast responses to front-end users\r\n3. Map out the conceptual design for a planned database\r\n4. Consider both back-end organisation of data and front-end accessibility for end-users\r\n5. Further refining the physical design to meet system storage requirements\r\n6. Install and test new versions of the database management system (DBMS)\r\n7. Develop, manage and test back-up and recovery plans\r\n8. Work closely with IT project managers, database programmers and multimedia programmers', 'An entry-level Database Administrator (DBA) with less than 1 year experience can expect to earn an average total compensation (includes tips, bonus, and overtime pay) of ₹290,248 based on 65 salaries. An early career Database Administrator (DBA) with 1-4 ', '1. IBM\r\n2. Dell Technologies\r\n3. Intel Corporation\r\n4. Tata Consultancy Services\r\n5. Accenture\r\n6. Amazon\r\n7. Capgemini\r\n8. Oracle'),
+(2, 'Hardware Engineer', 'Hardware engineers design the technology of the future. Using their solid knowledge of computer components and how they function, these skilled professionals play an important role in the development of a variety of useful products. They may, for instance, create new video game consoles, make improvements to mobile phones, or develop intelligent automotive systems. Hardware engineers frequently work full time in research labs and high-tech manufacturing firms, usually in large metropolitan areas. Some find positions in academia or with the federal government. The career path of a hardware engineer may lead to becoming a senior hardware design engineer, a computer and information systems manager, or a design engineering manager.', 'A strong background in math, science, and computer science is a must for aspiring hardware engineers. They also, however, should be adept communicators capable of conveying instructions in verbal and written forms. Other critical skills include\r\n\r\n1. Teamwork - designing a product involves collaborating with other relevant parties, such as software engineers\r\n2. Creativity – thinking outside the box results in innovative designs and novel solutions to problems\r\n3. Problem-solving skills – the ability to approach complex issues with curiosity and determination rather than frustration serves hardware engineers well\r\n4. Analytic thinking – logically examining the steps taken and the outcome helps hardware engineers make corrections and produce better results\r\n5. Multitasking – hardware engineers may work on different projects simultaneously and need to be aware of competing deadlines and priorities', 'The minimum educational requirement is generally a bachelor’s degree in computer engineering or a similar discipline, though a master’s degree can increase job prospects. Graduating from a school with an ABET-accredited program also may attract a hiring manager’s attention. For hardware engineers looking to move into leadership positions, obtaining an MBA can be a smart move. All in this field should be prepared to continue taking classes throughout their career in order to stay up to date on technological advances.', '1. Design Hardware\r\n2. Test and Document Progress\r\n3. Collaborate with Colleagues', 'An entry-level Computer Hardware Engineer with less than 1 year experience can expect to earn an average total compensation (includes tips, bonus, and overtime pay) of ₹256,973 based on 34 salaries. An early career Computer Hardware Engineer with 1-4 year', '1. Apple\r\n2. Google\r\n3. Intel Corporation\r\n4. IBM\r\n5. Oracle\r\n6. Larsen & Toubro'),
+(3, 'Application Support Engineer', 'An Application Support Engineer is an IT professional who provides technical support regarding a spectrum of software used within a specific business sector. Due to this broad definition, the core responsibilities of an Application Support Engineer vary depending on the industry. Some Application Support Engineers are responsible for database management, while others put more emphasis on the programming end of an application. The specific focus is dependent on the needs of the business.\r\n\r\nTypically part of an IT support team, an Application Support Engineer needs both technical knowledge and “people” skills to do their job well. Given how interwoven technology and the business world have become, Application Support Engineers are employed internally by a number of companies across a wide spectrum of industries. Application Support Engineers can also work for an agency and have several different clients. When it comes to work environment, Application Support Engineers often collaborate with other team members, as well as customers.', 'A successful Application Support Engineer is not your stereotypical anti-social tech person. In addition to possessing a wealth of technical knowledge, they must also have the interpersonal skills to help users of said application.\r\n\r\nBased on our research, we identified the following core skills one must possess to get a job as an Application Support Engineer.\r\n\r\n1. Working knowledge of SQL Databases & basic network configuration\r\n2. Working Knowledge of IT Hardware and Software\r\n3. Ability to learn and master employer-specific software\r\n4. Complex problem solving\r\n5. Written and verbal communication skills\r\n6. Ability to diagnose & address application issues', 'In order to get a job as an Application Support Engineer, one must first earn a Bachelor’s degree in Computer Science or a related field, such as Software Development. During the course of this education, aspiring Application Support Engineers learn the basics of database management, application development and and computer-related Mathematics.', 'The role of Application Support Engineer is one of the more generalized positions in the IT world. A good Application Support Engineer needs to have at least a working knowledge of database management, different operating systems and different programming languages. We scoured several Application Support Engineer job postings in order to compile the following list of core responsibilities.\r\n\r\n1. Identifying and Evaluate Technology Solutions\r\n2. Problem Solve and Troubleshoot\r\n3. Onboard New Users\r\n4. Identify Potential Issues\r\n5. Work with Cross-Functional Teams', 'According to online sources, the national median salary for Application Support Engineers is about ₹ 51 LPA. Those on the low end of the spectrum earn an annual salary in the neighborhood of ₹ 43 LPA, while those on the high end of the spectrum can earn ₹', '1. Accenture\r\n2. IBM\r\n3. VivaConnect Pvt. Ltd.\r\n4. Zwayam\r\n5. Augnito'),
+(4, 'Cyber Security Specialist', 'Cyber Security Specialist is responsible for providing security during the development stages of software systems, networks and data centers. The professionals have to search for vulnerabilities and risks in hardware and software. They manage and monitor any attacks and intrusions. The Security Specialist has to recognize the potential threat or attempted breach by closing off the security vulnerability. They build firewalls into network infrastructures.\r\n\r\nThe Cyber Security Specialist takes care of the day-to-day operations and data structures by overseeing the operational performance. They configure anti-virus systems and consoles. The professionals must have an in-depth understanding of vulnerabilities management systems and common security applications. They conduct software upgrades and explains performance criteria, documents configurations, and systems specifications. They manage the PPC system from threats and identifies and manages incidents and mitigate risks.\r\n\r\nThe Cyber Security Specialist takes care of the cyber security projects and makes sure they meet cyber security objectives. They work in close coordination with the stakeholders and other groups related to Cyber Security related matters. The specialist offers cyber security operations such as process re-engineering, automation, and documentation. The professionals recognize cyber security issues, devise and drive effective mitigation.', 'The Cyber Security Specialist assists in designing and developing security features for system architectures. They have to play an active role in developing special purpose systems necessary for specialized security features and procedures. The specialist defines security requirements for computer systems such as mainframes, workstation, and personal computers. They have to suggest various solutions and implement them to meet the security requirements.\r\n\r\n1. Strong IT skills and knowledge including hardware, software and networks\r\n2. Meticulous attention to detail\r\n3. Ability to use logic and reasoning to identify the strengths and weaknesses of IT systems\r\n4. A forensic approach to challenges\r\n5. A deep understanding of how hackers work and ability to keep up with the fast pace of change in the criminal cyber-underworld\r\n6. Ability to seek out vulnerabilities in IT infrastructures', 'The Cyber Security Specialist must have a bachelor’s degree in Computer Science, Information Technology, Telecommunications, Electronics & Electrical or any related field. Some organizations prefer candidates with prior and relevant work experience, whereas some employers opt for professionals with a master’s degree or any specialization.', '1. Identifying potential security risks\r\n2. Designing strategies and defensive systems against intruders\r\n3. Monitoring systems for unusual activities (e.g. unauthorized access, modification, duplication, or destruction of information)\r\n4. Creating new layers of protection\r\n5. Updating security systems\r\n6. Running diagnostics on information changes to check for undetected breaches that may have occurred.\r\n7. Keeping up-to-date on trends and new procedures in the industry\r\n8. Taking the necessary precautions, updating and fortifying defenses accordingly', 'The salary of a cyber security analyst begins at Rs 6 lakhs per annum.', '1. Tata group\r\n2. Siemens Technology India\r\n3. Monster India\r\n4. Tata Consultancy Services\r\n5. Sharda University\r\n6. Barclays'),
+(5, 'Networking Engineer', 'Networking Engineer will be responsible for maintaining and administering our company\'s computer networks. Primary duties will include maintenance of computer networks, hardware, software, and other related systems, performing disaster recovery operations, protecting data, software, and hardware from attacks, and replacing faulty network hardware components when necessary. Networking Engineers will also be working closely with the users of our network in order to identify potential issues and fix existing problems.\r\n\r\nNetworking Engineer ensures the integrity of high availability network infrastructure to provide maximum performance for your users. Networking Engineer work\'s internally as part of an organisation\'s IT support team, or externally as part of an outsourced IT networking consultancy firm working with a number of clients.', '1. Strong understanding of network infrastructure and network hardware.\r\n2. Ability to think through problems and visualize solutions.\r\n3. Ability to implement, administer, and troubleshoot network infrastructure devices, including wireless access points, firewall, routers, switches, controllers.\r\n4. Knowledge of application transport and network infrastructure protocols.\r\n5. Ability to create accurate network diagrams and documentation for design and planning network communication systems.\r\n6. Provides specific detailed information for hardware and software selection.\r\n7. Ability to quickly learn new or unfamiliar technology and products using documentation and internet resources.\r\n8. Ability to work with all levels of staff within and outside of IT and outside the organization.\r\n9. Good analytical and problem-solving skills.', 'Network Engineer Requirements include having a bachelor’ degree in the field of computer science, information technology or something that is related to technology. They should have a solid understanding of the network infrastructure and hardware.There are a lot of specialist courses that can enable you to get the skills and knowledge needed regarding networking certifications. Some of these are CCIE (Cisco), CCNP (Cisco), JNCIE-ENT (Juniper), Network+ (CompTIA), WCNA (Wireshark).', '1. Maintaining and administering computer networks and related computing environments including systems software, applications software, hardware, and configurations.\r\n2. Performing disaster recovery operations and data backups when required.\r\n3. Protecting data, software, and hardware by coordinating, planning, and implementing network security measures.\r\n4. Troubleshooting, diagnosing, and resolving hardware, software, and other network and system problems.\r\n5. Maintaining, configuring, and monitoring virus protection software and email applications.\r\n6. Conferring with network users about solving existing system problems.\r\n7. Designing, configuring, and testing networking software, computer hardware, and operating system software.\r\n8. Coordinating computer network access and use.\r\n', 'The average salary for a Network Engineer is ₹4,68,500 per year. A Network Engineer can expect an average starting salary of ₹1,65,000. The highest salaries can exceed ₹9,00,000.', '1. Capgemini Technology Services\r\n2. Bharti Airtel Limited\r\n3. ITC Infotech\r\n4. Reliance Jio Infocomm Ltd.\r\n5. IBM\r\n6. Google\r\n7. Cisco System'),
+(6, 'Software Developer', 'Software Developer design, develop, and test software and applications for computers. The main duties and responsibilities of software developer include directing and participating in programming activities, monitoring, and evaluating system performance, and designing and implementing new programs and features.\r\n\r\nA Java, C#, .Net, C, Sybase and Oracle Software Developer is generally responsible for the development, design and implementation of new or modified software products or ongoing business projects. Typically sitting within the IT team of a business, a Software Developer will be involved in liaising with the Business Analysts and Development Managers to ensure software projects meet requirements.\r\n\r\nDuties of Software developer will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. Software developer will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.', 'To be successful in this role, you will need extensive knowledge of programming languages and the software development life-cycle.\r\n\r\n1. Ability to develop unit testing of code components or complete applications.\r\n2. Must be a full-stack developer and understand concepts of software engineering.\r\n3. Experience working on a variety of software development projects.Experience working on a variety of software development projects.\r\n4. Deep programming language knowledge.\r\n5. Knowledge of the software development life-cycle.\r\n6. Experience developing software utilizing various coding languages including Java, C++, PHP and more\r\n7. Analyze code for weaknesses and errors, and present detailed plans to improve them\r\n8. Outstanding collaboration and communication skills are essenti', 'A degree and a technical background should be required to gain a Software Developer role. Degrees in the following subjects should be highlighted as particularly advantageous such as Computer Science , Computer Software Engineering, Software Programming and Development, Engineering.', '1. Directing system testing and validation procedures.\r\n2. Professionally maintain all software and create updates regularly to address customer and company concerns\r\n3. Working with customers or departments on technical issues including software system design and maintenance.\r\n4. Designing and developing software systems using scientific analysis and mathematical models to predict and measure outcomes and design consequences.\r\n5. Directing software programming and documentation development.\r\n6. Consulting with departments or customers on project status and proposals.\r\n7. Consulting with engineering staff to evaluate software hardware interfaces and develop specifications and performance requirements.\r\n8. Preparing reports on programming project specifications, activities, or status.', 'The national average salary for a Software Developer is Rs. 6,00,000 in India. It varies from range Rs. 6,00,000 - Rs. 11,00,000 depending upon Companies', '1. Accenture\r\n2. Amdocs\r\n3. Infosys\r\n4. Tata Consultancy Services\r\n5. IBM\r\n6. Wipro\r\n7. Cognizant Technology Solutions'),
+(7, 'API Integration Specialist', 'The API Integration Specialist are the technical problem solver who will help the clients and partners integrate with their system. The ideal candidate should be comfortable with writing scripts, have a strong understanding of REST web-services, and be willing to specialize in the more technical nuts and bolts of our system and the Application Programming Interface (API). Beyond the technical skillset, someone who can communicate clearly both orally and in writing. The incumbent will be required to bridge the gap between business resources and the technology team and effectively communicate with internal and external clients.', '1. Proven track record in understanding an enterprise’s APIs and processes. \r\n2. Experience in using APIs and web services to integrate systems. \r\n3. Excellent verbal and written communication skills, strong troubleshooting, problem solving, and analytical ability required. \r\n4. Ability to understand and articulate technical concepts and derive solutions.\r\n5. Ability to deal with complex and challenging client issues. \r\n6. Capability to perform in a high pressure working environment.', 'Degree in Computer Science or Information Technology or Business Information Systems or 2 years working in a technical role with API.', '1. Field support calls and emails from developers and business users about account API integration and functionality.\r\n2. Assist customers, partners, vendors and others with all aspects of our API and its documentation.\r\n3. Assist non-technical users in potential outcomes that can be achieved using the API.\r\n4. Consult business professionals on ways to maximize our API by providing data to 3rd party integrations.\r\n5. Engage with product and development teams in software development discussions to create/improve our systems.\r\n6. Use the API to create test scenarios and scripts with expected outcomes for new integrations or expanded API use.\r\n7. Be able to identify problems, prioritize and arrive at possible solutions.\r\n8. Be the Subject Matter Expert for all things API, including integrations, documentation and use cases, etc.', 'The average salary for API Integration Specialist is Rs. 731,000 per annum', '1. Uber \r\n2. Barclays \r\n3. IBM \r\n4. Philips \r\n5. Larsenn and Tourbo Infotech Limited \r\n6. Oracle \r\n7. Bank of America'),
+(8, 'Project Manager', 'A Project Manager is responsible for planning, overseeing and leading projects from ideation through to completion. This is a senior role at an organisation and requires interaction with a range of internal and external stakeholders, most often managing several moving project parts simultaneously. An ideal Project Manager job description should capture the nuances and variation of this senior role, seeking multi-skilled and highly capable candidates.\r\n\r\nProject managers in information technology (IT) are tasked with planning certain types of projects within a company and ensuring that they are executed and on-track through every stage of the process. This job may require daily evaluations of employees, as well as leadership and motivation, in order to achieve particular goals.\r\n\r\nIT project managers must ensure that employees have the same shared vision and goals for projects while being assigned specific duties. Problem-solving may be necessary when projects are not going as planned, and they are usually given budgets for projects and must ensure that all parties involved are adhering to financial limits.\r\n\r\nThese project managers oversee projects until they are finished, and evaluate them to determine whether follow-up projects are necessary and what changes can be made for the future. This job may also involve overseeing various personnel and departments to ensure their collaboration. Some positions require certification, such as project management professional certification, and a bachelor’s degree or higher in information technology, computer science, or a related field may also be required. As this is a leadership position, many years of relevant experience are often necessary, and past leadership skills and duties should be demonstrated.', 'Project Managers should possess high levels of the below skills to perform well in the role:\r\n\r\n1. Written and verbal communication skills\r\n2. Capacity to manage high stress situations\r\n3. Ability to multi-task and manage various project elements simultaneously\r\n4. Leadership skills\r\n5. Big-picture thinking and vision\r\n6. Attention to detail', 'A Project Manager job description could include degrees in any of the following fields:\r\n\r\n1. Engineering\r\n2. IT or Computer Science\r\n3. Business or Business Administration\r\n4. Management', 'As a role that focuses on completing a project as efficiently and promptly as possible, expect to see any of the following duties and responsibilities in a Project Manager job description:\r\n\r\n1. Leading project planning sessions\r\n2. Coordinating staff and internal resources\r\n3. Managing relationships with clients and stakeholders\r\n4. Designing and signing off on contracts\r\n5. Overseeing all incoming and outgoing project documentation\r\n6. Conducting project review and creating detailed reports for executive staff\r\n7. Optimising and improving processes and the overall approach where necessary\r\n8. Managing large and diverse teams', 'An entry-level Project Manager, Information Technology (IT) with less than 1 year experience can expect to earn an average total compensation (includes tips, bonus, and overtime pay) of ₹396,635 based on 57 salaries. An early career Project Manager, Infor', '1. Cisco Systems\r\n2. Deloite\r\n3. IBM\r\n4. AT&T\r\n5. Google\r\n6. Microsoft'),
+(9, 'Information Security Specialist', 'Information Security Specialist role involves in understanding and taking steps to mitigate the risks associated with collecting, storing and transmitting data in a business setting. Information Security Specialist will be expected to set up security measures that help prevent security breaches, as well as analyzing any breeches that do occur.\r\n\r\nInformation Security Specialist responsible for designing, testing and Implementation of IT Security solutions as well as on-going maintenance and monitoring of live production environments. The work may involve maintaining security software and integrating new security into an organisation using various tools and techniques including firewalls, spyware, malware detection and intrusion detection systems.', 'As an Information Security Specialist one will work to identify and mitigate against any security threats, weaknesses, bugs or exploits impacting on your organisations cyber security. This work could include software and hardware modifications and other changes such at educating your systems users in best practice methodologies with regard to data and IT Security.\r\n\r\n1. Knowledge of current security risks and protocols.\r\n2. Willingness to work on-call in the event of a security breech or other emergency.\r\n3. Good analytic and problem solving skills.\r\n4. Ability to work under close supervision, as well as the ability to take independent initiative when needed.\r\n5. You will need to be organised, efficient and able to work unsupervised under your own initiative\r\n6. Understanding of relevant scripting and source code programming languages, such as C#, C++, .NET, Java, Perl, PHP, Python or Ruby On Rails etc. that you will be using\r\n', 'The Information Security Specialist must have a Bachelors degree in a related field such as Computer Science, IT or a Cyber-Security related field. Also Post-secondary degree in system administration, network security, network administration or a related field will be accepted.', '1. Analyze existing security systems and make recommendations for changes or improvements.\r\n2. Prepare reports and action plans in the event that a security breech does occur.\r\n3. Organize and conduct tests and “ethical hacks” of the existing security architecture.\r\n4. Monitor the network and provide early warning of abnormalities or problems.\r\n5. Upgrade systems regularly to remain competitive in the field of security.\r\n6. Communicate the system status and keep users informed of downtime or changes to the system.\r\n7. Keep technical knowledge current through continuing education.\r\n8. Provide system updates and write code fixes.', 'According to online sources , the average salary for a Information Security Specialist is Rs. 10,03,608 per year in India.', '1. Amdocs\r\n2. American Express\r\n3. Adobe\r\n4. IBM\r\n5. Larsen and Tourbo Infotech Limited\r\n6. Deutsche Bank'),
+(10, 'Technical Writer', 'Technical Writers have the expertise to understand and communicate the technical aspects of a digital product to both highly technical and non-technical users. In a way, they act as a translator, providing users with the information that will resonate best with them based on their background.\r\n\r\nTechnical Writers are responsible for preparing instruction manuals and articles with the main goal to communicate complex, technical information more easily. They also develop, gather, and disseminate technical information among customers, designers, and manufacturers. Technical Writers are responsible for producing high-quality and understandable documentation with the goal to improve the success of products.\r\n', 'Based on our research, we identified the following core skills one must possess to get a job as a Technical Writer:\r\n \r\n1. Ability to translate highly technical information into easily understandable information for customers. \r\n2. Creative skills and usage of photographs, drawings, diagrams, animation, and charts that increase users\' understanding. \r\n3. Excellent written skills in English.\r\n4. Excellent communication and teamwork skills, including willingness and ability to consult with subject matter experts from engineering, support, and product management. \r\n5. Enjoys working as part of a team in a collaborative environment. \r\n6. Attention to detail with a creative eye.', 'A college degree is usually required for a position as a Technical Writer. In addition, knowledge of or experience with a technical subject, such as science or engineering, is beneficial. Employers generally prefer candidates who have a bachelor’s degree in English or another communications-related subject. Technical writing jobs may require candidates to have both a degree and knowledge of a technical field, such as engineering or computer science.', 'Technical writers create paper-based and digital operating instructions, how-to manuals, assembly instructions, and “frequently asked questions” pages to help technical support staff, consumers, and other users within a company or an industry.\r\n\r\n1. Write for a variety of audiences, from non-technical end users to programmers, system administrators, and integrators.\r\n2. Prepare, review, revise, and maintain technical documents, including software and systems engineering, system operations, testing, and user documentation.\r\n3. Gather and analyze technical and product information from various sources to document new or changing product functionality.\r\n4. Test both the product and its documentation for accuracy and consistency.\r\n5. Identify problem areas or structural deficiencies and proactively contribute to their improvement.\r\n6. Update existing documentation to reflect changes to functionality.\r\n', 'The national average salary for a Technical Writer is ₹5,99,007 in India.', '1. Oracle \r\n2. Wipro \r\n3. Cognizant \r\n4. Tata Consultancy Services \r\n5. Cisco \r\n6. Cyient \r\n7. Capgemini \r\n8. HCL Technologies'),
+(11, 'AI/ML Specialist', 'An artificial intelligence (AI)/ Machine Learning (ML) specialist applies their skills in engineering and computer science to create machines and software programs that can think for themselves. Most often, they use AI principles to address persistent business pain points, augment the capability of technical and human resources, and execute a change management/transformation process. The key contribution of an AI specialist is using emerging technologies, such as machine learning (ML) and neuro-linguistic programming (NLP), to solve business problems in new and creative ways that provide greater insight, accuracy, and consistency.', '1. Programming skills needed \r\n2. Computer science fundamentals and programming \r\n3. Distributed computing \r\n4. Machine learning algorithms and libraries \r\n5. Software engineering and system design\r\n6. Strong knowledge of data', 'In order to get a job as an AI/ML Specialist a Bachleor or Master’s degree in computer science, mathematics or similar relevant field is a necessity.One have to master data structures (stacks, queues, multi-dimensional arrays, trees, graphs), algorithms (searching, sorting, optimization, dynamic programming), computability and complexity (P vs. NP, NP-complete problems, big-O notation, approximate algorithms), and computer architecture (memory, cache, bandwidth, deadlocks, distributed processing).One have to master coding languages, such as Python, C++, JavaScript, Java, C#, Julia, Shell, R, TypeScript.', 'A AI/ML Specialist produces a tailor-made solution for each problem. The only way to achieve optimal results is to carefully process the data and select the best algorithm for the given context.\r\n\r\n1. Understanding business objectives and developing models that help to achieve them, along with metrics to track their progress\r\n2. Understand company and client challenges and how integrating AI capabilities can help create solutions\r\n3. Develop machine learning applications according to requirements\r\n4. Select appropriate datasets and data representation methods\r\n5. Analyze and explain AI and machine learning (ML) solutions while setting and maintaining high ethical standards\r\n6. Designing machine learning systems and self-running artificial intelligence (AI) software to automate predictive models.', 'According to online sources, the entry-level Artificial Intelligence/ Machine Learning salary in India for almost 40% of professionals earn around Rs. 6,00,000, mid-level and senior-level artificial intelligence salary could earn more than Rs. 50,00,000 i', '1. Microsoft \r\n2. Google \r\n3. Nokia \r\n4. JP Morgan \r\n5. Cisco \r\n6. Amazon \r\n7. Apple \r\n8. IBM'),
+(12, 'Software Tester', 'Software Testers are responsible for the quality of software development and deployment. They are involved in performing automated and manual tests to ensure the software created by developers is fit for purpose. Some of the duties include analysis of software, and systems, mitigate risk and prevent software issues.\r\n\r\nA software tester is responsible for designing test scenarios for software usability, running these tests, and preparing reports on the effectiveness and defects to the production team. A software tester is also known as a software test engineer or a quality assurance (QA) tester.', 'To be successful as a software tester, one should have a working knowledge of software and test design, the capability to run through tests, and the ability to analyze the results. Ultimately, the software tester should be result-driven, have good communication skills, and up-to-date knowledge of software programming and software test design.\r\n\r\n1. Up-to-date knowledge of software test design and testing methodologies.\r\n2. Working knowledge of test techniques and compatibility with various software programs.\r\n3. Working knowledge of programming.\r\n4. Excellent communication and critical thinking skills.\r\n5. Good organizational skills and detail-oriented mindset.\r\n6. A passion for working with technology.', 'Academic background of a software tester should be in Computer Science. A BTech/ B.E., MCA, BCA, BSc- Computers, will land a job quickly.If person does not hold any of these degrees, then they must complete a software testing certification like ISTQB and CSTE which help you learn Software Development/ Test Life Cycle and other testing methodologies.', '1. Reviewing software requirements and preparing test scenarios.\r\n2. Executing tests on software usability.\r\n3. Analyzing test results on database impacts, errors or bugs, and usability.\r\n4. Preparing reports on all aspects related to the software testing carried out and reporting to the design team.\r\n5. Interacting with clients to understand product requirements.\r\n6. Participating in design reviews and providing input on requirements, product design, and potential problems.\r\n7. Execute all levels of testing (System, Integration, and Regression).\r\n8. Provide timely solutions.', 'Compensation of a software tester varies from company to company. Average Software testing career package in India is Rs 247,315 - Rs 449,111.', '1. LTI - Larsen & Toubro Infotech\r\n2. Wipro\r\n3. Spiceworks\r\n4. Tata Consultancy Services\r\n5. Intel Technology India Pvt Ltd\r\n6. AT & T communications Services India'),
+(13, 'Business Analyst', 'Business analyst help guide businesses in improving processes, products, services and software through data analysis. These agile workers straddle the line between IT and the business to help bridge the gap and improve efficiency.\r\n\r\nBAs are responsible for creating new models that support business decisions by working closely with financial reporting and IT teams to establish initiatives and strategies to improve importing and to optimize costs. You’ll need a “strong understanding of regulatory and reporting requirements as well as plenty of experience in forecasting, budgeting and financial analysis combined with understanding of key performance indicators,” according to Robert Half Technology.\r\n\r\nThe role of a business analyst is constantly evolving and changing — especially as companies rely more on data to advise business operations. Every company has different issues that a business analyst can address, whether it’s dealing with outdated legacy systems, changing technologies, broken processes, poor client or customer satisfaction or siloed large organizations.', 'The business analyst position requires both hard skills and soft skills. Business analysts need to know how to pull, analyze and report data trends, and be able to share that information with others and apply it on the business side. Not all business analysts need a background in IT as long as they have a general understanding of how systems, products and tools work. Alternatively, some business analysts have a strong IT background and less experience in business, and are interested in shifting away from IT to this hybrid role.\r\n\r\n1. Able to exercise independent judgment and take action on it\r\n2. Excellent analytical, mathematical, and creative problem-solving skills\r\n3. Excellent listening, interpersonal, written, and oral communication skills\r\n4. Logical and efficient, with keen attention to detail\r\n5. Highly self-motivated and directed\r\n6. Ability to effectively prioritize and execute tasks while under pressure\r\n7. Strong customer service orientation\r\n8. Experience working in a team-oriented, collaborative environment', '1. College diploma or university degree in the field of business administration, finance, or information systems, computer science or a related field\r\n2. Proven experience with business and technical requirements analysis, elicitation, modeling, verification, and methodology development\r\n3. Excellent listening, interpersonal, written, and oral communication skills\r\n4. Demonstrated project management skills and project management software skills, including planning, organizing, and managing resources\r\n5. Working knowledge of Windows office systems\r\n6. Excellent understanding of the organization’s goals and objectives', '1. Elicits, analyzes, specifies, and validates the business needs of stakeholders, be they customers or end users. Collaborates with project sponsors to determine project scope and vision.\r\n2. Clearly identifies project stakeholders and establish customer classes, as well as their characteristics.\r\n3. Works with stakeholders and project team to prioritize collected requirements.\r\n4. Researches, reviews, and analyzes the effectiveness and efficiency of existing requirements-gathering processes and develop strategies for enhancing or further leveraging these processes.\r\n5. Develops and utilizes standard templates to accurately and concisely write requirements specifications.\r\n6. Analyzes and verifies requirements for completeness, consistency, comprehensibility, feasibility, and conformity to standards.\r\n7. Creates process models, specifications, diagrams, and charts to provide direction to developers and/or the project team.\r\n8. Manages and tracks the status of requirements throughout the project lifecycle; enforce and redefine as necessary.', 'The average salary for an IT business analyst is $67,762 per year, according to data from PayScale. The highest paid BAs are in San Francisco, where the average salary is 28 percent higher than the national average. New York is second, with reported salar', '1. Deloitte\r\n2. Tata Consultancy Services\r\n3. American Express\r\n4. Flipkart\r\n5. Dell Technologies\r\n6. Barclays'),
+(14, 'Customer Service Executive', 'Customer Service Executive manages a team of representatives who will offer excellent customer service and after-sales support. Customer Service Execute creates policies and procedures and oversee the customer service provided by the team. The Customer Service Executive will be responsible for the selection of staff in the hiring process and ensure that a standardized level of service is maintained for all customers.\r\n\r\nA Customer Service Executive, display\'s excellent interpersonal and communication skills as well as a professional appearance. An outstanding Customer Service Executive should possess a proven track record of successful customer service and management skills.\r\n', '1. Excellent interpersonal and written and oral communication skills. \r\n2. Knowledge of CRM systems. \r\n3. Computer skills. \r\n4. The ability to run diagnostic tests and determine the causes of errors or problems. \r\n5. Keeping track of common issues and maintaining accurate reports are important abilities for these professionals.', 'Bachelor degree in business administration or any relevant field is required. MBA or any other master degree in management will help the candidates apply for a higher-level position.', '1. Managing a team of representatives offering customer support.\r\n2. Resolving customer complaints brought to your attention.\r\n3. Creating policies and procedures.\r\n4. Planning the training and standardization of service delivery.\r\n5. Conducting quality assurance surveys with customers and providing feedback to the staff.\r\n6. Possessing excellent product knowledge to enhance customer support.\r\n7. Maintaining a pleasant working environment for your team.\r\n', 'The average salary for a Customer Care Executive is Rs.209,450. For a fresher, the salary will be starting from Rs.180,000. Upon experience Customer Service Executive salary will range from Rs.220,000 - Rs.270,000 depending on the company.', '1. Amazon \r\n2. Dell Technologies \r\n3. HSBC \r\n4. Reliance Jio \r\n5. Tata communications \r\n6. Axis Bank \r\n7. Tech Mahindra Business Services Limited \r\n8. LG Electronics'),
+(15, 'Data Scientist', 'A data scientist is someone who makes value out of data. Such a person proactively fetches information from various sources and analyzes it for better understanding about how the business performs, and to build AI tools that automate certain processes within the company.\r\n\r\nData scientist duties typically include creating various machine learning-based tools or processes within the company, such as recommendation engines or automated lead scoring systems. People within this role should also be able to perform statistical analysis.', 'A strong background in math, science, and computer science is a must for aspiring hardware engineers. They also, however, should be adept communicators capable of conveying instructions in verbal and written forms. Other critical skills include\r\n\r\n1. excellent analytical and problem-solving skills\r\n2. experience in database interrogation and analysis tools, such as Hadoop, SQL and SAS\r\n3. exceptional communication and presentation skills in order to explain your work to people who don\'t understand the mechanics behind data analysis\r\n4. planning, time management and organisational skills\r\n5. the ability to deliver under pressure and to tight deadlines\r\n6. teamworking skills and a collaborative approach to sharing ideas and finding solutions.', '1. BSc/BA in Computer Science, Engineering or relevant field; graduate degree in Data Science or other quantitative field is preferred.\r\n2. You\'ll be expected to know some programming languages such as R, Python, SQL, C or Java and have strong database design and coding skills.\r\n3. A postgraduate qualification, such as a Masters or PhD, can be useful and many data scientists have one. It is especially helpful if you\'re considering a change of career or are interested in learning analysis skills.\r\n4. You\'ll typically need a mathematical, engineering, computer science or scientific-related degree to get a place on a course, although subjects such as business, economics, psychology or health may also be relevant if you have mathematical aptitude and basic programming experience.\r\n5. Understanding of machine-learning and operations research\r\n6. Strong math skills (e.g. statistics, algebra)', '1. Identify valuable data sources and automate collection processes\r\n2. Undertake preprocessing of structured and unstructured data\r\n3. Analyze large amounts of information to discover trends and patterns\r\n4. Build predictive models and machine-learning algorithms\r\n5. Combine models through ensemble modeling\r\n6. Present information using data visualization techniques\r\n7. Propose solutions and strategies to business challenges\r\n8. Collaborate with engineering and product development teams', 'An entry-level Data Scientist with less than 1 year experience can expect to earn an average total compensation (includes tips, bonus, and overtime pay) of ₹536,700 based on 539 salaries. An early career Data Scientist with 1-4 years of experience earns a', '1. Pinterest\r\n2. Microsoft\r\n3. Accenture\r\n4. Intel\r\n5. Oracle\r\n6. Uber\r\n'),
+(16, 'Helpdesk Engineer', 'Helpdesk Engineer are the go-to people for providing technical assistance and support related to computer systems, hardware, and software. They are responsible for answering queries and addressing system and user issues in a timely and professional manner. Helpdesk Engineer works with the IT team, and will often interact with system and computer users across the company. The helpdesk team will train users on basic system and computer functions. Understanding and proactively maintaining daily system performance, having the ability to troubleshoot customer problems, and innate follow-up and follow-through skills are all essential aspects of the help desk support’s day-to-day role.\r\n\r\nAn excellent Helpdesk Engineer must have good technical knowledge and be able to communicate effectively to understand the problem and explain its solution. They must also be customer-oriented and patient to deal with difficult customers. The goal is to create value for clients that will help preserve the company’s reputation and business.', '1. Proven experience as a help desk technician or other customer support role.\r\n1. Tech savvy with working knowledge of office automation products, databases and remote control.\r\n2. Good understanding of computer systems, mobile devices and other tech products.\r\n3. Ability to diagnose and resolve basic technical issues.\r\n4. Proficiency in English.\r\n5. Excellent communication skills.\r\n6. Customer-oriented and cool-tempered.\r\n7. General awareness of computer systems, PC repair, and network management\r\n8. Understanding and appreciation for information security within systems and user devices.', 'A college degree is required for entry-level helpdesk positions, a degree in computer information science, or help desk administration. It can also be useful to get a specialized or niche certificate in PC repair, network administration, or help desk support.', '1. Monitor and respond quickly to incoming requests relate to IT issues.\r\n2. Serve as the first point of contact for customers seeking technical assistance over the phone or email.\r\n3. Perform remote troubleshooting through diagnostic techniques and pertinent questions.\r\n4. Determine the best solution based on the issue and details provided by customers.\r\n5. Provide accurate information on IT products or services.\r\n6. Follow-up and update customer status and information.\r\n7. Pass on any feedback or suggestions by customers to the appropriate internal team.\r\n8. Identify and suggest possible improvements on procedures.\r\n', 'Helpdesk Engineer salary in India ranges between ₹ 1.4 Lakhs to ₹ 4.7 Lakhs with an average annual salary of ₹ 2.4 Lakhs.', '1. Wipro\r\n2. NTT Data\r\n3. Dell\r\n4. Reliance Jio Infocomm Ltd.\r\n5. IBM\r\n6. Google\r\n7. Cisco System');
+INSERT INTO `knowledge_network` (`id`, `title`, `description`, `skills`, `educational_requirements`, `duties`, `salary`, `companies`) VALUES
+(17, 'Graphic Designer', 'The Graphic Designer job includes the entire process of defining requirements, visualizing and creating graphics including illustrations, logos, layouts and photos. Graphic Designer will be the one to shape the visual aspects of websites, books, magazines, product packaging, exhibitions and more.\r\n\r\nGraphic Designer should capture the attention of those who see them and communicate the right message. For this, one need to have a creative flair and a strong ability to translate requirements into design. The goal is to inspire and attract the target audience.\r\n\r\nGraphic designers use their artistic abilities to communicate ideas, inform consumers, and solve problems. From the layout of a website to large images seen on billboards, graphic designers create visual concepts by hand or by computer to help others interpret the world around them through color, texture, images, and symbols. Graphic designers can be found in many industries and may be responsible for all aspects of a company\'s design process, or they might specialize in a particular field such as advertising, digital design, illustration, or branding. Some work independently as freelancers, while others are part of a design studio, a creative agency, or a corporate company.', '1. Proven graphic designing experience.\r\n2. A strong portfolio of illustrations or other graphics.\r\n3. Familiarity with design software and technologies (such as InDesign, Illustrator, Dreamweaver, Photoshop).\r\n4. A keen eye for aesthetics and details.\r\n5. Excellent communication skills.\r\n6. Ability to work methodically and meet deadlines.', 'While entry is open to non-graduates, preference is given to those with relevant degrees. A degree in graphic design is advantageous or Degree in Design, Fine Arts or related field is a plus. Also one should have good knowledge of design software, such as Quark Xpress, InDesign or Illustrator, plus photo-editing software such as PhotoShop.', '1. Study design briefs and determine requirements.\r\n2. Schedule projects and define budget constraints.\r\n3. Conceptualize visuals based on requirements.\r\n4. Prepare rough drafts and present ideas.\r\n5. Develop illustrations, logos and other designs using software or by hand.\r\n6. Use the appropriate colors and layouts for each graphic.\r\n7. Work with copywriters and creative director to produce final design.\r\n8. Test graphics across various media.\r\n9. Ensure final graphics and layouts are visually appealing and on-brand.', 'The average salary for a Graphic Designer in India is Rs. 305123 per annum.', '1. Buttercup advertising studio\r\n2. Sigzen Technologies\r\n3. Mind digital\r\n4. Webisdom\r\n5. Zero designs\r\n6. Netgains\r\n7. Detecvision\r\n8. WiseLife\r\n'),
+(18, 'Penetration Tester', 'Penetration testers, also known as “ethical hackers,” are highly skilled security specialists that spend their days attempting to breach computer and network security systems. These testers work in the information technology (IT) field to ensure that those without authorization cannot access an organization’s data. They do this by trying to hack into networks to identify potential vulnerabilities in the system.\r\n\r\nPenetration testers help businesses and organizations identify and resolve security vulnerabilities and weaknesses affecting their digital assets and computer networks. Some hold in-house positions with permanent employers, functioning as part of internal cybersecurity or information technology (IT) teams. Others work for specialized firms that provide penetration-testing services to end clients.', '1. Coding skill required to infiltrate any system.\r\n2. Comprehensive knowledge of computer security, including forensics, systems analysis and more.\r\n3. Insight into how hackers exploit the human element to gain unauthorized access to secure systems.\r\n4. Clear understanding of how computer security breaches can disrupt business, including the financial and managerial implications.\r\n5. Exceptional problem-solving skills.\r\n6. Communications skills to document and share your findings.', 'Bachelor’s or Master’s degree in computer science, IT, cybersecurity, or a related specialization. Knowledge of SQL, C++, JavaScript, Ruby and Python', 'Penetration Tester job will likely also involve planning and executing tests, documenting your methodologies, creating detailed reports about your findings and perhaps also being involved in designing fixes and improving security protocols.\r\n\r\n1. Perform penetration tests on computer systems, networks and applications.\r\n2. Create new testing methods to identify vulnerabilities.\r\n3. Perform physical security assessments of systems, servers and other network devices to identify areas that require physical protection.\r\n4. Pinpoint methods and entry points that attackers may use to exploit vulnerabilities or weaknesses.\r\n5. Search for weaknesses in common software, web applications and proprietary systems.\r\n6. Research, evaluate, document and discuss findings with IT teams and management.\r\n7. Review and provide feedback for information security fixes.\r\n8. Establish improvements for existing security services, including hardware, software, policies and procedures.\r\n9. Identify areas where improvement is needed in security education and awareness for users.', 'The average salary for a Penetration Tester in India is Rs. 603062 per annum.', '1. Bank of America\r\n2. JP Morgan Chase\r\n3. Amazon\r\n4. IBM\r\n5. Dell\r\n6. Sony\r\n7. Ebay\r\n8. Deloitte');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recommendations`
+--
+
+CREATE TABLE `recommendations` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `career_suggested` varchar(100) NOT NULL,
+  `prediction_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `recommendations`
+--
+
+INSERT INTO `recommendations` (`id`, `user_id`, `career_suggested`, `prediction_date`) VALUES
+(1, 16, 'API Integration Specialist', '2025-04-16 05:48:52'),
+(2, 25, 'Graphics Designer', '2025-04-14 12:29:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_profiles`
+--
+
+CREATE TABLE `student_profiles` (
+  `profile_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `bio` text DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `college` varchar(255) DEFAULT NULL,
+  `highest_qualification` varchar(100) DEFAULT NULL,
+  `github_profile` varchar(255) DEFAULT NULL,
+  `linkedin_profile` varchar(255) DEFAULT NULL,
+  `technical_skills` text DEFAULT NULL,
+  `hobbies` text DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_profiles`
+--
+
+INSERT INTO `student_profiles` (`profile_id`, `user_id`, `bio`, `profile_picture`, `address`, `college`, `highest_qualification`, `github_profile`, `linkedin_profile`, `technical_skills`, `hobbies`, `updated_at`) VALUES
+(5, 16, 'A motivated engineering student passionate about technology and innovation and a passionate artist.', '../uploads/profile_pictures/defaultpfp.jpeg', 'Kundapura Taluk, Udupi Distraict, Karnataka', 'St. Joseph Engineering College, Mangaluru', 'Bachelor of Engineering in Computer Science', 'https://github.com/AkahayKumarS', 'https://www.linkedin.com/in/akshaya-kumar-s/', 'C, Java, Python, PHP, SQL, Graphic Design, Photoshop, 3D Modeling', 'Drawing, Painting and Clay Modeling', '2025-04-14 07:51:53'),
+(8, 25, 'I am a nursing student passionate about Art and Dance.', NULL, 'Kundapura Taluk, Udupi Distraict, Karnataka', 'Nursing college, Udupi', 'GNM Nursing', '', '', 'Graphic Design, Photoshop, 3D Modeling', 'Drawing and Painting', '2025-04-14 07:47:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_type` enum('admin','student') DEFAULT 'student'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `user_type`) VALUES
+(15, 'Admin', 'admin@careerspark.com', '$2y$10$aKsipkFuS/8l36pZq4p2GuQxPoxIJIQBIC2n9nBKcAUtGWAC8EPW.', '2024-11-26 17:21:12', 'admin'),
+(16, 'Akshay Kumar S', 'akshay@gmail.com', '$2y$10$MZcxALFPuMUEVGWZ0dXMIevh.8loduLuYGvlA7w4zdMbWG/i0jXg6', '2024-11-26 17:23:55', 'student'),
+(17, 'Shankar Shettigar', 'shankar@gmail.com', '$2y$10$BPh/T9Ra04PvX1u9LVRmteb1/TuZvAc.iqunwSN21sR1OnT55y1xa', '2024-11-27 11:34:17', 'admin'),
+(18, 'Ajith Kumar', 'ajith@gmail.com', '$2y$10$fZVLeMsM5ePWuFq78.t8Dufq9lfCOzfG8XpV6gutH7z3Bwj6WL6FS', '2024-11-27 11:48:36', 'student'),
+(20, 'Amma', 'amma@gmail.com', '$2y$10$hl.HuFm0auXWST.2aRxa8ezxw4q733nyqet3L0GxYPMVHTwYQaDce', '2024-11-27 12:52:37', 'student'),
+(21, 'Ajith Kumar', 'ajithkumar@gmail.com', '$2y$10$zFT/7i2NSc/iHasN2m7yPuQubjKO8tUMlwTlIKyDvEnmy3..QoGBe', '2024-11-27 12:59:12', 'student'),
+(22, 'Ajith Kumar', 'akshaykumars@gmail.com', '$2y$10$pozGZ9183HeaKORkAKemSusbZ5Qcs11qvx93k8ND1W59FjZGMuJ76', '2024-11-27 13:34:42', 'student'),
+(24, 'Rohith', 'rohith@gmail.com', '$2y$10$glH7c3WPn73de0Wk2O2WDuW78aJPu.30WQIhx9lJgqrW6mW9WZ6dm', '2024-12-25 06:36:32', 'student'),
+(25, 'Aishwarya', 'aishu@gmail.com', '$2y$10$I8qrzg3SKvUA7kdUoviT3eHMFnUVKtTZ6mTQLFOCxrgD8Tg9grM.e', '2025-04-14 07:44:46', 'student');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resume_templates`
+--
+
+CREATE TABLE `resume_templates` (
+  `template_id` int(11) NOT NULL AUTO_INCREMENT,
+  `template_name` varchar(100) NOT NULL,
+  `template_description` text,
+  `template_thumbnail` varchar(255),
+  `is_active` boolean DEFAULT true,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`template_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resumes`
+--
+
+CREATE TABLE `resumes` (
+  `resume_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `template_id` int(11) NOT NULL,
+  `resume_name` varchar(255) NOT NULL,
+  `personal_info` JSON,
+  `education` JSON,
+  `experience` JSON,
+  `skills` JSON,
+  `projects` JSON,
+  `certifications` JSON,
+  `languages` JSON,
+  `interests` JSON,
+  `color_scheme` varchar(50) DEFAULT '#2bc5d4',
+  `font_family` varchar(50) DEFAULT 'Roboto',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`resume_id`),
+  KEY `user_id` (`user_id`),
+  KEY `template_id` (`template_id`),
+  CONSTRAINT `fk_resume_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_resume_template` FOREIGN KEY (`template_id`) REFERENCES `resume_templates` (`template_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resume_sections`
+--
+
+CREATE TABLE `resume_sections` (
+  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resume_id` int(11) NOT NULL,
+  `section_name` varchar(100) NOT NULL,
+  `section_order` int(11) NOT NULL DEFAULT 0,
+  `is_visible` boolean DEFAULT true,
+  PRIMARY KEY (`section_id`),
+  KEY `resume_id` (`resume_id`),
+  CONSTRAINT `fk_section_resume` FOREIGN KEY (`resume_id`) REFERENCES `resumes` (`resume_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `resume_templates`
+--
+
+INSERT INTO `resume_templates` (`template_name`, `template_description`, `template_thumbnail`) VALUES
+('Modern', 'Clean and professional design with a modern touch', 'assets/img/templates/modern.png'),
+('Classic', 'Traditional resume layout perfect for all industries', 'assets/img/templates/classic.png'),
+('Creative', 'Unique design for creative professionals', 'assets/img/templates/creative.png'),
+('Minimal', 'Simple and elegant design focusing on content', 'assets/img/templates/minimal.png'),
+('Professional', 'Corporate style perfect for business professionals', 'assets/img/templates/professional.png');
+
+-- --------------------------------------------------------
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `job_roles`
+--
+ALTER TABLE `job_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `knowledge_network`
+--
+ALTER TABLE `knowledge_network`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recommendations`
+--
+ALTER TABLE `recommendations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `student_profiles`
+--
+ALTER TABLE `student_profiles`
+  ADD PRIMARY KEY (`profile_id`),
+  ADD KEY `fk_user_profile` (`user_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `resume_templates`
+--
+ALTER TABLE `resume_templates`
+  ADD PRIMARY KEY (`template_id`);
+
+--
+-- Indexes for table `resumes`
+--
+ALTER TABLE `resumes`
+  ADD PRIMARY KEY (`resume_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `template_id` (`template_id`);
+
+--
+-- Indexes for table `resume_sections`
+--
+ALTER TABLE `resume_sections`
+  ADD PRIMARY KEY (`section_id`),
+  ADD KEY `resume_id` (`resume_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `job_roles`
+--
+ALTER TABLE `job_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `knowledge_network`
+--
+ALTER TABLE `knowledge_network`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1213;
+
+--
+-- AUTO_INCREMENT for table `recommendations`
+--
+ALTER TABLE `recommendations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `student_profiles`
+--
+ALTER TABLE `student_profiles`
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `resume_templates`
+--
+ALTER TABLE `resume_templates`
+  MODIFY `template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `resumes`
+--
+ALTER TABLE `resumes`
+  MODIFY `resume_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `resume_sections`
+--
+ALTER TABLE `resume_sections`
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `recommendations`
+--
+ALTER TABLE `recommendations`
+  ADD CONSTRAINT `recommendations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `student_profiles`
+--
+ALTER TABLE `student_profiles`
+  ADD CONSTRAINT `fk_user_profile` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `resumes`
+--
+ALTER TABLE `resumes`
+  ADD CONSTRAINT `fk_resume_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_resume_template` FOREIGN KEY (`template_id`) REFERENCES `resume_templates` (`template_id`);
+
+--
+-- Constraints for table `resume_sections`
+--
+ALTER TABLE `resume_sections`
+  ADD CONSTRAINT `fk_section_resume` FOREIGN KEY (`resume_id`) REFERENCES `resumes` (`resume_id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

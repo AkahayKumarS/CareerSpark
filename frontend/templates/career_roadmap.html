@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CareerSpark - Career Roadmap</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/img/CareerSparkFavicon.png"
+      rel="icon"
+    />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/lib/animate/animate.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Stylesheet -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/css/style.css"
+      rel="stylesheet"
+    />
+
+    <!-- Add your CSS styles here -->
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --background-color: #f4f6f7;
+        --text-color: #2c3e50;
+      }
+      /* 
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      } */
+
+      /* body {
+        background-color: var(--background-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      } */
+
+      .roadmap {
+        max-width: 800px;
+        width: 100%;
+        min-height: 100vh;
+        margin-top: 40px;
+        margin-left: 230px;
+      }
+
+      .roadmap-container {
+        max-width: 800px;
+        width: 100%;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .roadmap-header {
+        background-color: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .roadmap-header h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .course-timeline {
+        position: relative;
+        padding: 30px;
+      }
+
+      .course-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .course-item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .course-item::before {
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background-color: var(--primary-color);
+        transition: background-color 0.3s ease;
+      }
+
+      .course-item:hover::before {
+        background-color: var(--secondary-color);
+      }
+
+      .course-icon {
+        font-size: 3rem;
+        margin-right: 20px;
+        color: var(--primary-color);
+      }
+
+      .course-details {
+        flex-grow: 1;
+      }
+
+      .course-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      .course-description {
+        color: #7f8c8d;
+        margin-bottom: 10px;
+      }
+
+      .course-dates {
+        display: flex;
+        justify-content: space-between;
+        color: #95a5a6;
+      }
+
+      .career-destination {
+        text-align: center;
+        padding: 20px;
+        background-color: var(--secondary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .arrow {
+        font-size: 2rem;
+        margin: 0 15px;
+      }
+
+      .download-btn {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .download-btn button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: white;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .download-btn button:hover {
+        background-color: var(--secondary-color);
+      }
+
+      @media print {
+        /* Reset Body and HTML */
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          height: 100%; /* Ensures content height fits the page */
+          overflow: hidden; /* Prevents content overflow */
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact; /* Preserves colors */
+        }
+
+        /* Hide Everything by Default */
+        body * {
+          visibility: hidden;
+        }
+
+        /* Show Only the Roadmap Container */
+        .roadmap-container,
+        .roadmap-container * {
+          visibility: visible;
+        }
+
+        .roadmap-container {
+          position: absolute;
+          left: 50%;
+          top: 13%;
+          transform: translateX(-50%);
+          width: 90%;
+          max-width: 800px;
+          padding: 0; /* Remove padding inside container */
+          margin: 0 auto; /* Center align */
+          page-break-inside: avoid; /* Avoid breaking into multiple pages */
+        }
+
+        /* Remove Footer, Buttons, and Extra Elements */
+        .footer,
+        .download-btn,
+        .navbar,
+        .back-to-top {
+          display: none !important;
+        }
+
+        /* Page Settings */
+        @page {
+          size: auto; /* Dynamically adjust to content size */
+          margin: 10mm 10mm; /* Minimal margin around content */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div
+        class="spinner-border text-primary"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav
+      class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
+    >
+      <a
+        href="http://127.0.0.1/CareerSpark/frontend/index.php"
+        class="navbar-brand d-flex align-items-center px-4 px-lg-5"
+      >
+        <!-- Replace book icon with CareerSpark logo -->
+        <img
+          src="http://127.0.0.1/CareerSpark/frontend/img/careerSparkLogo.png"
+          alt="CareerSpark Logo"
+          style="height: 310px; width: 350px; margin-right: 10px"
+        />
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler me-4"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/index.php"
+            class="nav-item nav-link"
+            >Home</a
+          >
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/about.php"
+            class="nav-item nav-link"
+            >About</a
+          >
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Services</a
+            >
+            <div class="dropdown-menu fade-down m-0">
+              <a href="http://127.0.0.1:5000/" class="dropdown-item"
+                >Career Prediction</a
+              >
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php"
+                class="dropdown-item"
+                >Knowledge Network</a
+              >
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/resume_builder.php"
+                class="dropdown-item"
+                >Resume Builder</a
+              >
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/courses.php"
+                class="dropdown-item"
+                >Courses</a
+              >
+            </div>
+          </div>
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/contact.php"
+            class="nav-item nav-link"
+            >Contact</a
+          >
+          <a
+            href="http://127.0.0.1/CareerSpark/backend/logout.php"
+            class="nav-item nav-link"
+            >Log out <i class="fa fa-sign-out-alt ms-1"></i
+          ></a>
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/profile.php"
+            class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase"
+            >Profile <i class="bi bi-person-circle ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="roadmap">
+      <div class="roadmap-container">
+        <div class="roadmap-header">
+          <h1 style="color: white">Career Roadmap</h1>
+          <p style="font-size: large; color: #e3dfef">
+            Your personalized path to success as a
+            <strong>{{ job_role }}</strong>!
+          </p>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="course-timeline">
+          {% for phase in roadmap %}
+          <div class="course-item">
+            <!-- Dynamic Icon -->
+            <div class="course-icon" id="icon-{{ phase.skill }}">📚</div>
+            <div class="course-details">
+              <div class="course-title">{{ phase.skill }}</div>
+              <div class="course-description">Skill Development Path</div>
+              <div class="course-dates">
+                <span>Start: {{ phase.start_date }}</span>
+                <span>End: {{ phase.end_date }}</span>
+              </div>
+              {% if phase.courses %}
+              <ul class="mt-4">
+                {% for course in phase.courses %}
+                <li>
+                  <a
+                    href="{{ course.course_link }}"
+                    target="_blank"
+                    class="text-primary hover:text-blue-700"
+                  >
+                    <i class="fas fa-book mr-2"></i> {{ course.title }}
+                  </a>
+                  <span class="text-gray-500 ml-2">
+                    ({{ course.duration }} weeks)
+                  </span>
+                </li>
+                {% endfor %}
+              </ul>
+              {% else %}
+              <p class="text-muted text-gray-400 italic">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                No courses available for this skill
+              </p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Download Roadmap Button -->
+      <div class="download-btn text-center mt-4">
+        <button id="download-roadmap" class="btn btn-primary">
+          <i class="fas fa-download mr-2"></i> Download Roadmap
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div
+      class="my-footer container-fluid bg-dark text-light footer pt-5 mt-0 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5 position-relative">
+        <div class="row g-5">
+          <!-- Quick Links -->
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-white mb-3">Quick Links</h4>
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/index.php"
+              >Home</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/about.php"
+              >About Us</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/contact.php"
+              >Contact Us</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/courses.php"
+              >Courses</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php"
+              >Knowledge Network</a
+            >
+          </div>
+
+          <!-- Contact Information -->
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-white mb-3">Contact</h4>
+            <p class="mb-2">
+              <i class="fa fa-map-marker-alt me-3"></i>SJEC, Mangaluru
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-phone-alt me-3"></i>+91 9108083054
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-envelope me-3"></i>support@careerspark.com
+            </p>
+            <!-- <div class="d-flex pt-2">
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://twitter.com"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://facebook.com"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://youtube.com"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://linkedin.com"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div> -->
+          </div>
+
+          <!-- Our Motto Section -->
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-white mb-3">Our Motto</h4>
+            <p>
+              At CareerSpark, we empower individuals with the tools and
+              opportunities to succeed in their careers, offering top resources
+              to guide job seekers toward their professional goals.
+            </p>
+          </div>
+        </div>
+
+        <!-- CareerSpark Logo -->
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+          <img
+            src="http://127.0.0.1/CareerSpark/frontend/img/careerSpark_footer_logo.png"
+            alt="CareerSpark Logo"
+            style="height: 240px"
+          />
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+              &copy;
+              <a
+                class="border-bottom"
+                href="http://127.0.0.1/CareerSpark/frontend/index.php"
+                >CareerSpark</a
+              >, All Rights Reserved.
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              <div class="footer-menu">
+                Designed By
+                <a
+                  class="border-bottom"
+                  href="https://github.com/AkahayKumarS/CareerSpark"
+                  target="_blank"
+                  >GA-17</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
+
+    <style>
+      .my-footer {
+        background: linear-gradient(90deg, rgb(22, 33, 50), rgb(46, 188, 201));
+      }
+    </style>
+    <!-- Script -->
+    <script>
+      // Skill Icon Mapping
+      const courseIcons = {
+        // Database Related
+        SQL: "🗄️", // or 'fa-database'
+        "Database Management": "💾", // or 'fa-server'
+        "PL/SQL": "📊", // or 'fa-code'
+        MongoDB: "🍃", // or 'fa-leaf'
+
+        // Hardware/Circuit Design
+        "Hardware Design": "🔧", // or 'fa-microchip'
+        "Circuit Design": "⚡", // or 'fa-bolt'
+        "FPGA Programming": "🎛️", // or 'fa-microchip'
+        VHDL: "📟", // or 'fa-memory'
+
+        // General IT
+        "Problem Solving": "🧩", // or 'fa-puzzle-piece'
+        ITIL: "📚", // or 'fa-book'
+        "Cloud Computing": "☁️", // or 'fa-cloud'
+
+        // Cybersecurity
+        "Ethical Hacking": "🔓", // or 'fa-user-secret'
+        "Network Security": "🛡️", // or 'fa-shield-alt'
+        "Penetration Testing": "🎯", // or 'fa-bullseye'
+        SIEM: "🔍", // or 'fa-search'
+
+        // Networking
+        "Networking Protocols": "🌐", // or 'fa-network-wired'
+        "Cisco Technologies": "📡", // or 'fa-broadcast-tower'
+        SDN: "🔄", // or 'fa-project-diagram'
+        "Cloud Networking": "☁️", // or 'fa-cloud-upload-alt'
+
+        // Development
+        Java: "☕", // or 'fa-java'
+        Python: "🐍", // or 'fa-python'
+        Git: "📦", // or 'fa-code-branch'
+        Docker: "🐳", // or 'fa-docker'
+
+        // API Development
+        "API Development": "🔌", // or 'fa-plug'
+        REST: "🔄", // or 'fa-exchange-alt'
+        GraphQL: "📊", // or 'fa-project-diagram'
+        OAuth2: "🔐", // or 'fa-key'
+
+        // Project Management
+        Leadership: "👥", // or 'fa-users'
+        "Agile Methodologies": "🔄", // or 'fa-sync'
+        "PMP Certification": "📜", // or 'fa-certificate'
+        "MS Project": "📅", // or 'fa-calendar-alt'
+
+        // Security Operations
+        "Network Security": "🛡️", // or 'fa-shield-alt'
+        Encryption: "🔒", // or 'fa-lock'
+        "Incident Response": "🚨", // or 'fa-exclamation-triangle'
+        "SOC Management": "👁️", // or 'fa-eye'
+
+        // Technical Writing
+        "Technical Writing": "📝", // or 'fa-pen'
+        Research: "🔍", // or 'fa-search'
+        Markdown: "📄", // or 'fa-file-alt'
+        "API Documentation": "📑", // or 'fa-file-code'
+
+        // AI/ML
+        "Machine Learning": "🤖", // or 'fa-robot'
+        TensorFlow: "🧮", // or 'fa-brain'
+        NLP: "💭", // or 'fa-comments'
+        "Computer Vision": "👁️", // or 'fa-eye'
+
+        // Testing
+        "Manual Testing": "🔍", // or 'fa-search'
+        Selenium: "🤖", // or 'fa-robot'
+        JIRA: "📋", // or 'fa-clipboard'
+        Cypress: "🎯", // or 'fa-bullseye'
+
+        // Business Analysis
+        "Requirement Analysis": "📊", // or 'fa-chart-line'
+        Communication: "💬", // or 'fa-comments'
+        Tableau: "📈", // or 'fa-chart-bar'
+        "SQL for Analysis": "📊", // or 'fa-database'
+
+        // Customer Support
+        "Customer Support": "🎧", // or 'fa-headset'
+        "CRM Tools": "👥", // or 'fa-users'
+        "Multichannel Communication": "📱", // or 'fa-comments'
+
+        // Data Science
+        "Data Analysis": "📊", // or 'fa-chart-bar'
+        BigQuery: "🔍", // or 'fa-search'
+        "Data Visualization": "📈", // or 'fa-chart-line'
+
+        // IT Support
+        Troubleshooting: "🔧", // or 'fa-wrench'
+        "Active Directory": "🗄️", // or 'fa-folder-tree'
+        "Ticketing Tools": "🎫", // or 'fa-ticket-alt'
+
+        // Design
+        Photoshop: "🎨", // or 'fa-paint-brush'
+        Illustrator: "✒️", // or 'fa-pen-fancy'
+        "After Effects": "🎬", // or 'fa-film'
+        "3D Modeling": "💠", // or 'fa-cube'
+      };
+
+      // Assign Icons Dynamically
+      document.querySelectorAll(".course-icon").forEach((icon) => {
+        const skill = icon.id.replace("icon-", "");
+        icon.textContent = courseIcons[skill] || "📚"; // Default icon if no match
+      });
+
+      // Download Roadmap as PDF
+      document
+        .getElementById("download-roadmap")
+        .addEventListener("click", () => {
+          window.print(); // Download roadmap
+        });
+    </script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/wow/wow.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/easing/easing.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/waypoints/waypoints.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="http://127.0.0.1/CareerSpark/frontend/js/main.js"></script>
+  </body>
+</html>

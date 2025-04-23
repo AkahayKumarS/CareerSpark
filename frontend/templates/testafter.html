@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CareerSpark - Career Recommendations</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/img/CareerSparkFavicon.png"
+      rel="icon"
+    />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/lib/animate/animate.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Stylesheet -->
+    <link
+      href="http://127.0.0.1/CareerSpark/frontend/css/style.css"
+      rel="stylesheet"
+    />
+    <style>
+      .hero-area {
+        position: relative;
+        color: white;
+        padding: 100px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero-area .bg-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+      }
+
+      .hero-area .bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(24, 29, 56, 0.7);
+        /* Dark overlay with desired color */
+        z-index: 1;
+      }
+
+      .hero-area .container {
+        position: relative;
+        z-index: 2;
+        /* Ensures content appears above overlay */
+      }
+
+      .career-list {
+        margin-top: 20px;
+      }
+
+      .career-list .card {
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .career-list .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+    <style>
+      .timeline {
+        border-left: 4px solid #06bbcc;
+        padding: 10px 0;
+        margin-top: 20px;
+        position: relative;
+      }
+
+      .timeline-item {
+        margin-left: 30px;
+        padding: 10px;
+        position: relative;
+        background: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .timeline-item:before {
+        content: "";
+        position: absolute;
+        left: -14px;
+        top: 10px;
+        width: 8px;
+        height: 8px;
+        background: #06bbcc;
+        border-radius: 50%;
+      }
+
+      .timeline-item h5 {
+        margin: 0;
+        font-weight: bold;
+      }
+    </style>
+    <style>
+      /* Custom Timeline Styling */
+      .timeline {
+        position: relative;
+        padding: 30px 0;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50px;
+        width: 4px;
+        background-color: #e0e0e0;
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+        padding-left: 80px;
+        background-color: #f9fafb;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .timeline-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 30px;
+        top: 20px;
+        width: 40px;
+        height: 40px;
+        background-color: #3b82f6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+      .timeline-item h5 {
+        color: #3b82f6;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      .timeline-item ul {
+        padding-left: 20px;
+      }
+      .timeline-item li {
+        margin-bottom: 10px;
+      }
+      .timeline-item li a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #4a5568;
+        transition: color 0.3s ease;
+      }
+      .timeline-item li a:hover {
+        color: #3b82f6;
+      }
+      .timeline-item li a i {
+        margin-right: 10px;
+        color: #3b82f6;
+      }
+
+      .best-career-link {
+        color: #6c757d; /* Default text color (muted gray) */
+        text-decoration: none; /* Remove underline */
+        transition: color 0.3s ease; /* Smooth transition effect */
+      }
+    </style>
+    <!-- Add CSS in head section or in a separate stylesheet -->
+    <style>
+      /* Card hover effects */
+      .career-card {
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .career-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+      }
+
+      /* Icon wrapper with animation */
+      .icon-wrapper {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: rgba(0, 123, 255, 0.1);
+        animation: pulse 2s infinite;
+        margin-bottom: 1rem;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(0, 123, 255, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        }
+      }
+
+      /* Badge pulse effect */
+      .badge-pulse {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        animation: badgePulse 1.5s infinite;
+      }
+
+      @keyframes badgePulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      /* List item hover effects */
+      .career-item,
+      .skill-item {
+        transition: all 0.2s ease;
+        border-left: 0 solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .career-item:hover,
+      .skill-item:hover {
+        border-left: 4px solid #ffc107;
+        background-color: rgba(255, 193, 7, 0.05);
+        padding-left: calc(1.25rem - 4px);
+      }
+
+      .matched-skills .skill-item:hover {
+        border-left-color: #28a745;
+        background-color: rgba(40, 167, 69, 0.05);
+      }
+
+      .missing-skills .skill-item:hover {
+        border-left-color: #dc3545;
+        background-color: rgba(220, 53, 69, 0.05);
+      }
+
+      /* Course link hover effect */
+      .course-link {
+        transition: all 0.2s ease;
+        display: inline-block;
+        position: relative;
+      }
+
+      .course-link:hover {
+        color: #0056b3 !important;
+        transform: translateX(5px);
+      }
+
+      .course-link:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0056b3;
+        transition: width 0.3s;
+      }
+
+      .course-link:hover:after {
+        width: 100%;
+      }
+
+      /* Roadmap button effects */
+      .roadmap-btn {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .roadmap-btn:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: all 0.6s;
+        z-index: -1;
+      }
+
+      .roadmap-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      }
+
+      .roadmap-btn:hover:before {
+        left: 100%;
+      }
+
+      /* Skill glow effect */
+      .skill-glow {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 5px;
+        background: linear-gradient(to right, transparent, #28a745);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .matched-skills .skill-item:hover .skill-glow {
+        opacity: 1;
+      }
+
+      /* Animation for best career link */
+      .best-career-link {
+        position: relative;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .best-career-link:hover {
+        color: #007bff !important;
+        transform: scale(1.05);
+        text-decoration: underline;
+      }
+
+      /* Course list styling */
+      .course-list {
+        list-style: none;
+        padding-left: 2rem;
+      }
+
+      .course-item {
+        margin: 0.5rem 0;
+        position: relative;
+      }
+
+      .course-item:before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: #007bff;
+        transform: translateY(-50%);
+      }
+    </style>
+
+    <style>
+      /* Last Suggested Career styling */
+      .last-career-alert {
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background-color: rgba(13, 202, 240, 0.1);
+        border-left: 4px solid #0dcaf0;
+      }
+
+      .last-career-alert:hover {
+        background-color: rgba(13, 202, 240, 0.15);
+      }
+
+      .history-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(13, 202, 240, 0.2);
+        color: #0dcaf0;
+      }
+
+      .previous-career-text {
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div
+        class="spinner-border text-primary"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav
+      class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
+    >
+      <a
+        href="http://127.0.0.1/CareerSpark/frontend/index.php"
+        class="navbar-brand d-flex align-items-center px-4 px-lg-5"
+      >
+        <!-- Replace book icon with CareerSpark logo -->
+        <img
+          src="http://127.0.0.1/CareerSpark/frontend/img/careerSparkLogo.png"
+          alt="CareerSpark Logo"
+          style="height: 310px; width: 350px; margin-right: 10px"
+        />
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler me-4"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/index.php"
+            class="nav-item nav-link"
+            >Home</a
+          >
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/about.php"
+            class="nav-item nav-link"
+            >About</a
+          >
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Services</a
+            >
+            <div class="dropdown-menu fade-down m-0">
+              <a href="http://127.0.0.1:5000/" class="dropdown-item"
+                >Career Prediction</a
+              >
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php"
+                class="dropdown-item"
+                >Knowledge Network</a
+              >
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/resume_builder.php"
+                class="dropdown-item"
+                >Resume Builder</a
+              >
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/courses.php"
+                class="dropdown-item"
+                >Courses</a
+              >
+            </div>
+          </div>
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/contact.php"
+            class="nav-item nav-link"
+            >Contact</a
+          >
+          <a
+            href="http://127.0.0.1/CareerSpark/backend/logout.php"
+            class="nav-item nav-link"
+            >Log out <i class="fa fa-sign-out-alt ms-1"></i
+          ></a>
+          <a
+            href="http://127.0.0.1/CareerSpark/frontend/profile.php"
+            class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase"
+            >Profile <i class="bi bi-person-circle ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Hero Section (Matching Knowledge Network Style) -->
+    <div class="hero-area section">
+      <!-- Background Image -->
+      <div
+        class="bg-image"
+        style="
+          background-image: url(http://127.0.0.1/CareerSpark/frontend/img/cat-3.jpg);
+        "
+      ></div>
+      <div class="bg-overlay"></div>
+      <!-- Dark overlay -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-md-offset-1 text-center">
+            <h1 class="white-text text-primary">
+              Your Personalized Career Path
+            </h1>
+            <p class="lead white-text mb-4">
+              Our advanced AI has analyzed your skills and interests to reveal
+              the most promising career opportunities tailored just for you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Career List -->
+    <div class="container career-list py-5">
+      <div class="row g-4">
+        <!-- Last Suggested Career -->
+        {% if previous_career %}
+        <div class="col-12">
+          <div
+            class="alert alert-info d-flex align-items-center shadow-sm border-0 last-career-alert"
+            role="alert"
+          >
+            <div class="history-icon-container me-3">
+              <i class="fas fa-history fa-lg"></i>
+            </div>
+            <div>
+              <strong>Last Suggested Career:</strong>
+              <span class="ms-1 previous-career-text"
+                >{{ previous_career }}</span
+              >
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Best Matched Career -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0 h-100 career-card">
+            <div class="card-body text-center position-relative">
+              <div class="icon-wrapper mb-3">
+                <i class="fas fa-bullseye fa-4x text-primary"></i>
+              </div>
+              <h4 class="card-title fw-bold">Best Matched Career</h4>
+              <a
+                href="http://127.0.0.1/CareerSpark/frontend/jobDetails.php?id={{ job_id }}"
+                class="card-text fs-5 text-muted best-career-link d-block mb-4"
+              >
+                {{ job0 }}
+              </a>
+
+              <div class="mt-4">
+                <span class="badge bg-primary px-3 py-2 position-relative">
+                  <i class="fas fa-star me-1"></i> Top Recommendation
+                  <span class="badge-pulse"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alternative Career Paths -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0 h-100 career-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-route text-warning me-3 fa-2x"></i>
+                <h4 class="card-title text-warning fw-bold mb-0">
+                  Alternative Career Paths
+                </h4>
+              </div>
+              <ul class="list-group mt-3 alternative-careers">
+                {% if alternative_careers %} {% for career in
+                alternative_careers %}
+                <li
+                  class="list-group-item d-flex align-items-center career-item"
+                >
+                  <i class="fas fa-lightbulb text-warning me-3"></i>
+                  <span>{{ career }}</span>
+                </li>
+                {% endfor %} {% else %}
+                <li class="list-group-item text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No alternative careers
+                  found.
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-4">
+        <!-- Matched Skills -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0 career-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-medal text-success me-3 fa-2x"></i>
+                <h4 class="card-title text-success fw-bold mb-0">
+                  Matched Skills
+                </h4>
+              </div>
+              <ul class="list-group matched-skills">
+                {% if matched_skills %} {% for skill in matched_skills %}
+                <li
+                  class="list-group-item d-flex align-items-center skill-item"
+                  data-skill="{{ skill }}"
+                >
+                  <i class="fas fa-check-circle text-success me-3"></i>
+                  <span>{{ skill }}</span>
+                  <span class="skill-glow"></span>
+                </li>
+                {% endfor %} {% else %}
+                <li class="list-group-item text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No matched skills
+                  found.
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Missing Skills and Courses -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm border-0 career-card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-puzzle-piece text-danger me-3 fa-2x"></i>
+                <h4 class="card-title text-danger fw-bold mb-0">
+                  Missing Skills
+                </h4>
+              </div>
+              <ul class="list-group missing-skills">
+                {% if missing_skills %} {% for skill in missing_skills %}
+                <li class="list-group-item skill-item">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-exclamation-circle text-danger me-3"></i>
+                    <span>{{ skill }}</span>
+                  </div>
+                  {% if courses[skill] %}
+                  <ul class="mt-2 course-list">
+                    {% for course in courses[skill] %}
+                    <li class="course-item">
+                      <a
+                        href="{{ course['course_link'] }}"
+                        target="_blank"
+                        class="text-primary course-link"
+                      >
+                        <i class="fas fa-book-open me-2"></i>{{ course['title']
+                        }}
+                      </a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </li>
+                {% endfor %} {% else %}
+                <li class="list-group-item text-muted">
+                  <i class="fas fa-info-circle me-2"></i>No missing skills
+                  found.
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Career Roadmap -->
+        <div class="container mt-5">
+          <h3 class="text-center text-primary text-3xl font-bold mb-6">
+            Your Personalized Career Roadmap
+          </h3>
+
+          <!-- View Career Roadmap Button -->
+          <div class="text-center mt-4">
+            <a
+              href="{{ url_for('career_roadmap') }}"
+              class="btn btn-primary px-5 py-2 roadmap-btn"
+            >
+              <i class="fas fa-road me-2"></i> View Career Roadmap
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add JavaScript to the bottom of your page -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Animate skills one by one
+        const skills = document.querySelectorAll(".matched-skills .skill-item");
+        skills.forEach((skill, index) => {
+          setTimeout(() => {
+            skill.style.opacity = "0";
+            skill.style.transform = "translateX(-20px)";
+            setTimeout(() => {
+              skill.style.transition = "all 0.5s ease";
+              skill.style.opacity = "1";
+              skill.style.transform = "translateX(0)";
+            }, 50);
+          }, index * 200);
+        });
+
+        // Add subtle animation to career cards
+        const cards = document.querySelectorAll(".career-card");
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            setTimeout(() => {
+              card.style.transition = "all 0.5s ease";
+              card.style.opacity = "1";
+              card.style.transform = "translateY(0)";
+            }, 50);
+          }, index * 150);
+        });
+      });
+    </script>
+
+    <!-- Floating Chat Icon Button -->
+    <div id="chat-toggle" class="chat-toggle-btn">
+      <div class="chat-icon-wrapper">
+        <i class="fas fa-comments"></i>
+      </div>
+      <span class="notification-badge">1</span>
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-window" class="career-chat-window">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="chat-title">
+            <h3>CareerBot</h3>
+            <span class="status-indicator">Online</span>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="action-btn minimize-btn">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button class="action-btn close-btn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="chat-box" class="chat-messages">
+        <div class="message bot-message welcome-message">
+          <div class="message-content">
+            <p>
+              👋 Hi there! I'm CareerBot, your personal career advisor. How can
+              I help you today?
+            </p>
+            <span class="message-time">Just now</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-replies">
+        <button
+          class="quick-reply-btn"
+          onclick="sendQuickReply('What careers match my skills?')"
+        >
+          <i class="fas fa-briefcase"></i> Career matches
+        </button>
+        <button
+          class="quick-reply-btn"
+          onclick="sendQuickReply('Help me with my resume')"
+        >
+          <i class="fas fa-file-alt"></i> Resume help
+        </button>
+        <button
+          class="quick-reply-btn"
+          onclick="sendQuickReply('Interview tips')"
+        >
+          <i class="fas fa-comment-dots"></i> Interview tips
+        </button>
+      </div>
+
+      <div class="chat-input-container">
+        <div class="input-wrapper">
+          <input type="text" id="chat-input" placeholder="Ask CareerBot..." />
+          <button class="emoji-btn">
+            <i class="far fa-smile"></i>
+          </button>
+        </div>
+        <button id="send-btn" onclick="sendMessage()" class="send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div
+      class="my-footer container-fluid bg-dark text-light footer pt-5 mt-0 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5 position-relative">
+        <div class="row g-5">
+          <!-- Quick Links -->
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-white mb-3">Quick Links</h4>
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/index.php"
+              >Home</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/about.php"
+              >About Us</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/contact.php"
+              >Contact Us</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/courses.php"
+              >Courses</a
+            >
+            <a
+              class="btn btn-link"
+              href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php"
+              >Knowledge Network</a
+            >
+          </div>
+
+          <!-- Contact Information -->
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-white mb-3">Contact</h4>
+            <p class="mb-2">
+              <i class="fa fa-map-marker-alt me-3"></i>SJEC, Mangaluru
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-phone-alt me-3"></i>+91 9108083054
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-envelope me-3"></i>support@careerspark.com
+            </p>
+            <!-- <div class="d-flex pt-2">
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://twitter.com"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://facebook.com"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://youtube.com"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-social"
+                href="https://linkedin.com"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div> -->
+          </div>
+
+          <!-- Our Motto Section -->
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-white mb-3">Our Motto</h4>
+            <p>
+              At CareerSpark, we empower individuals with the tools and
+              opportunities to succeed in their careers, offering top resources
+              to guide job seekers toward their professional goals.
+            </p>
+          </div>
+        </div>
+
+        <!-- CareerSpark Logo -->
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+          <img
+            src="http://127.0.0.1/CareerSpark/frontend/img/careerSpark_footer_logo.png"
+            alt="CareerSpark Logo"
+            style="height: 240px"
+          />
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+              &copy;
+              <a
+                class="border-bottom"
+                href="http://127.0.0.1/CareerSpark/frontend/index.php"
+                >CareerSpark</a
+              >, All Rights Reserved.
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              <div class="footer-menu">
+                Designed By
+                <a
+                  class="border-bottom"
+                  href="https://github.com/AkahayKumarS/CareerSpark"
+                  target="_blank"
+                  >GA-17</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+    <style>
+      .my-footer {
+        background: linear-gradient(90deg, rgb(22, 33, 50), rgb(46, 188, 201));
+      }
+    </style>
+
+    <!-- Back to Top -->
+    <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="bi bi-arrow-up"></i
+    ></a> -->
+
+    <style>
+      /* Main Chat Elements */
+      .chat-toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3498db, #1a76c7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .chat-toggle-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 18px rgba(52, 152, 219, 0.5);
+      }
+
+      .chat-icon-wrapper {
+        font-size: 24px;
+        animation: pulse 2s infinite;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #e74c3c;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border: 2px solid white;
+      }
+
+      .career-chat-window {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 400px;
+        height: 500px;
+        background: white;
+        border-radius: 15px;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      /* Chat Header */
+      .chat-header {
+        background: linear-gradient(135deg, #3498db, #1a76c7);
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 15px 15px 0 0;
+      }
+
+      .chat-header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .chat-avatar {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 20px;
+      }
+
+      .chat-title {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-title h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .status-indicator {
+        font-size: 12px;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+      }
+
+      .status-indicator:before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: #2ecc71;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      .chat-header-actions {
+        display: flex;
+      }
+
+      .action-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 5px;
+        transition: background-color 0.2s;
+      }
+
+      .action-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Chat Messages */
+      .chat-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background-color: #f8fafc;
+        position: relative;
+      }
+
+      .message {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        max-width: 80%;
+      }
+
+      .bot-message {
+        align-self: flex-start;
+      }
+
+      .user-message {
+        align-self: flex-end;
+        margin-left: auto;
+      }
+
+      .message-content {
+        padding: 12px 16px;
+        border-radius: 18px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        position: relative;
+        word-break: break-word;
+      }
+
+      .bot-message .message-content {
+        background-color: white;
+        border-bottom-left-radius: 5px;
+      }
+
+      .user-message .message-content {
+        background-color: #3498db;
+        color: white;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message-time {
+        font-size: 10px;
+        opacity: 0.7;
+        margin-top: 5px;
+        align-self: flex-end;
+      }
+
+      .welcome-message .message-content {
+        background-color: rgba(52, 152, 219, 0.1);
+        border: 1px solid rgba(52, 152, 219, 0.2);
+      }
+
+      /* Typing indicator */
+      .typing-indicator {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: white;
+        border-radius: 18px;
+        width: fit-content;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .typing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #b0b0b0;
+        margin: 0 2px;
+        animation: typingBounce 1.4s infinite ease-in-out;
+      }
+
+      .typing-dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typingBounce {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+        }
+        30% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* Quick Replies */
+      .quick-replies {
+        padding: 10px 15px;
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        background-color: #f8fafc;
+        border-top: 1px solid #eaeaea;
+        scrollbar-width: none;
+      }
+
+      .quick-replies::-webkit-scrollbar {
+        display: none;
+      }
+
+      .quick-reply-btn {
+        white-space: nowrap;
+        padding: 8px 12px;
+        border-radius: 18px;
+        background-color: white;
+        border: 1px solid #e0e5eb;
+        color: #3498db;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+      }
+
+      .quick-reply-btn i {
+        margin-right: 5px;
+      }
+
+      .quick-reply-btn:hover {
+        background-color: #f0f7ff;
+        border-color: #3498db;
+        transform: translateY(-2px);
+      }
+
+      /* Input Area */
+      .chat-input-container {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-top: 1px solid #eaeaea;
+      }
+
+      .input-wrapper {
+        flex: 1;
+        background-color: #f0f2f5;
+        border-radius: 20px;
+        padding: 5px 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      #chat-input {
+        flex: 1;
+        border: none;
+        padding: 8px 0;
+        font-size: 14px;
+        background-color: transparent;
+        outline: none;
+      }
+
+      .emoji-btn {
+        background: none;
+        border: none;
+        color: #888;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 16px;
+        transition: color 0.2s;
+      }
+
+      .emoji-btn:hover {
+        color: #3498db;
+      }
+
+      .send-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+        transition: all 0.2s;
+      }
+
+      .send-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4);
+      }
+
+      /* Animations */
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
+        .career-chat-window {
+          width: calc(100% - 40px);
+          height: 70vh;
+          bottom: 80px;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Elements
+        const chatToggle = document.getElementById("chat-toggle");
+        const chatWindow = document.getElementById("chat-window");
+        const chatBox = document.getElementById("chat-box");
+        const chatInput = document.getElementById("chat-input");
+        const sendBtn = document.getElementById("send-btn");
+        const minimizeBtn = document.querySelector(".minimize-btn");
+        const closeBtn = document.querySelector(".close-btn");
+        const notificationBadge = document.querySelector(".notification-badge");
+
+        // Toggle chatbot visibility
+        chatToggle.addEventListener("click", () => {
+          if (chatWindow.style.display === "flex") {
+            chatWindow.style.opacity = "0";
+            setTimeout(() => {
+              chatWindow.style.display = "none";
+            }, 300);
+          } else {
+            chatWindow.style.display = "flex";
+            setTimeout(() => {
+              chatWindow.style.opacity = "1";
+              chatInput.focus();
+            }, 10);
+            notificationBadge.style.display = "none";
+          }
+        });
+
+        // Initialize
+        chatWindow.style.opacity = "0";
+        chatWindow.style.transform = "translateY(20px)";
+
+        // Add minimize functionality
+        minimizeBtn.addEventListener("click", () => {
+          chatWindow.style.opacity = "0";
+          chatWindow.style.transform = "translateY(20px)";
+          setTimeout(() => {
+            chatWindow.style.display = "none";
+            chatWindow.style.transform = "translateY(0)";
+          }, 300);
+        });
+
+        // Add close functionality
+        closeBtn.addEventListener("click", () => {
+          chatWindow.style.opacity = "0";
+          setTimeout(() => {
+            chatWindow.style.display = "none";
+          }, 300);
+        });
+
+        // Send message with Enter key
+        chatInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        });
+
+        // Format timestamp
+        function formatTime() {
+          const now = new Date();
+          let hours = now.getHours();
+          let minutes = now.getMinutes();
+          const ampm = hours >= 12 ? "PM" : "AM";
+
+          hours = hours % 12;
+          hours = hours ? hours : 12;
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+
+          return `${hours}:${minutes} ${ampm}`;
+        }
+      });
+
+      // Send message to backend
+      async function sendMessage() {
+        const input = document.getElementById("chat-input");
+        const message = input.value.trim();
+        if (!message) return;
+
+        const chatBox = document.getElementById("chat-box");
+        const timestamp = formatTime();
+
+        // Add user message with animation
+        const userMessageElement = document.createElement("div");
+        userMessageElement.className = "message user-message";
+        userMessageElement.style.opacity = "0";
+        userMessageElement.style.transform = "translateY(10px)";
+        userMessageElement.innerHTML = `
+          <div class="message-content">
+            <p>${escapeHtml(message)}</p>
+            <span class="message-time">${timestamp}</span>
+          </div>
+        `;
+        chatBox.appendChild(userMessageElement);
+
+        // Animate the message in
+        setTimeout(() => {
+          userMessageElement.style.transition = "all 0.3s ease";
+          userMessageElement.style.opacity = "1";
+          userMessageElement.style.transform = "translateY(0)";
+        }, 10);
+
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Show typing indicator
+        const typingIndicator = document.createElement("div");
+        typingIndicator.className = "typing-indicator";
+        typingIndicator.innerHTML = `
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        `;
+        chatBox.appendChild(typingIndicator);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+          const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message }),
+          });
+
+          const data = await res.json();
+
+          // Remove typing indicator after a slight delay
+          setTimeout(() => {
+            if (typingIndicator.parentNode) {
+              typingIndicator.parentNode.removeChild(typingIndicator);
+            }
+
+            // Format reply: support **bold**, *italic*, URLs, and newlines
+            let reply = escapeHtml(
+              data.reply ||
+                "I didn't understand that. Could you please rephrase?"
+            );
+
+            reply = reply
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // **bold**
+              .replace(/\*(.*?)\*/g, "<em>$1</em>") // *italic*
+              .replace(
+                /(https?:\/\/[^\s]+)/g,
+                '<a href="$1" target="_blank" class="chat-link">$1</a>'
+              ) // links
+              .replace(/\n/g, "<br>"); // new lines
+
+            // Add bot response with animation
+            const botMessageElement = document.createElement("div");
+            botMessageElement.className = "message bot-message";
+            botMessageElement.style.opacity = "0";
+            botMessageElement.style.transform = "translateY(10px)";
+            botMessageElement.innerHTML = `
+              <div class="message-content">
+                <p>${reply}</p>
+                <span class="message-time">${formatTime()}</span>
+              </div>
+            `;
+            chatBox.appendChild(botMessageElement);
+
+            // Animate the message in
+            setTimeout(() => {
+              botMessageElement.style.transition = "all 0.3s ease";
+              botMessageElement.style.opacity = "1";
+              botMessageElement.style.transform = "translateY(0)";
+              chatBox.scrollTop = chatBox.scrollHeight;
+            }, 10);
+          }, 1500); // Simulate thinking time
+        } catch (error) {
+          // Remove typing indicator if there's an error
+          if (typingIndicator.parentNode) {
+            typingIndicator.parentNode.removeChild(typingIndicator);
+          }
+
+          // Add error message
+          const errorMessage = document.createElement("div");
+          errorMessage.className = "message bot-message";
+          errorMessage.innerHTML = `
+            <div class="message-content" style="background-color: #fff1f0; color: #e74c3c;">
+              <p><i class="fas fa-exclamation-circle me-2"></i>Sorry, I'm having trouble right now. Please try again.</p>
+              <span class="message-time">${formatTime()}</span>
+            </div>
+          `;
+          chatBox.appendChild(errorMessage);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      }
+
+      // Send a quick reply message
+      function sendQuickReply(message) {
+        document.getElementById("chat-input").value = message;
+        sendMessage();
+      }
+
+      // Format time helper function
+      function formatTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? "PM" : "AM";
+
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+
+        return `${hours}:${minutes} ${ampm}`;
+      }
+
+      // Basic HTML escape function to avoid issues
+      function escapeHtml(text) {
+        const map = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        };
+        return text.replace(/[&<>"']/g, (m) => map[m]);
+      }
+    </script>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/wow/wow.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/easing/easing.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/waypoints/waypoints.min.js"></script>
+    <script src="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="http://127.0.0.1/CareerSpark/frontend/js/main.js"></script>
+  </body>
+</html>

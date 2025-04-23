@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>CareerSpark</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/img/CareerSparkFavicon.png" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="http://127.0.0.1/CareerSpark/frontend/css/style.css" rel="stylesheet">
+</head>
+<!-- Spinner Start -->
+<div id="spinner"
+  class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+  <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="http://127.0.0.1/CareerSpark/frontend/index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <!-- Replace book icon with CareerSpark logo -->
+        <img src="http://127.0.0.1/CareerSpark/frontend/img/careerSparkLogo.png" alt="CareerSpark Logo"
+            style="height: 310px; width: 350px; margin-right: 10px;">
+    </a>
+  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+      <a href="http://127.0.0.1/CareerSpark/frontend/index.php" class="nav-item nav-link">Home</a>
+      <a href="http://127.0.0.1/CareerSpark/frontend/about.php" class="nav-item nav-link">About</a>
+      <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
+        <div class="dropdown-menu fade-down m-0">
+          <a href="http://127.0.0.1:5000/" class="dropdown-item">Career Prediction</a>
+          <a href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php" class="dropdown-item">Knowledge Network</a>
+          <a href="http://127.0.0.1/CareerSpark/frontend/resume_builder.php" class="dropdown-item">Resume Builder</a>
+          <a href="http://127.0.0.1/CareerSpark/frontend/courses.php" class="dropdown-item">Courses</a>
+        </div>
+      </div>
+      <a href="http://127.0.0.1/CareerSpark/frontend/contact.php" class="nav-item nav-link">Contact</a>
+      <a href="http://127.0.0.1/CareerSpark/backend/logout.php" class="nav-item nav-link">Log out <i
+          class="fa fa-sign-out-alt ms-1"></i></a>
+      <a href="http://127.0.0.1/CareerSpark/frontend/profile.php"
+        class="btn btn-primary py-4 px-lg-4 d-none d-lg-block text-uppercase">Profile <i
+          class="bi bi-person-circle ms-2"></i>
+      </a>
+
+    </div>
+  </div>
+</nav>
+<!-- Navbar End -->
+
+<!-- Form Section -->
+<div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+      <div class="col-lg-8">
+          <div class="form-card shadow-lg rounded-3 p-5">
+              <h2 class="text-center mb-4">Rate Your Skills</h2>
+              <form method="POST" action="{{ url_for('prediction') }}">
+                <div class="row g-3">
+                  {% set levels = [("0", "Not Interested"), ("1", "Poor"), ("2", "Beginner"), ("3", "Average"), ("4", "Intermediate"), ("5", "Excellent"), ("6", "Professional")] %}
+                  {% set icons = [
+                    "terminal", "code", "coffee", "python", "js", "html5", "react", "node", "leaf", "flask", 
+                    "database", "server", "git-alt", "cogs", "cloud", "box", "ship", "mobile-alt", "bolt", "brain", 
+                    "robot", "sitemap", "project-diagram", "shield-alt", "link", "cloud-upload-alt", "vr-cardboard", 
+                    "eye", "comments"
+                  ] %}
+                  {% set names = [
+                    "C Programming", "C++", "Java", "Python", "JavaScript", "HTML/CSS", "React.js", "Node.js", "Django", "Flask",
+                    "SQL", "MongoDB", "Git", "DevOps", "AWS", "Docker", "Kubernetes", "Android Development", "Flutter", "Machine Learning",
+                    "Deep Learning", "Data Structures", "Algorithms", "Cybersecurity", "Blockchain", "Cloud Computing", "AR/VR",
+                    "Computer Vision", "NLP"
+                  ] %}
+                  {% for icon, name in zip(icons, names) %}
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="{{ name | lower | replace(' ', '-') | replace('.', '') }}" class="form-label">
+                        <i class="{{ 'fab' if icon in ['python', 'js', 'html5', 'react', 'node', 'git-alt', 'docker'] else 'fas' }} fa-{{ icon }} me-2 text-primary"></i>{{ name }}
+                      </label>                      
+                      <select class="form-select" id="{{ name | lower | replace(' ', '-') | replace('.', '') }}" name="{{ name }}" required>
+                        <option value="">Choose your level</option>
+                        {% for val, label in levels %}
+                        <option value="{{ val }}">{{ label }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  {% endfor %}
+              
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-custom px-5 py-2"
+                      style="background-color: #00bcd4; color: white">
+                      Discover Yourself!
+                    </button>
+                  </div>
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+<!-- Footer Start -->
+<div class="my-footer container-fluid bg-dark text-light footer pt-5 mt-0 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5 position-relative">
+        <div class="row g-5">
+            <!-- Quick Links -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-white mb-3">Quick Links</h4>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/index.php">Home</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/about.php">About Us</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/contact.php">Contact Us</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/courses.php">Courses</a>
+                <a class="btn btn-link" href="http://127.0.0.1/CareerSpark/frontend/knowledgeNetwork.php">Knowledge Network</a>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-white mb-3">Contact</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>SJEC, Mangaluru</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9108083054</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>support@careerspark.com</p>
+                <!-- <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href="https://twitter.com"><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://facebook.com"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://youtube.com"><i
+                            class="fab fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://linkedin.com"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div> -->
+            </div>
+
+            <!-- Our Motto Section -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-white mb-3">Our Motto</h4>
+                <p>At CareerSpark, we empower individuals with the tools and opportunities to succeed in their careers,
+                    offering top resources to guide job seekers toward their professional goals.</p>
+            </div>
+        </div>
+
+        <!-- CareerSpark Logo -->
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+            <img src="http://127.0.0.1/CareerSpark/frontend/img/careerSpark_footer_logo.png" alt="CareerSpark Logo" style="height: 240px;">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="http://127.0.0.1/CareerSpark/frontend/index.php">CareerSpark</a>, All Rights Reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="footer-menu">
+                        Designed By <a class="border-bottom" href="https://github.com/AkahayKumarS/CareerSpark"
+                            target="_blank">GA-17</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<style>
+    .my-footer {
+        background: linear-gradient(90deg, rgb(22, 33, 50), rgb(46, 188, 201));
+    }
+</style>
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/wow/wow.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/easing/easing.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/waypoints/waypoints.min.js"></script>
+<script src="http://127.0.0.1/CareerSpark/frontend/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="http://127.0.0.1/CareerSpark/frontend/js/main.js"></script>
+</body>
+
+</html>
