@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useResume } from '../contexts/ResumeContext';
+import React, { useState } from "react";
+import { useResume } from "../contexts/ResumeContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Type,
   Palette,
@@ -18,22 +18,22 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
-  Edit
-} from 'lucide-react';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { toast } from '@/components/ui/use-toast';
-import PDFDownloader from './PDFDownloader';
-import { 
+  Edit,
+} from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { toast } from "@/components/ui/use-toast";
+import PDFDownloader from "./PDFDownloader";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
-} from './ui/select';
-import { Input } from './ui/input';
-import ResumeForm from './ResumeForm';
-import ColorPicker from './Colorpicker';
+  SelectValue,
+} from "./ui/select";
+import { Input } from "./ui/input";
+import ResumeForm from "./ResumeForm";
+import ColorPicker from "./ColorPicker";
 
 interface CustomizationPanelProps {
   isOpen: boolean;
@@ -42,21 +42,29 @@ interface CustomizationPanelProps {
 
 // Available fonts
 const availableFonts = [
-  'Roboto', 'Poppins', 'Montserrat', 'Lato', 'Open Sans', 'Playfair Display', 'Merriweather', 'Source Sans Pro', 'Ubuntu'
+  "Roboto",
+  "Poppins",
+  "Montserrat",
+  "Lato",
+  "Open Sans",
+  "Playfair Display",
+  "Merriweather",
+  "Source Sans Pro",
+  "Ubuntu",
 ];
 
 const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
-  const { 
-    customization, 
-    setCustomization, 
+  const {
+    customization,
+    setCustomization,
     activeTemplate,
     resetToTemplate,
     setFont,
     setFontSize,
     setColorTheme,
-    setSectionVisibility
+    setSectionVisibility,
   } = useResume();
-  
+
   const [colorInput, setColorInput] = useState(customization.colorTheme);
 
   const handleColorChange = (color: string) => {
@@ -67,7 +75,7 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
   const handleColorInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setColorInput(e.target.value);
   };
-  
+
   const handleColorInputBlur = () => {
     if (/^#([0-9A-F]{3}){1,2}$/i.test(colorInput)) {
       setColorTheme(colorInput);
@@ -94,9 +102,9 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
     <>
       <div
         className={`fixed top-0 right-0 h-full bg-white shadow-lg transition-transform duration-300 ease-in-out z-30 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ width: '400px' }}
+        style={{ width: "400px" }}
       >
         <div className="p-4 border-b sticky top-0 bg-white z-10 flex justify-between items-center">
           <h2 className="text-lg font-semibold">Customize Resume</h2>
@@ -110,7 +118,10 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
           </Button>
         </div>
 
-        <div className="p-4 overflow-y-auto" style={{ height: 'calc(100vh - 70px)' }}>
+        <div
+          className="p-4 overflow-y-auto"
+          style={{ height: "calc(100vh - 70px)" }}
+        >
           <Tabs defaultValue="content">
             <TabsList className="grid grid-cols-4 mb-4">
               <TabsTrigger value="content">
@@ -145,7 +156,11 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
                   <SelectContent>
                     {availableFonts.map((font) => (
                       <SelectItem key={font} value={font}>
-                        <span className={`font-${font.toLowerCase().replace(/\s+/g, '-')}`}>
+                        <span
+                          className={`font-${font
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                        >
                           {font}
                         </span>
                       </SelectItem>
@@ -158,17 +173,31 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
                 <div className="flex justify-between">
                   <h3 className="text-sm font-medium">Font Size</h3>
                   <span className="text-xs text-gray-500">
-                    {customization.fontSize === 'small' ? 'Small' : 
-                     customization.fontSize === 'medium' ? 'Medium' : 'Large'}
+                    {customization.fontSize === "small"
+                      ? "Small"
+                      : customization.fontSize === "medium"
+                      ? "Medium"
+                      : "Large"}
                   </span>
                 </div>
-                <Slider 
-                  min={0} 
-                  max={2} 
-                  step={1} 
-                  value={[customization.fontSize === 'small' ? 0 : customization.fontSize === 'medium' ? 1 : 2]} 
+                <Slider
+                  min={0}
+                  max={2}
+                  step={1}
+                  value={[
+                    customization.fontSize === "small"
+                      ? 0
+                      : customization.fontSize === "medium"
+                      ? 1
+                      : 2,
+                  ]}
                   onValueChange={(value) => {
-                    const size = value[0] === 0 ? 'small' : value[0] === 1 ? 'medium' : 'large';
+                    const size =
+                      value[0] === 0
+                        ? "small"
+                        : value[0] === 1
+                        ? "medium"
+                        : "large";
                     setFontSize(size);
                   }}
                 />
@@ -204,7 +233,9 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
                     <button
                       key={color}
                       className={`w-full aspect-square rounded-full border-2 ${
-                        customization.colorTheme === color ? 'border-black' : 'border-transparent'
+                        customization.colorTheme === color
+                          ? "border-black"
+                          : "border-transparent"
                       }`}
                       style={{ backgroundColor: color }}
                       onClick={() => handleColorChange(color)}
@@ -217,8 +248,8 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
                 <div className="space-y-2">
                   <Label htmlFor="custom-color">Custom Color</Label>
                   <div className="flex gap-2">
-                    <div 
-                      className="h-10 w-10 rounded-md border" 
+                    <div
+                      className="h-10 w-10 rounded-md border"
                       style={{ backgroundColor: colorInput }}
                     />
                     <Input
@@ -237,30 +268,37 @@ const CustomizationPanel = ({ isOpen, onToggle }: CustomizationPanelProps) => {
 
             <TabsContent value="sections" className="space-y-4">
               <h3 className="text-sm font-medium">Toggle Sections</h3>
-              
-              {Object.entries(customization.visibleSections).map(([section, isVisible]) => (
-                <div key={section} className="flex items-center justify-between">
-                  <Label htmlFor={`section-${section}`} className="capitalize">
-                    {section}
-                  </Label>
-                  <Switch 
-                    id={`section-${section}`}
-                    checked={isVisible}
-                    onCheckedChange={(checked) => 
-                      setSectionVisibility(section as keyof typeof customization.visibleSections, checked)
-                    }
-                  />
-                </div>
-              ))}
+
+              {Object.entries(customization.visibleSections).map(
+                ([section, isVisible]) => (
+                  <div
+                    key={section}
+                    className="flex items-center justify-between"
+                  >
+                    <Label
+                      htmlFor={`section-${section}`}
+                      className="capitalize"
+                    >
+                      {section}
+                    </Label>
+                    <Switch
+                      id={`section-${section}`}
+                      checked={isVisible}
+                      onCheckedChange={(checked) =>
+                        setSectionVisibility(
+                          section as keyof typeof customization.visibleSections,
+                          checked
+                        )
+                      }
+                    />
+                  </div>
+                )
+              )}
             </TabsContent>
           </Tabs>
 
           <div className="mt-8 pt-6 border-t grid grid-cols-2 gap-3">
-            <Button 
-              variant="outline" 
-              className="w-full" 
-              onClick={handleReset}
-            >
+            <Button variant="outline" className="w-full" onClick={handleReset}>
               <RefreshCw className="h-4 w-4 mr-1" />
               Reset
             </Button>

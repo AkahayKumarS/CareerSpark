@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_name'] = $user['name'];
                     $_SESSION['user_type'] = $user['user_type'];
-                    setcookie("user_id", $_SESSION['user_id'], time() + 3600, "/", "", false, true); // Secure, HttpOnly cookie
+                    setcookie("user_id", $_SESSION['user_id'], time() + 10800, "/", "", false, true); // Secure, HttpOnly cookie
 
                     $modalDisplay = true;
 

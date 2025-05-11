@@ -9,7 +9,7 @@ import google.generativeai as genai
 from flask_cors import CORS
 
  
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()  # Load environment variables from .env file 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
@@ -107,67 +107,106 @@ def generate_roadmap(missing_skills, courses):
 
 @app.route('/')
 def career():
-    return render_template("hometest.html")
+    return render_template("hometest.html", zip=zip)
 
-@app.route('/predict', methods=['POST','GET'])
+@app.route('/predict', methods=['POST', 'GET'])
 def prediction():
     user_id = request.cookies.get('user_id')
 
     if not user_id:
         return "User not logged in. Please log in to access this feature.", 401
-    
+
     if request.method == 'POST':
-        # Process form data
+        # Load model and label encoder
+        with open("careerlast.pkl", "rb") as f:
+            loaded_model = pickle.load(f)
+        with open("label_encoder.pkl", "rb") as f:
+            le = pickle.load(f)
+
         result = request.form
-        user_ratings = np.array([float(value) for value in  result.values()]).reshape(1, -1)
+        user_ratings = np.array([float(value) for value in result.values()]).reshape(1, -1)
 
-        loaded_model = pickle.load(open("careerlast.pkl", 'rb'))
-        predictions = loaded_model.predict(user_ratings)
+        # predictions = loaded_model.predict(user_ratings)
+        # best_matched_job_role = le.inverse_transform(predictions)[0]
 
-        best_matched_job_role = predictions[0]
+        probs = loaded_model.predict_proba(user_ratings)[0]
+        top_index = np.argmax(probs)
+        top_role = le.inverse_transform([top_index])[0]
+        top_prob = probs[top_index]
 
+        print("Top role:", top_role, "Top prob:", top_prob)
+
+
+        # If model is unsure, handle it
+        if top_prob < 0.40:
+            return "Prediction not confident enough. Please refine your input."
+
+        # Convert form input to skill names
+        form_keys = list(result.keys())
+
+        # Define essential skill dependencies (customize as needed)
+        role_keywords = {
+            "Blockchain Developer": ["Blockchain"],
+            "Frontend Developer": ["HTML/CSS", "JavaScript", "React.js"],
+            "Backend Developer": ["Node.js", "SQL", "MongoDB"],
+            "Full Stack Developer": ["HTML/CSS", "JavaScript", "React.js", "Node.js", "SQL"],
+            "AI/ML Engineer": ["Machine Learning", "Python"],
+            "Cybersecurity Analyst": ["Cybersecurity", "DevOps"],
+            "Cloud Architect": ["AWS", "Cloud Computing", "DevOps"],
+            "AR/VR Developer": ["AR/VR"],
+            "Computer Vision Engineer": ["Computer Vision", "Deep Learning"],
+            "NLP Engineer": ["NLP"],
+            "Mobile App Developer": ["Android Development", "Flutter"]
+        }
+
+        # Map skills back to user ratings
+        user_input_dict = {skill: float(value) for skill, value in zip(result.keys(), result.values())}
+
+        # Custom logic to filter unrealistic predictions
+        def has_critical_flaw(role, user_ratings_dict):
+            return any(
+                user_ratings_dict.get(skill, 0) <= 1  # Not Interested or Poor
+                for skill in role_keywords.get(role, [])
+            )
+
+        # Recheck for flaws
+        if has_critical_flaw(top_role, user_input_dict):
+            # Find next best role that doesn't violate rules
+            sorted_probs = sorted(list(enumerate(probs)), key=lambda x: -x[1])
+            for idx, prob in sorted_probs[1:]:
+                alt_role = le.inverse_transform([idx])[0]
+                if not has_critical_flaw(alt_role, user_input_dict):
+                    best_matched_job_role = alt_role
+                    break
+            else:
+                best_matched_job_role = top_role  # fallback
+        else:
+            best_matched_job_role = top_role
+
+        print("Final suggested role after skill check:", best_matched_job_role)
         pred_proba = loaded_model.predict_proba(user_ratings)
 
-        jobs_dict = {0:'AI ML Specialist',
-                1:'API Integration Specialist',
-                2:'Application Support Engineer',
-                3:'Business Analyst',
-                4:'Customer Service Executive',
-                5:'Cyber Security Specialist',
-                6:'Data Scientist',
-                7:'Database Administrator',
-                8:'Graphics Designer',
-                9:'Hardware Engineer',
-                10:'Helpdesk Engineer',
-                11:'Information Security Specialist',
-                12:'Networking Engineer',
-                13:'Project Manager',
-                14:'Software Developer',
-                15:'Software Tester',
-                16:'Technical Writer'}
-    
-        threshold = 0.05
-        alternative_careers = [
-        (index, prob)
-        for index, prob in enumerate(pred_proba[0])
-        if prob > threshold and index != np.argmax(pred_proba[0])
-        ]
-        alternative_careers = sorted(alternative_careers,   key=lambda x: -x[1])
-        alternative_career_roles = [
-        jobs_dict[career[0]] for career in alternative_careers
-        ]
+        # Show alternatives with probability threshold
+        # threshold = 0.05
+        # alternative_careers = [
+        #     (index, prob) for index, prob in enumerate(pred_proba[0])
+        #     if prob > threshold and index != np.argmax(pred_proba[0])
+        # ]
+        # alternative_careers = sorted(alternative_careers, key=lambda x: -x[1])
+        # alternative_career_roles = [le.inverse_transform([career[0]])[0] for career in alternative_careers]
 
+        # Match against job_roles DB
         job_roles = fetch_job_roles()
-        best_matched_job = next((job for job in job_roles if    job['job_role'] == best_matched_job_role), None)
+        best_matched_job = next((job for job in job_roles if job['job_role'] == best_matched_job_role), None)
 
         if not best_matched_job:
-            return f"Job role '{best_matched_job_role}' not     found in the database.", 500
+            return f"Job role '{best_matched_job_role}' not found in the database.", 500
 
-        required_skills = best_matched_job['required_skills'].  split(", ")
+        required_skills = best_matched_job['required_skills'].split(", ")
         user_skills = fetch_student_skills(user_id)
 
-        matched_skills = [skill for skill in required_skills    if skill in user_skills]
-        missing_skills = [skill for skill in required_skills    if skill not in matched_skills]
+        matched_skills = [skill for skill in required_skills if skill in user_skills]
+        missing_skills = [skill for skill in required_skills if skill not in matched_skills]
 
         courses_for_missing_skills = {}
         for skill in missing_skills:
@@ -175,54 +214,52 @@ def prediction():
             if courses:
                 courses_for_missing_skills[skill] = courses
 
-        roadmap = generate_roadmap(missing_skills,  courses_for_missing_skills)
+        roadmap = generate_roadmap(missing_skills, courses_for_missing_skills)
 
-        # Store results in session
+        # Store in session
         session['best_career'] = best_matched_job_role
-        session['alternative_careers'] =    alternative_career_roles
+        # session['alternative_careers'] = alternative_career_roles
         session['matched_skills'] = matched_skills
         session['missing_skills'] = missing_skills
         session['courses'] = courses_for_missing_skills
         session['roadmap'] = roadmap
 
-        conn = get_db_connection()  # Establish DB connection
-        cursor = conn.cursor()
+        # Save to DB
+        conn = get_db_connection()
+        # Use one cursor to fetch job_id
+        cursor1 = conn.cursor()
+        cursor1.execute("SELECT id FROM job_roles WHERE job_role = %s", (best_matched_job_role,))
+        job_id_result = cursor1.fetchone()
+        job_id = job_id_result[0] if job_id_result else None
+        cursor1.close()  # ✅ Close cursor1
 
-        # SQL query to fetch job ID for the best-matched career role (job0)
-        query = "SELECT id FROM job_roles WHERE job_role = %s"
-        cursor.execute(query, (best_matched_job_role,))  # Pass job0 as parameter
-
-        # Fetch the job ID
-        job_id = cursor.fetchone()[0]  # Assuming job_role is   unique and only one ID is fetched
-
-        # Check if user already has a record
-        cursor.execute("SELECT career_suggested FROM recommendations WHERE user_id = %s", (user_id,))
-        existing = cursor.fetchone()
+        # Use a fresh cursor for recommendations check and update
+        cursor2 = conn.cursor()
+        cursor2.execute("SELECT career_suggested FROM recommendations WHERE user_id = %s", (user_id,))
+        existing = cursor2.fetchone()
 
         if existing:
             session['previous_career'] = existing[0]
-            cursor.execute(
-                "UPDATE recommendations SET career_suggested = %s, prediction_date = NOW() WHERE user_id = %s",
-                (best_matched_job_role, user_id))
+            cursor2.execute("UPDATE recommendations SET career_suggested = %s, prediction_date = NOW() WHERE user_id = %s",(best_matched_job_role, user_id))
         else:
-            session['previous_career'] = None  # No previous suggestion
-            cursor.execute(
-                "INSERT INTO recommendations (user_id, career_suggested) VALUES (%s, %s)", (user_id, best_matched_job_role))
-        
+            session['previous_career'] = None
+            cursor2.execute("INSERT INTO recommendations (user_id, career_suggested) VALUES (%s, %s)", (user_id, best_matched_job_role))
+
         conn.commit()
-        cursor.close()
+        cursor2.close()  # ✅ Close cursor2
         conn.close()
+
         session['job_id'] = job_id
 
-        # Redirect to GET route
         return redirect(url_for('result_page'))
+
 
 @app.route('/result', methods=['GET'])
 def result_page():
     # Retrieve data from session
     job0 = session.get('best_career')
     job_id = session.get('job_id')
-    alternative_careers = session.get('alternative_careers')
+    # alternative_careers = session.get('alternative_careers')
     matched_skills = session.get('matched_skills')
     missing_skills = session.get('missing_skills')
     courses = session.get('courses')
@@ -233,7 +270,7 @@ def result_page():
         "testafter.html",
         job0=job0,
         job_id=job_id,
-        alternative_careers=alternative_careers,
+        # alternative_careers=alternative_careers,
         matched_skills=matched_skills,
         missing_skills=missing_skills,
         courses=courses,

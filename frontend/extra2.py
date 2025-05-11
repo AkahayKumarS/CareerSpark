@@ -1,69 +1,59 @@
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.ensemble import StackingClassifier, RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
-import pickle
-import matplotlib.pyplot as plt
-import seaborn as sns
+from imblearn.over_sampling import RandomOverSampler
+from sklearn.pipeline import Pipeline
 
-# Load dataset
-df = pd.read_csv("computer_science_student_career_datasetMar62024.csv")
+# Load and preprocess dataset
+df = pd.read_csv("grouped_15000_cse_skills_job_roles.csv")
 
-# Print column names and first few rows for verification
-print("Columns:", df.columns.tolist())
-print(df.head())
-
-# Drop any rows with missing values
+rating_map = {
+    "Not Interested": 0, "Poor": 1, "Beginner": 2,
+    "Average": 4, "Intermediate": 6, "Excellent": 8, "Professional": 10
+}
+for col in df.columns[:-1]:
+    df[col] = df[col].map(rating_map)
 df.dropna(inplace=True)
 
-# Encode categorical features if any (excluding target)
-label_encoders = {}
-for col in df.columns:
-    if df[col].dtype == "object" and col != "Career":
-        le = LabelEncoder()
-        df[col] = le.fit_transform(df[col])
-        label_encoders[col] = le
+le = LabelEncoder()
+df["EncodedRoles"] = le.fit_transform(df[df.columns[-1]])
 
-# Encode the target variable 'Career'
-target_encoder = LabelEncoder()
-df['Career_Goals'] = target_encoder.fit_transform(df['Career_Goals'])
+X = df.iloc[:, :-2].values
+y = df["EncodedRoles"].values
 
-# Split features and target
-X = df.drop('Career_Goals', axis=1).values
-y = df['Career_Goals'].values
+ros = RandomOverSampler(random_state=42)
+X_resampled, y_resampled = ros.fit_resample(X, y)
 
-# Split into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_resampled, y_resampled, test_size=0.3, random_state=42
+)
 
-# Train XGBoost model
-model = XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', random_state=42)
-model.fit(X_train, y_train)
+# Pipelines for base models
+xgb_pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('xgb', XGBClassifier(random_state=42, eval_metric='mlogloss', max_depth=6, learning_rate=0.1, n_estimators=200))
+])
 
-# Predict
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"\n✅ Accuracy: {accuracy * 100:.2f}%")
+rf_pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('rf', RandomForestClassifier(n_estimators=150, max_depth=10, random_state=42))
+])
 
-# Save model
-pickle.dump(model, open("career_model_xgb.pkl", "wb"))
-print("Model saved as 'career_model_xgb.pkl'")
+logreg_pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('logreg', LogisticRegression(max_iter=1500))
+])
 
-# Decode career predictions back to labels
-y_test_labels = target_encoder.inverse_transform(y_test)
-y_pred_labels = target_encoder.inverse_transform(y_pred)
+# Stacking classifier
+stack_model = StackingClassifier(
+    estimators=[('xgb', xgb_pipe), ('rf', rf_pipe), ('logreg', logreg_pipe)],
+    final_estimator=RandomForestClassifier(n_estimators=120),
+    cv=5, n_jobs=-1
+)
 
-# Classification report
-print("\nClassification Report:")
-print(classification_report(y_test_labels, y_pred_labels))
+# Train model
+stack_model.fit(X_train, y_train)
 
-# Confusion Matrix
-conf_matrix = confusion_matrix(y_test_labels, y_pred_labels)
-plt.figure(figsize=(10, 6))
-sns.heatmap(conf_matrix, annot=True, fmt='d', xticklabels=target_encoder.classes_, yticklabels=target_encoder.classes_, cmap="YlGnBu")
-plt.title("Confusion Matrix")
-plt.xlabel("Predicted")
-plt.ylabel("Actual")
-plt.tight_layout()
-plt.show()

@@ -555,103 +555,89 @@
     <script>
       // Skill Icon Mapping
       const courseIcons = {
-        // Database Related
-        SQL: "🗄️", // or 'fa-database'
-        "Database Management": "💾", // or 'fa-server'
-        "PL/SQL": "📊", // or 'fa-code'
-        MongoDB: "🍃", // or 'fa-leaf'
+        // Web Development
+        HTML: "📝", // or 'fa-html5'
+        CSS: "🎨", // or 'fa-css3-alt'
+        JavaScript: "🟨", // or 'fa-js'
+        React: "⚛️", // or 'fa-react'
+        "UI/UX Design": "🖌️", // or 'fa-palette'
+        "Responsive Web Design": "📱", // or 'fa-mobile-alt'
+        "Node.js": "🟢", // or 'fa-node-js'
+        "Frontend Development": "🖥️", // or 'fa-desktop'
+        "Backend Development": "⚙️", // or 'fa-cogs'
 
-        // Hardware/Circuit Design
-        "Hardware Design": "🔧", // or 'fa-microchip'
-        "Circuit Design": "⚡", // or 'fa-bolt'
-        "FPGA Programming": "🎛️", // or 'fa-microchip'
-        VHDL: "📟", // or 'fa-memory'
-
-        // General IT
-        "Problem Solving": "🧩", // or 'fa-puzzle-piece'
-        ITIL: "📚", // or 'fa-book'
-        "Cloud Computing": "☁️", // or 'fa-cloud'
-
-        // Cybersecurity
-        "Ethical Hacking": "🔓", // or 'fa-user-secret'
-        "Network Security": "🛡️", // or 'fa-shield-alt'
-        "Penetration Testing": "🎯", // or 'fa-bullseye'
-        SIEM: "🔍", // or 'fa-search'
-
-        // Networking
-        "Networking Protocols": "🌐", // or 'fa-network-wired'
-        "Cisco Technologies": "📡", // or 'fa-broadcast-tower'
-        SDN: "🔄", // or 'fa-project-diagram'
-        "Cloud Networking": "☁️", // or 'fa-cloud-upload-alt'
-
-        // Development
-        Java: "☕", // or 'fa-java'
+        // Programming Languages
         Python: "🐍", // or 'fa-python'
-        Git: "📦", // or 'fa-code-branch'
-        Docker: "🐳", // or 'fa-docker'
+        Java: "☕", // or 'fa-java'
+
+        // Databases
+        SQL: "🗄️", // or 'fa-database'
+        MongoDB: "🍃", // or 'fa-leaf'
+        Databases: "💾", // or 'fa-server'
 
         // API Development
-        "API Development": "🔌", // or 'fa-plug'
+        "REST APIs": "🔄", // or 'fa-exchange-alt'
         REST: "🔄", // or 'fa-exchange-alt'
-        GraphQL: "📊", // or 'fa-project-diagram'
-        OAuth2: "🔐", // or 'fa-key'
+        APIs: "🔌", // or 'fa-plug'
+        Authentication: "🔑", // or 'fa-key'
+        Security: "🔒", // or 'fa-shield-alt'
 
-        // Project Management
-        Leadership: "👥", // or 'fa-users'
-        "Agile Methodologies": "🔄", // or 'fa-sync'
-        "PMP Certification": "📜", // or 'fa-certificate'
-        "MS Project": "📅", // or 'fa-calendar-alt'
+        // DevOps
+        DevOps: "♾️", // or 'fa-infinity'
+        "CI/CD": "🔄", // or 'fa-sync'
+        Docker: "🐳", // or 'fa-docker'
+        Kubernetes: "☸️", // or 'fa-dharmachakra'
 
-        // Security Operations
-        "Network Security": "🛡️", // or 'fa-shield-alt'
-        Encryption: "🔒", // or 'fa-lock'
-        "Incident Response": "🚨", // or 'fa-exclamation-triangle'
-        "SOC Management": "👁️", // or 'fa-eye'
+        // Mobile Development
+        Android: "🤖", // or 'fa-android'
+        iOS: "🍎", // or 'fa-apple'
+        Flutter: "🦋", // or 'fa-feather-alt'
+        "React Native": "📱", // or 'fa-mobile-alt'
+        "Mobile Security": "🔐", // or 'fa-lock'
 
-        // Technical Writing
-        "Technical Writing": "📝", // or 'fa-pen'
-        Research: "🔍", // or 'fa-search'
-        Markdown: "📄", // or 'fa-file-alt'
-        "API Documentation": "📑", // or 'fa-file-code'
-
-        // AI/ML
+        // AI & Machine Learning
         "Machine Learning": "🤖", // or 'fa-robot'
-        TensorFlow: "🧮", // or 'fa-brain'
+        "Deep Learning": "🧠", // or 'fa-brain'
+        "Data Science": "📊", // or 'fa-chart-bar'
+        TensorFlow: "🧮", // or 'fa-calculator'
+        "Scikit-Learn": "🔬", // or 'fa-microscope'
+        AI: "🤖", // or 'fa-robot'
         NLP: "💭", // or 'fa-comments'
-        "Computer Vision": "👁️", // or 'fa-eye'
+        "Natural Language Processing": "💭", // or 'fa-comments'
+        Transformers: "🔄", // or 'fa-sync'
+        "Text Mining": "⛏️", // or 'fa-mining-drill'
+        BERT: "📚", // or 'fa-book'
 
-        // Testing
-        "Manual Testing": "🔍", // or 'fa-search'
-        Selenium: "🤖", // or 'fa-robot'
-        JIRA: "📋", // or 'fa-clipboard'
-        Cypress: "🎯", // or 'fa-bullseye'
+        // Cybersecurity
+        "Network Security": "🛡️", // or 'fa-shield-alt'
+        "Ethical Hacking": "🔓", // or 'fa-user-secret'
+        "Risk Assessment": "⚠️", // or 'fa-exclamation-triangle'
+        Firewalls: "🧱", // or 'fa-shield-alt'
+        Cryptography: "🔐", // or 'fa-key'
 
-        // Business Analysis
-        "Requirement Analysis": "📊", // or 'fa-chart-line'
-        Communication: "💬", // or 'fa-comments'
-        Tableau: "📈", // or 'fa-chart-bar'
-        "SQL for Analysis": "📊", // or 'fa-database'
+        // Blockchain
+        "Blockchain Basics": "⛓️", // or 'fa-link'
+        Solidity: "📜", // or 'fa-file-contract'
+        Ethereum: "Ξ", // or 'fa-ethereum'
+        "Smart Contracts": "📑", // or 'fa-file-signature'
+        "Web3.js": "🕸️", // or 'fa-spider-web'
 
-        // Customer Support
-        "Customer Support": "🎧", // or 'fa-headset'
-        "CRM Tools": "👥", // or 'fa-users'
-        "Multichannel Communication": "📱", // or 'fa-comments'
+        // Cloud Computing
+        "Cloud Platforms": "☁️", // or 'fa-cloud'
+        AWS: "☁️", // or 'fa-aws'
+        Azure: "☁️", // or 'fa-microsoft'
+        GCP: "☁️", // or 'fa-google'
 
-        // Data Science
-        "Data Analysis": "📊", // or 'fa-chart-bar'
-        BigQuery: "🔍", // or 'fa-search'
-        "Data Visualization": "📈", // or 'fa-chart-line'
-
-        // IT Support
-        Troubleshooting: "🔧", // or 'fa-wrench'
-        "Active Directory": "🗄️", // or 'fa-folder-tree'
-        "Ticketing Tools": "🎫", // or 'fa-ticket-alt'
-
-        // Design
-        Photoshop: "🎨", // or 'fa-paint-brush'
-        Illustrator: "✒️", // or 'fa-pen-fancy'
-        "After Effects": "🎬", // or 'fa-film'
+        // Game Development
+        Unity: "🎮", // or 'fa-gamepad'
+        "Unreal Engine": "🎲", // or 'fa-cube'
         "3D Modeling": "💠", // or 'fa-cube'
+        "C#": "🎯", // or 'fa-code'
+        "XR Development": "🥽", // or 'fa-vr-cardboard'
+
+        // Computer Vision
+        OpenCV: "👁️", // or 'fa-eye'
+        "Image Processing": "🖼️", // or 'fa-image'
       };
 
       // Assign Icons Dynamically

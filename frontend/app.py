@@ -146,17 +146,17 @@ def prediction():
 
         # Define essential skill dependencies (customize as needed)
         role_keywords = {
-            "Blockchain Developer": ["Blockchain"],
+            "Blockchain Developer": ["Blockchain","Python","JavaScript"],
             "Frontend Developer": ["HTML/CSS", "JavaScript", "React.js"],
-            "Backend Developer": ["Node.js", "SQL", "MongoDB"],
-            "Full Stack Developer": ["HTML/CSS", "JavaScript", "React.js", "Node.js", "SQL"],
-            "AI/ML Engineer": ["Machine Learning", "Python"],
-            "Cybersecurity Analyst": ["Cybersecurity", "DevOps"],
-            "Cloud Architect": ["AWS", "Cloud Computing", "DevOps"],
-            "AR/VR Developer": ["AR/VR"],
-            "Computer Vision Engineer": ["Computer Vision", "Deep Learning"],
-            "NLP Engineer": ["NLP"],
-            "Mobile App Developer": ["Android Development", "Flutter"]
+            "Backend Developer": ["Node.js", "SQL", "MongoDB","Java","Python"],
+            "Full Stack Developer": ["HTML/CSS", "JavaScript", "React.js", "Node.js", "SQL","MongoDB","Python","Java","Git"],
+            "AI/ML Engineer": ["Machine Learning", "Python","Java","C++"],
+            "Cybersecurity Analyst": ["Python","C","C++","Cybersecurity", "DevOps"],
+            "Cloud Architect": ["Python","Java","AWS", "Cloud Computing", "DevOps","Docker","Kubernetes"],
+            "AR/VR Developer": ["AR/VR","Python","JavaScript","C++"],
+            "Computer Vision Engineer": ["Python","C++","Computer Vision", "Deep Learning"],
+            "NLP Engineer": ["NLP","Python","Machine Learning","Deep Learning"],
+            "Mobile App Developer": ["Java","Android Development", "Flutter"]
         }
 
         # Map skills back to user ratings
@@ -186,14 +186,6 @@ def prediction():
         print("Final suggested role after skill check:", best_matched_job_role)
         pred_proba = loaded_model.predict_proba(user_ratings)
 
-        # Show alternatives with probability threshold
-        threshold = 0.05
-        alternative_careers = [
-            (index, prob) for index, prob in enumerate(pred_proba[0])
-            if prob > threshold and index != np.argmax(pred_proba[0])
-        ]
-        alternative_careers = sorted(alternative_careers, key=lambda x: -x[1])
-        alternative_career_roles = [le.inverse_transform([career[0]])[0] for career in alternative_careers]
 
         # Match against job_roles DB
         job_roles = fetch_job_roles()
@@ -218,7 +210,6 @@ def prediction():
 
         # Store in session
         session['best_career'] = best_matched_job_role
-        session['alternative_careers'] = alternative_career_roles
         session['matched_skills'] = matched_skills
         session['missing_skills'] = missing_skills
         session['courses'] = courses_for_missing_skills
@@ -259,7 +250,6 @@ def result_page():
     # Retrieve data from session
     job0 = session.get('best_career')
     job_id = session.get('job_id')
-    alternative_careers = session.get('alternative_careers')
     matched_skills = session.get('matched_skills')
     missing_skills = session.get('missing_skills')
     courses = session.get('courses')
@@ -270,7 +260,6 @@ def result_page():
         "testafter.html",
         job0=job0,
         job_id=job_id,
-        alternative_careers=alternative_careers,
         matched_skills=matched_skills,
         missing_skills=missing_skills,
         courses=courses,
@@ -342,7 +331,7 @@ def chat():
         prompt = f"""You are CareerBot, a helpful student chatbot. Answer this message in a friendly and concise way: "{user_input}" """
 
     try:
-        model = genai.GenerativeModel(model_name="models/gemini-1.5-pro-latest")
+        model = genai.GenerativeModel(model_name="models/gemini-2.0-flash")
         response = model.generate_content(prompt)
         return jsonify({"reply": response.text})
     except Exception as e:

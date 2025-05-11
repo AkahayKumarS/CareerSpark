@@ -34,7 +34,7 @@ const Welcome = ({ onStart }: WelcomeProps) => {
       <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl w-full">
         {step === "welcome" && (
           <div className="p-10 text-center">
-            <h1 className="text-2xl font-bold mb-2">
+            <h1 className="text-3xl font-bold mb-2">
               Welcome to CareerSpark Resume Builder
             </h1>
             <p className="text-gray-600 mb-4">

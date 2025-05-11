@@ -2,7 +2,7 @@
 session_start();  // Start the session
 session_unset();  // Unset all session variables
 session_destroy();  // Destroy the session
-setcookie("user_id", "", time() - 3600, "/");
+setcookie("user_id", "", time() - 10800, "/");
 ?>
 
 <!DOCTYPE html>

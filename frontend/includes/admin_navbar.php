@@ -109,8 +109,8 @@
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="admin_dashboard.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <!-- Replace book icon with CareerSpark logo -->
-            <img src="./img/careerSparkLogo.png" alt="CareerSpark Logo"
-                style="height: 310px; width: 350px; margin-right: 10px;">
+            <img src="./img/career_spark_logo.png" alt="CareerSpark Logo"
+                style="height: 70px; width: 300px; margin-right: 10px;">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

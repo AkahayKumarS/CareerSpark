@@ -35,7 +35,7 @@ const Index = () => {
           <>
             <header className="bg-white shadow-sm p-1 m-0 pr-14">
               <div className="flex justify-between items-center w-full">
-                <h1 className="text-lg font-bold text-resume-teal-dark ml-16">
+                <h1 className="text-2xl font-bold text-resume-teal-dark ml-16">
                   CareerSpark Resume Builder
                 </h1>
                 <div className="flex gap-1 mr-2">
